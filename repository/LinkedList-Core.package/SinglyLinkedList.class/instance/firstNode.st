@@ -1,0 +1,3 @@
+private
+firstNode
+	^ firstNode

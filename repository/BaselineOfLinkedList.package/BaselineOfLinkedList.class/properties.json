@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfLinkedList",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfLinkedList",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
