@@ -1,0 +1,14 @@
+{
+	"category" : "LinkedList-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "BernardoContreras 8/28/2016 17:01",
+	"instvars" : [
+		"stack" ],
+	"name" : "AnotherSinglyLinkedStackTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

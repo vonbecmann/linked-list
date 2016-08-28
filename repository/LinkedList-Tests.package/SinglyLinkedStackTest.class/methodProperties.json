@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"empty" : "BernardoContreras 8/28/2016 17:52",
+		"nonEmpty" : "BernardoContreras 8/28/2016 17:42",
+		"setUp" : "BernardoContreras 8/28/2016 17:47",
+		"test0FixtureCloneTest" : "",
+		"test0FixtureEmptyTest" : "",
+		"testCopyCreatesNewObject" : "",
+		"testCopyEmpty" : "",
+		"testEmptyError" : "BernardoContreras 8/28/2016 17:51",
+		"testIfEmptyifNotEmpty" : "",
+		"testIfNotEmpty" : "",
+		"testIsEmpty" : "",
+		"testIsEmptyOrNil" : "",
+		"testPop" : "BernardoContreras 8/28/2016 18:31",
+		"testPush" : "BernardoContreras 8/28/2016 18:31",
+		"testSize" : "BernardoContreras 8/28/2016 18:32",
+		"testTop" : "BernardoContreras 8/28/2016 18:32" } }
