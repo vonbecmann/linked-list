@@ -1,0 +1,4 @@
+requirements
+empty
+	
+	^ SinglyLinkedList new

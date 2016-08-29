@@ -1,0 +1,16 @@
+{
+	"category" : "LinkedList-Tests",
+	"classinstvars" : [
+		 ],
+	"classtraitcomposition" : "TEmptyTest classTrait + TPrintTest classTrait",
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"list" ],
+	"name" : "SinglyLinkedListTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"traitcomposition" : "TEmptyTest + (TPrintTest - {#testStoreOn})",
+	"type" : "normal" }
