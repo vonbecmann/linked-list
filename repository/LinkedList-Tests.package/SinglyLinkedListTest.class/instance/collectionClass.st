@@ -1,0 +1,3 @@
+requirements
+collectionClass
+	^ self classToBeTested

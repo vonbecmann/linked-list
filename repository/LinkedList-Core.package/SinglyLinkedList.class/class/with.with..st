@@ -1,8 +1,8 @@
 instance creation
-with: anObject with: anotherObject
-	"Answer an instance of me containing anObject and anotherObject."
+with: firstObject with: secondObject
+	"Answer an instance of me containing firstObject and secondObject."
 
 	^ self new
-		add: anObject;
-		add: anotherObject;
+		add: firstObject;
+		add: secondObject;
 		yourself

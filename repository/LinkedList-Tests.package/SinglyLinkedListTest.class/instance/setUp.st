@@ -8,4 +8,7 @@ setUp
 		add: 7;
 		add: 'test';
 		add: true;
-		add: false
+		add: false.
+	otherList := self empty
+		addAll: (7 to: 11);
+		yourself
