@@ -2,6 +2,21 @@
 	"class" : {
 		 },
 	"instance" : {
+		"classToBeTested" : "BernardoContreras 8/29/2016 16:31",
+		"collectionWithoutNilElements" : "BernardoContreras 8/29/2016 16:22",
 		"empty" : "BernardoContreras 8/28/2016 21:46",
 		"nonEmpty" : "BernardoContreras 8/28/2016 22:22",
-		"setUp" : "BernardoContreras 8/28/2016 22:22" } }
+		"selectorsToBeIgnored" : "BernardoContreras 8/29/2016 18:17",
+		"setUp" : "BernardoContreras 8/29/2016 16:23",
+		"sizeCollection" : "BernardoContreras 8/29/2016 16:22",
+		"testDetectIfFoundIfNoneWhenNobodyIsFound" : "BernardoContreras 8/29/2016 16:51",
+		"testDetectIfFoundIfNoneWhenSomethingIsFound" : "BernardoContreras 8/29/2016 16:52",
+		"testDetectIfFoundIfNoneWhenSomethingIsFoundIgnoringTheFoundObject" : "BernardoContreras 8/29/2016 16:52",
+		"testDetectIfFoundWhenNobodyIsFound" : "BernardoContreras 8/29/2016 16:52",
+		"testDetectIfFoundWhenSomethingIsFound" : "BernardoContreras 8/29/2016 16:52",
+		"testDetectIfFoundWhenSomethingIsFoundIgnoringTheFoundObject" : "BernardoContreras 8/29/2016 16:52",
+		"testFirst01" : "BernardoContreras 8/29/2016 17:25",
+		"testFirst02" : "BernardoContreras 8/29/2016 17:30",
+		"testSecond01" : "BernardoContreras 8/29/2016 17:58",
+		"testSecond02" : "BernardoContreras 8/29/2016 18:16",
+		"testSecond03" : "BernardoContreras 8/29/2016 18:15" } }

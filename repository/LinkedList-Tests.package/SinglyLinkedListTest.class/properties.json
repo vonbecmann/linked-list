@@ -2,7 +2,7 @@
 	"category" : "LinkedList-Tests",
 	"classinstvars" : [
 		 ],
-	"classtraitcomposition" : "TEmptyTest classTrait + TPrintTest classTrait",
+	"classtraitcomposition" : "TEmptyTest classTrait + TPrintTest classTrait + TIterateTest classTrait + TSizeTest classTrait",
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
@@ -11,6 +11,6 @@
 	"name" : "SinglyLinkedListTest",
 	"pools" : [
 		 ],
-	"super" : "TestCase",
-	"traitcomposition" : "TEmptyTest + (TPrintTest - {#testStoreOn})",
+	"super" : "ClassTestCase",
+	"traitcomposition" : "TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn})",
 	"type" : "normal" }

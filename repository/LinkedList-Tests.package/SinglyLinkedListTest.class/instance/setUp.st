@@ -6,4 +6,6 @@ setUp
 		add: 1.2;
 		add: $a;
 		add: 7;
-		add: 'test'
+		add: 'test';
+		add: true;
+		add: false

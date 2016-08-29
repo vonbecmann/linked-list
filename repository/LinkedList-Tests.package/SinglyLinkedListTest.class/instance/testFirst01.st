@@ -1,6 +1,6 @@
 tests
-testSecond01
+testFirst01
 	self
-		should: [ list second ]
+		should: [ self empty first ]
 		raise: Error
 		withExceptionDo: [ :ex | self assert: ex messageText equals: 'collection is empty!' ]
