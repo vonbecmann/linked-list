@@ -2,7 +2,7 @@
 	"category" : "LinkedList-Tests",
 	"classinstvars" : [
 		"testSize" ],
-	"classtraitcomposition" : "TEmptyTest classTrait + TCloneTest classTrait",
+	"classtraitcomposition" : "TEmptyTest classTrait + TSizeTest classTrait + TCloneTest classTrait",
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
@@ -11,6 +11,6 @@
 	"name" : "SinglyLinkedStackTest",
 	"pools" : [
 		 ],
-	"super" : "TestCase",
-	"traitcomposition" : "TEmptyTest + (TCloneTest - {#testCopyNonEmpty})",
+	"super" : "ClassTestCase",
+	"traitcomposition" : "TEmptyTest + TSizeTest + (TCloneTest - {#testCopyNonEmpty})",
 	"type" : "normal" }

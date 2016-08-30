@@ -1,3 +1,3 @@
-tests - empty
+requirements
 empty
 	^ SinglyLinkedStack new
