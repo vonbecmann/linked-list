@@ -1,11 +1,14 @@
 enumerating
 select: selectBlock thenCollect: collectBlock
 	"Utility method to improve readability."
+	"Optimized."
 
-	| newCollection |
+	| newCollection current |
 	newCollection := self class new.
-	self
-		do: [ :each | 
-			(selectBlock value: each)
-				ifTrue: [ newCollection add: (collectBlock value: each) ] ].
+	current := firstNode.
+	[ current isNil ]
+		whileFalse: [ 
+			(selectBlock value: current value)
+				ifTrue: [ newCollection add: (collectBlock value: current value) ].
+			current := current nextNode ].
 	^ newCollection
