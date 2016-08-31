@@ -2,7 +2,7 @@
 	"category" : "LinkedList-Tests",
 	"classinstvars" : [
 		 ],
-	"classtraitcomposition" : "TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait + TCreationWithTest classTrait",
+	"classtraitcomposition" : "TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait + TCreationWithTest classTrait + TCloneTest classTrait",
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
@@ -13,5 +13,5 @@
 	"pools" : [
 		 ],
 	"super" : "ClassTestCase",
-	"traitcomposition" : "TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice}) + (TCreationWithTest - {#testOfSize})",
+	"traitcomposition" : "TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice}) + (TCreationWithTest - {#testOfSize}) + TCloneTest",
 	"type" : "normal" }
