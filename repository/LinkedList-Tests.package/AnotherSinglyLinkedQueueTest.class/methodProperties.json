@@ -1,0 +1,18 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"setUp" : "BernardoContreras 9/10/2016 20:30",
+		"testAsArray" : "BernardoContreras 9/10/2016 21:31",
+		"testHeadWhenIsEmpty" : "BernardoContreras 9/10/2016 21:39",
+		"testHeadWhenIsNotEmpty" : "BernardoContreras 9/10/2016 21:45",
+		"testNextPutWhenIsEmpty" : "BernardoContreras 9/10/2016 21:07",
+		"testNextPutWhenIsNotEmpty" : "BernardoContreras 9/10/2016 21:08",
+		"testNextWhenIsEmpty" : "BernardoContreras 9/10/2016 20:31",
+		"testNextWhenIsNotEmpty" : "BernardoContreras 9/10/2016 20:44",
+		"testPeekWhenIsEmpty" : "BernardoContreras 9/10/2016 20:56",
+		"testPeekWhenIsNotEmpty" : "BernardoContreras 9/10/2016 20:58",
+		"testRemoveAll" : "BernardoContreras 9/10/2016 21:52",
+		"testSize" : "BernardoContreras 9/10/2016 20:52",
+		"testWith" : "BernardoContreras 9/10/2016 21:59",
+		"testWithAll" : "BernardoContreras 9/10/2016 21:59" } }
