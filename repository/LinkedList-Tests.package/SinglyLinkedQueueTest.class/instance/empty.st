@@ -1,0 +1,3 @@
+requirements
+empty
+	^ SinglyLinkedQueue new

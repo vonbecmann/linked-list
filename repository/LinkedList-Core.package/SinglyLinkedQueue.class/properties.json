@@ -1,0 +1,16 @@
+{
+	"category" : "LinkedList-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "BernardoContreras 9/10/2016 19:49",
+	"instvars" : [
+		"firstNode",
+		"lastNode",
+		"tally" ],
+	"name" : "SinglyLinkedQueue",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
