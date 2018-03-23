@@ -6,8 +6,9 @@ Gofer it
 
 Metacello new
     baseline: 'LinkedList';
-    repository: 'filetree:///home/vonbecmann/workspaces/linked-list/repository';
+    repository: 'tonel:///home/vonbecmann/workspaces/linked-list/repository';
     load.
+
 
 
 Smalltalk snapshot: true andQuit: true.
