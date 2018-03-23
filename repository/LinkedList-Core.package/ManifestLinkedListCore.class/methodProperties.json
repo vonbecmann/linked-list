@@ -1,7 +1,0 @@
-{
-	"class" : {
-		"ruleCollectionProtocolRuleV1FalsePositive" : "BernardoContreras 8/30/2016 12:24",
-		"ruleDetectContainsRuleV1FalsePositive" : "BernardoContreras 8/31/2016 16:00",
-		"ruleInconsistentMethodClassificationRuleV1FalsePositive" : "BernardoContreras 8/30/2016 12:24" },
-	"instance" : {
-		 } }
