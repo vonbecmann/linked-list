@@ -25,9 +25,9 @@ SinglyLinkedNode class >> with: anObject [
 SinglyLinkedNode class >> with: anObject next: aNode [
 	"a singly linked node with an object as its value and a node as its successor"
 
-	^ (self with: anObject)
-		nextNode: aNode;
-		yourself
+	^ (self basicNew initializeValue: anObject)
+			nextNode: aNode;
+			yourself
 ]
 
 { #category : #comparing }
@@ -43,7 +43,6 @@ SinglyLinkedNode >> hash [
 
 { #category : #initialization }
 SinglyLinkedNode >> initializeValue: anObject [
-	self initialize.
 	value := anObject
 ]
 
