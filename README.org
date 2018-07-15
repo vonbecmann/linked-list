@@ -1,5 +1,6 @@
 * linked-list
-  a crappy linked list [[https://travis-ci.org/vonbecmann/linked-list][https://travis-ci.org/vonbecmann/linked-list.svg?branch=pharo6]]
+  a crappy linked list [[https://travis-ci.org/vonbecmann/linked-list][https://travis-ci.org/vonbecmann/linked-list.svg?branch=master]]
+
 
 
 
