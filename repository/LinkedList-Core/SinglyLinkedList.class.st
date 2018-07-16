@@ -11,7 +11,7 @@ Class {
 		'firstNode',
 		'lastNode'
 	],
-	#category : 'LinkedList-Core'
+	#category : #'LinkedList-Core'
 }
 
 { #category : #'instance creation' }
@@ -416,6 +416,15 @@ SinglyLinkedList >> isEmptyOrNil [
 { #category : #testing }
 SinglyLinkedList >> isNotEmpty [
 	^ self isEmpty not
+]
+
+{ #category : #accessing }
+SinglyLinkedList >> last [
+	"Answer the last element of the receiver"
+
+	"Create an error notification if the receiver is 	empty."
+
+	^ lastNode ifNil: [ self emptyError ] ifNotNil: [ lastNode value ]
 ]
 
 { #category : #enumerating }

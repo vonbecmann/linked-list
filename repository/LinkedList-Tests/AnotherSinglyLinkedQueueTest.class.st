@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'queue'
 	],
-	#category : 'LinkedList-Tests'
+	#category : #'LinkedList-Tests'
 }
 
 { #category : #running }
