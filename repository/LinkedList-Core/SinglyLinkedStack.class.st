@@ -11,7 +11,7 @@ Class {
 		'tally',
 		'firstNode'
 	],
-	#category : 'LinkedList-Core'
+	#category : #'LinkedList-Core'
 }
 
 { #category : #'instance creation' }

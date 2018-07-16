@@ -5,7 +5,7 @@ tests for a singly linked node.
 Class {
 	#name : #SinglyLinkedNodeTest,
 	#superclass : #TestCase,
-	#category : 'LinkedList-Tests'
+	#category : #'LinkedList-Tests'
 }
 
 { #category : #tests }

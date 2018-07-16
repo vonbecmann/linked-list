@@ -7,7 +7,7 @@ Class {
 		'list',
 		'otherList'
 	],
-	#category : 'LinkedList-Tests'
+	#category : #'LinkedList-Tests'
 }
 
 { #category : #coverage }
@@ -181,6 +181,27 @@ SinglyLinkedListTest >> testFirst01 [
 { #category : #tests }
 SinglyLinkedListTest >> testFirst02 [
 	self assert: self nonEmpty first equals: 1.2
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testLast01 [
+	self
+		should: [ self empty last ]
+		raise: Error
+		withExceptionDo: [ :ex | self assert: ex messageText equals: 'collection is empty!' ]
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testLast02 [
+	self assert: self nonEmpty last equals: false
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testLast03 [
+	| newList |
+	newList := self empty.
+	newList addAll: (1 to: 11).
+	self assert: newList last equals: 11
 ]
 
 { #category : #tests }
