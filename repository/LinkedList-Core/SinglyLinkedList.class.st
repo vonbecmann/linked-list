@@ -585,8 +585,8 @@ SinglyLinkedList >> removeFirst [
 	oldNode := firstNode.
 	firstNode := firstNode == lastNode
 		ifTrue: [ lastNode := nil ]
-		ifFalse: [ oldNode nextNode ].
-	oldNode nextNode: nil.
+		ifFalse: [ firstNode nextNode ].
+	oldNode release.
 	tally := tally - 1.
 	^ firstElement
 ]
