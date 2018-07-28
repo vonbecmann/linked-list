@@ -141,6 +141,51 @@ AnotherSinglyLinkedListTest >> test09CollectCubes [
 ]
 
 { #category : #tests }
+AnotherSinglyLinkedListTest >> test10RemoveLast [
+	| element result oldSize |
+	list addAll: (1 to: 5).
+	element := list last.
+	oldSize := list size.
+	result := list removeLast.
+	
+	self assert: result equals: element.
+	self assert: list size equals: (oldSize - 1)
+]
+
+{ #category : #tests }
+AnotherSinglyLinkedListTest >> test11RemoveLast [
+	| element result oldSize |
+	list add: 1.
+	element := list last.
+	oldSize := list size.
+	result := list removeLast.
+
+	self assert: result equals: element.
+	self assert: list size equals: oldSize - 1
+]
+
+{ #category : #tests }
+AnotherSinglyLinkedListTest >> test12RemoveLast [
+	| element |
+	list add: 1.
+	element := list last.
+
+	self assert: list size equals: 1.
+
+	self assert: list removeLast equals: element.
+
+	self assert: list size equals: 0
+]
+
+{ #category : #tests }
+AnotherSinglyLinkedListTest >> test13RemoveLast [
+	self
+		should: [ list removeLast ]
+		raise: Error
+		withExceptionDo: [ :ex | self assert: ex messageText equals: 'collection is empty!' ]
+]
+
+{ #category : #tests }
 AnotherSinglyLinkedListTest >> testReversed [
 	| reversed |
 	self assert: list isEmpty.

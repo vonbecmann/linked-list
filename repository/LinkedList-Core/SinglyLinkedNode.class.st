@@ -65,6 +65,12 @@ SinglyLinkedNode >> printOn: aStream [
 		nextPut: $)
 ]
 
+{ #category : #'initialize-release' }
+SinglyLinkedNode >> release [
+	value := nextNode := nil.
+	super release
+]
+
 { #category : #accessing }
 SinglyLinkedNode >> value [
 	^ value

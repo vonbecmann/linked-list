@@ -591,6 +591,26 @@ SinglyLinkedList >> removeFirst [
 	^ firstElement
 ]
 
+{ #category : #removing }
+SinglyLinkedList >> removeLast [
+	"Remove the receiver's last element and answer it. If the receiver is 
+	empty, create an error notification."
+
+	| lastElement oldNode current |
+	lastElement := self last.
+	oldNode := lastNode.
+	lastNode := firstNode == lastNode
+		ifTrue: [ firstNode := nil ]
+		ifFalse: [ current := firstNode.
+			[ current nextNode == lastNode ] whileFalse: [ current := current nextNode ].
+			current
+				nextNode: nil;
+				yourself ].
+	oldNode release.
+	tally := tally - 1.
+	^ lastElement
+]
+
 { #category : #converting }
 SinglyLinkedList >> reversed [
 	^ self
