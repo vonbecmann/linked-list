@@ -182,15 +182,10 @@ SinglyLinkedList >> collect: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	Collect the resulting values into a collection like the receiver. Answer  
 	the new collection."
-	"Optimized."
 
-	| newCollection current |
+	| newCollection |
 	newCollection := self class new.
-	current := firstNode.
-	[ current isNil ]
-		whileFalse: [ 
-			newCollection add: (aBlock value: current value).
-			current := current nextNode ].
+	self do: [ :each | newCollection add: (aBlock value: each) ].
 	^ newCollection
 ]
 
@@ -528,32 +523,26 @@ SinglyLinkedList >> reject: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver only those elements for 
 	which aBlock evaluates to false. Answer the new collection."
-	"Optimized."
 
-	| newCollection current |
+	| newCollection |
 	newCollection := self class new.
-	current := firstNode.
-	[ current isNil ]
-		whileFalse: [ 
-			(aBlock value: current value)
-				ifFalse: [ newCollection add: current value ].
-			current := current nextNode ].
+	self
+		do: [ :each | 
+			(aBlock value: each)
+				ifFalse: [ newCollection add: each ] ].
 	^ newCollection
 ]
 
 { #category : #enumerating }
 SinglyLinkedList >> reject: rejectBlock thenCollect: collectBlock [
 	"Utility method to improve readability."
-	"Optimized."
 
-	| newCollection current |
+	| newCollection |
 	newCollection := self class new.
-	current := firstNode.
-	[ current isNil ]
-		whileFalse: [ 
-			(rejectBlock value: current value)
-				ifFalse: [ newCollection add: (collectBlock value: current value) ].
-			current := current nextNode ].
+	self
+		do: [ :each | 
+			(rejectBlock value: each)
+				ifFalse: [ newCollection add: (collectBlock value: each) ] ].
 	^ newCollection
 ]
 
@@ -637,32 +626,26 @@ SinglyLinkedList >> select: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver, only those elements for 
 	which aBlock evaluates to true. Answer the new collection."
-	"Optimized."
 
-	| newCollection current |
+	| newCollection |
 	newCollection := self class new.
-	current := firstNode.
-	[ current isNil ]
-		whileFalse: [ 
-			(aBlock value: current value)
-				ifTrue: [ newCollection add: current value ].
-			current := current nextNode ].
+	self
+		do: [ :each | 
+			(aBlock value: each)
+				ifTrue: [ newCollection add: each ] ].
 	^ newCollection
 ]
 
 { #category : #enumerating }
 SinglyLinkedList >> select: selectBlock thenCollect: collectBlock [
 	"Utility method to improve readability."
-	"Optimized."
 
-	| newCollection current |
+	| newCollection |
 	newCollection := self class new.
-	current := firstNode.
-	[ current isNil ]
-		whileFalse: [ 
-			(selectBlock value: current value)
-				ifTrue: [ newCollection add: (collectBlock value: current value) ].
-			current := current nextNode ].
+	self
+		do: [ :each | 
+			(selectBlock value: each)
+				ifTrue: [ newCollection add: (collectBlock value: each) ] ].
 	^ newCollection
 ]
 
