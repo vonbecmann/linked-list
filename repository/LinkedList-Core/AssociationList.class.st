@@ -274,6 +274,14 @@ AssociationList >> first [
 ]
 
 { #category : #testing }
+AssociationList >> identityIncludes: anObject [
+	"Answer whether anObject is one of the receiver's elements."
+
+	self do: [ :each | anObject == each ifTrue: [ ^ true ] ].
+	^ false
+]
+
+{ #category : #testing }
 AssociationList >> ifEmpty: aBlock [
 	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
 
@@ -316,6 +324,22 @@ AssociationList >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 { #category : #testing }
 AssociationList >> includes: anObject [
 	self do: [ :each | anObject = each ifTrue: [ ^ true ] ].
+	^ false
+]
+
+{ #category : #testing }
+AssociationList >> includesAll: aCollection [
+	"Answer whether all the elements of aCollection are in the receiver."
+
+	aCollection do: [ :elem | (self includes: elem) ifFalse: [ ^ false ] ].
+	^ true
+]
+
+{ #category : #testing }
+AssociationList >> includesAny: aCollection [
+	"Answer whether any element of aCollection is one of the receiver's elements."
+
+	aCollection 	do: [ :elem | (self includes: elem) ifTrue: [ ^ true ] ].
 	^ false
 ]
 

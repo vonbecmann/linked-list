@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + TDictionaryAddingTest',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TDictionaryAddingTest classTrait',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest + TIncludesTest + TDictionaryAddingTest',
+	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TIncludesTest classTrait + TDictionaryAddingTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -12,6 +12,13 @@ Class {
 	],
 	#category : #'LinkedList-Tests'
 }
+
+{ #category : #requirements }
+AssociationListTest >> anotherElementNotIn [
+	" return an element different of 'elementNotIn'  not included in 'nonEmpty' "
+
+	^ 937
+]
 
 { #category : #requirements }
 AssociationListTest >> associationWithKeyAlreadyInToAdd [
@@ -43,6 +50,13 @@ AssociationListTest >> collectionWithoutNilElements [
 	" return a collection that doesn't includes a nil element  and that doesn't includes equal elements'"
 
 	^ nonEmpty5ElementsNoDuplicates
+]
+
+{ #category : #requirements }
+AssociationListTest >> elementNotIn [
+	"return an element not included in 'nonEmpty' "
+
+	^ 739
 ]
 
 { #category : #requirements }
