@@ -13,6 +13,18 @@ Class {
 	#category : #'LinkedList-Core'
 }
 
+{ #category : #comparing }
+AssociationList >> = associationList [
+	self == associationList ifTrue: [ ^ true ].
+	self class = associationList class ifFalse: [ ^ false ].
+	self size = associationList size ifFalse: [ ^ false ].
+	self
+		associationsDo: [ :assoc | 
+			(associationList at: assoc key ifAbsent: [ ^ false ]) = assoc value
+				ifFalse: [ ^ false ] ].
+	^ true
+]
+
 { #category : #adding }
 AssociationList >> add: anAssociation [
 	self
@@ -271,6 +283,14 @@ AssociationList >> first [
 	"Create an error notification if the receiver is 	empty."
 
 	^ firstNode ifNil: [ self emptyError ] ifNotNil: [ firstNode value ]
+]
+
+{ #category : #comparing }
+AssociationList >> hash [
+	| hash |
+	hash := self class hash.
+	self associationsDo: [ :assoc | hash := (hash + assoc hash) hashMultiply ].
+	^ hash
 ]
 
 { #category : #testing }

@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + TIncludesTest + TDictionaryAddingTest',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TIncludesTest classTrait + TDictionaryAddingTest classTrait',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest + TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest',
+	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
