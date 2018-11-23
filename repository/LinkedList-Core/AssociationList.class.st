@@ -33,8 +33,7 @@ AssociationList >> add: anAssociation [
 				ifTrue: [ 
 					assoc value: anAssociation value.
 					^ anAssociation ] ].
-	self addLast: anAssociation.
-	^ anAssociation
+	^ self addLast: anAssociation
 ]
 
 { #category : #adding }
