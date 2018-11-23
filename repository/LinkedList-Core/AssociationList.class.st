@@ -127,14 +127,10 @@ AssociationList >> at: key ifAbsent: aBlock [
 	"Answer the value associated with the key or, if key isn't found,
 	answer the result of evaluating aBlock."
 
-	| current |
-	current := firstNode.
-	[ current isNil ]
-		whileFalse: [ | assoc |
-			assoc := current value.
+	self
+		associationsDo: [ :assoc | 
 			assoc key = key
-				ifTrue: [ ^ assoc value ].
-			current := current nextNode ].
+				ifTrue: [ ^ assoc value ] ].
 	^ aBlock value
 ]
 
