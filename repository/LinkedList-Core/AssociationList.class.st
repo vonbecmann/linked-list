@@ -487,7 +487,16 @@ AssociationList >> reject: aBlock [
 AssociationList >> reject: rejectBlock thenCollect: collectBlock [
 	"Utility method to improve readability."
 
-	^ (self reject: rejectBlock) collect: collectBlock
+	"Optimize"
+
+	| newCollection |
+	newCollection := self class new.
+	self
+		associationsDo: [ :assoc | 
+			(rejectBlock value: assoc value)
+				ifFalse: [ 
+					newCollection addLast: (Association basicNew key: assoc key value: (collectBlock value: assoc value)) ] ].
+	^ newCollection
 ]
 
 { #category : #enumerating }
