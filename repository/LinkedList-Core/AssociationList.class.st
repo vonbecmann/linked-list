@@ -173,8 +173,16 @@ AssociationList >> collect: collectBlock thenDo: doBlock [
 { #category : #enumerating }
 AssociationList >> collect: collectBlock thenSelect: selectBlock [
 	"Utility method to improve readability."
+	"Optimized"
 
-	^ (self collect: collectBlock) select: selectBlock
+	| newCollection newElement |
+	newCollection := self class new.
+	self
+		associationsDo: [ :assoc | 
+			newElement := collectBlock value: assoc value.
+			(selectBlock value: newElement)
+				ifTrue: [ newCollection addLast: (Association basicNew key: assoc key value: newElement) ] ].
+	^ newCollection
 ]
 
 { #category : #adding }
