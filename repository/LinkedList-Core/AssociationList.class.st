@@ -501,9 +501,13 @@ AssociationList >> reject: rejectBlock thenCollect: collectBlock [
 
 { #category : #enumerating }
 AssociationList >> reject: rejectBlock thenDo: doBlock [
-	"Utility method to improve readability."
+	"Utility method to improve readability. 
+	Do not create the intermediate collection."
 
-	(self reject: rejectBlock) do: doBlock
+	self
+		do: [ :each | 
+			(rejectBlock value: each)
+				ifFalse: [ doBlock value: each ] ]
 ]
 
 { #category : #'initialize-release' }
