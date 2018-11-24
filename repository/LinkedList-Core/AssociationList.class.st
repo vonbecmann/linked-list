@@ -477,9 +477,9 @@ AssociationList >> reject: aBlock [
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :each | 
-			(aBlock value: each value)
-				ifFalse: [ newCollection addLast: each copy ] ].
+		associationsDo: [ :assoc | 
+			(aBlock value: assoc value)
+				ifFalse: [ newCollection addLast: assoc copy ] ].
 	^ newCollection
 ]
 
