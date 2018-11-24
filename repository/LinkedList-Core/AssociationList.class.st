@@ -561,9 +561,9 @@ AssociationList >> select: aBlock [
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :each | 
-			(aBlock value: each value)
-				ifTrue: [ newCollection addLast: each copy ] ].
+		associationsDo: [ :assoc | 
+			(aBlock value: assoc value)
+				ifTrue: [ newCollection addLast: assoc copy ] ].
 	^ newCollection
 ]
 
