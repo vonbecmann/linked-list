@@ -13,6 +13,13 @@ Class {
 	#category : #'LinkedList-Core'
 }
 
+{ #category : #copying }
+AssociationList >> , aCollection [
+	^ self copy
+		addAll: aCollection;
+		yourself
+]
+
 { #category : #comparing }
 AssociationList >> = associationList [
 	self == associationList ifTrue: [ ^ true ].
@@ -455,6 +462,17 @@ AssociationList >> occurrencesOf: anObject [
 	^ ocurrences
 ]
 
+{ #category : #copying }
+AssociationList >> postCopy [
+	| node |
+	super postCopy.
+	firstNode
+		ifNotNil: [ 
+			node := firstNode := firstNode copy.
+			[ node nextNode isNil ] whileFalse: [ node nextNode: (node := node nextNode copy) ].
+			lastNode := node ]
+]
+
 { #category : #private }
 AssociationList >> previousNodeAt: key ifAbsent: aBlock [
 	| previous current |
@@ -612,4 +630,17 @@ AssociationList >> sumNumbers: aBlock [
 	dealing with numbers."
 
 	^ self inject: 0 into: [ :sum :each | sum + (aBlock value: each) ]
+]
+
+{ #category : #accessing }
+AssociationList >> values [
+	"Answer a Collection containing the receiver's values."
+
+	"Optimized for efficiency"
+
+	| values index |
+	values := Array new: self size.
+	index := 0.
+	self do: [ :each | values at: (index := index + 1) put: each ].
+	^ values
 ]

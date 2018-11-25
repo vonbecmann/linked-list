@@ -1,14 +1,16 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest + TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest',
+	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
 		'keyNotIn',
 		'associationNotIn',
-		'nonEmpty5ElementsNoDuplicates'
+		'nonEmpty5ElementsNoDuplicates',
+		'emptyList',
+		'notIncludedList'
 	],
 	#category : #'LinkedList-Tests'
 }
@@ -65,6 +67,16 @@ AssociationListTest >> empty [
 ]
 
 { #category : #requirements }
+AssociationListTest >> emptyDict [
+	^ emptyList
+]
+
+{ #category : #requirements }
+AssociationListTest >> newEmptyDict [
+	^ self emptyDict copy
+]
+
+{ #category : #requirements }
 AssociationListTest >> nonEmpty [
 	^ alist
 ]
@@ -74,24 +86,35 @@ AssociationListTest >> nonEmptyDict [
 	^ alist
 ]
 
+{ #category : #requirements }
+AssociationListTest >> nonEmptyDifferentFromNonEmptyDict [
+	" return a dictionary for which all keys are not included in nonEmptyDict"
+
+	^ notIncludedList
+]
+
 { #category : #running }
 AssociationListTest >> setUp [
 	super setUp.
+	emptyList := self classToBeTested new.
 	alist := self classToBeTested new.
-	alist 
+	alist
 		at: #a put: 1;
 		at: #b put: 30;
 		at: #c put: 1;
 		at: #d put: -2.
 	nonEmpty5ElementsNoDuplicates := self classToBeTested new.
-	nonEmpty5ElementsNoDuplicates 
+	nonEmpty5ElementsNoDuplicates
 		at: #a put: 1;
 		at: #b put: 30;
 		at: #c put: 13;
-		at: #d put: -2.	
+		at: #d put: -2.
 	valueNotIn := 666.
 	keyNotIn := #z.
-	associationNotIn := keyNotIn -> valueNotIn
+	associationNotIn := keyNotIn -> valueNotIn.
+	notIncludedList := self classToBeTested new
+		add: associationNotIn;
+		yourself
 ]
 
 { #category : #requirements }
