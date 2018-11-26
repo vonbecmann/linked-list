@@ -121,6 +121,21 @@ AssociationList >> associationsDo: aBlock [
 			current := current nextNode ]
 ]
 
+{ #category : #enumerating }
+AssociationList >> associationsSelect: aBlock [
+	"Evaluate aBlock with each of my associations as the argument. Collect
+	into a collection that is like me, only those associations for which aBlock evaluates
+	to true."
+
+	| newCollection |
+	newCollection := self class new.
+	self
+		associationsDo: [ :assoc | 
+			(aBlock value: assoc)
+				ifTrue: [ newCollection addLast: assoc copy ] ].
+	^ newCollection
+]
+
 { #category : #accessing }
 AssociationList >> at: key [
 	"Answer the value associated with the key."
@@ -451,6 +466,13 @@ AssociationList >> keysAndValuesDo: aBlock [
 ]
 
 { #category : #enumerating }
+AssociationList >> keysDo: aBlock [
+	"Evaluate aBlock for each of the receiver's keys."
+
+	self associationsDo: [ :association | aBlock value: association key ]
+]
+
+{ #category : #enumerating }
 AssociationList >> noneSatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns false for all elements return true.
@@ -659,4 +681,11 @@ AssociationList >> values [
 	index := 0.
 	self do: [ :each | values at: (index := index + 1) put: each ].
 	^ values
+]
+
+{ #category : #enumerating }
+AssociationList >> valuesDo: aBlock [
+	"Evaluate aBlock for each of the receiver's values."
+
+	self do: aBlock
 ]
