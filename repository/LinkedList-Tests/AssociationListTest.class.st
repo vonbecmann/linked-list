@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
-	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait',
+	#superclass : #CollectionRootTest,
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
