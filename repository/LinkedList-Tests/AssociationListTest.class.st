@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #CollectionRootTest,
-	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest',
-	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait',
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -69,6 +69,13 @@ AssociationListTest >> empty [
 { #category : #requirements }
 AssociationListTest >> emptyDict [
 	^ emptyList
+]
+
+{ #category : #requirements }
+AssociationListTest >> keyNotInNonEmptyDict [
+	" return a key not included in nonEmptyDict"
+
+	^ keyNotIn
 ]
 
 { #category : #requirements }
