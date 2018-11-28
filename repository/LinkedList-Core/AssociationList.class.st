@@ -433,6 +433,11 @@ AssociationList >> inject: thisValue into: binaryBlock [
 ]
 
 { #category : #testing }
+AssociationList >> isDictionary [
+	^ true
+]
+
+{ #category : #testing }
 AssociationList >> isEmpty [
 	^ firstNode isNil
 ]

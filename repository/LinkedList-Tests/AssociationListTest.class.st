@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #CollectionRootTest,
-	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest',
-	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait',
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds})',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -16,10 +16,31 @@ Class {
 }
 
 { #category : #requirements }
+AssociationListTest >> aValue [
+	" return a value to put into nonEmpty"
+
+	^ 33
+]
+
+{ #category : #requirements }
+AssociationListTest >> anIndex [
+	" return an index in nonEmpty bounds"
+
+	^ #GG
+]
+
+{ #category : #requirements }
 AssociationListTest >> anotherElementNotIn [
 	" return an element different of 'elementNotIn'  not included in 'nonEmpty' "
 
 	^ 937
+]
+
+{ #category : #requirements }
+AssociationListTest >> anotherValue [
+	" return a value ( not eual to 'aValue' ) to put into nonEmpty "
+
+	^ 67
 ]
 
 { #category : #requirements }
