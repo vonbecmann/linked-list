@@ -93,6 +93,55 @@ AssociationList >> anySatisfy: aBlock [
 	^ false
 ]
 
+{ #category : #printing }
+AssociationList >> asCommaString [
+	"Return collection printed as 'a, b, c' "
+
+	^ String streamContents: [ :s | self asStringOn: s delimiter: ', ' ]
+]
+
+{ #category : #printing }
+AssociationList >> asCommaStringAnd [
+	"Return collection printed as 'a, b and c' "
+
+	^ String streamContents: [ :s | self asStringOn: s delimiter: ', ' last: ' and ' ]
+]
+
+{ #category : #printing }
+AssociationList >> asStringOn: aStream delimiter: delimString [
+	"Print elements on a stream separated
+	with a delimiter String like: 'a, b, c'
+	Uses #asString instead of #print:."
+
+	self
+		do: [ :elem | aStream nextPutAll: elem asString ]
+		separatedBy: [ aStream nextPutAll: delimString ]
+]
+
+{ #category : #printing }
+AssociationList >> asStringOn: aStream delimiter: delimString last: lastDelimString [
+	"Print elements on a stream separated
+	with a delimiter between all the elements and with
+	a special one before the last like: 'a, b and c'.
+	Uses #asString instead of #print:
+
+	Note: Feel free to improve the code to detect the last element."
+
+	| n sz |
+	n := 1.
+	sz := self size.
+	self
+		do: [ :elem | 
+			n := n + 1.
+			aStream nextPutAll: elem asString ]
+		separatedBy: [ 
+			aStream
+				nextPutAll:
+					(n = sz
+						ifTrue: [ lastDelimString ]
+						ifFalse: [ delimString ]) ]
+]
+
 { #category : #accessing }
 AssociationList >> associationAt: key [
 	"Returns the association for the given key."

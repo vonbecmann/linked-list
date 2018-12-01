@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #CollectionRootTest,
-	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds})',
-	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait',
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -10,7 +10,8 @@ Class {
 		'associationNotIn',
 		'nonEmpty5ElementsNoDuplicates',
 		'emptyList',
-		'notIncludedList'
+		'notIncludedList',
+		'nonEmpty1Element'
 	],
 	#category : #'LinkedList-Tests'
 }
@@ -110,6 +111,13 @@ AssociationListTest >> nonEmpty [
 ]
 
 { #category : #requirements }
+AssociationListTest >> nonEmpty1Element [
+	" return a collection of size 1 including one element"
+
+	^ nonEmpty1Element
+]
+
+{ #category : #requirements }
 AssociationListTest >> nonEmptyDict [
 	^ alist
 ]
@@ -142,6 +150,9 @@ AssociationListTest >> setUp [
 	associationNotIn := keyNotIn -> valueNotIn.
 	notIncludedList := self classToBeTested new
 		add: associationNotIn;
+		yourself.
+	nonEmpty1Element := self classToBeTested new
+		at: #a put: 5;
 		yourself
 ]
 
