@@ -123,23 +123,12 @@ AssociationList >> asStringOn: aStream delimiter: delimString last: lastDelimStr
 	"Print elements on a stream separated
 	with a delimiter between all the elements and with
 	a special one before the last like: 'a, b and c'.
-	Uses #asString instead of #print:
+	Uses #asString instead of #print: ."
 
-	Note: Feel free to improve the code to detect the last element."
-
-	| n sz |
-	n := 1.
-	sz := self size.
 	self
-		do: [ :elem | 
-			n := n + 1.
-			aStream nextPutAll: elem asString ]
-		separatedBy: [ 
-			aStream
-				nextPutAll:
-					(n = sz
-						ifTrue: [ lastDelimString ]
-						ifFalse: [ delimString ]) ]
+		do: [ :elem | aStream nextPutAll: elem asString ]
+		separatedBy: [ aStream nextPutAll: delimString ]
+		lastSeparatedBy: [ aStream nextPutAll: lastDelimString ]
 ]
 
 { #category : #accessing }
@@ -337,6 +326,27 @@ AssociationList >> do: elementBlock separatedBy: separatorBlock [
 	[ current isNil ]
 		whileFalse: [ 
 			current == firstNode ifFalse: [ separatorBlock value ].
+			elementBlock value: current value value.
+			current := current nextNode ]
+]
+
+{ #category : #enumerating }
+AssociationList >> do: elementBlock separatedBy: separatorBlock lastSeparatedBy: lastSeparatorBlock [
+	"Evaluate the elementBlock for all elements in the receiver,
+	and evaluate the separatorBlock between them and evaluate
+	the lastSeparatorBlock before the last"
+
+	"Optimized."
+
+	| current |
+	current := firstNode.
+	[ current isNil ]
+		whileFalse: [ 
+			current == firstNode
+				ifFalse: [ 
+					current == lastNode
+						ifTrue: [ lastSeparatorBlock value ]
+						ifFalse: [ separatorBlock value ] ].
 			elementBlock value: current value value.
 			current := current nextNode ]
 ]
@@ -621,21 +631,12 @@ AssociationList >> printOn: aStream delimiter: delimString [
 AssociationList >> printOn: aStream delimiter: delimString last: lastDelimString [
 	"Print elements on a stream separated
 	with a delimiter between all the elements and with
-	a special one before the last like: 'a, b and c'
+	a special one before the last like: 'a, b and c'."
 
-	Note: Feel free to improve the code to detect the last element."
-
-	| n sz |
-	n := 1.
-	sz := self size.
 	self
-		do: [ :elem | 
-			n := n + 1.
-			aStream print: elem ]
-		separatedBy: [ 
-			n = sz
-				ifTrue: [ aStream print: lastDelimString ]
-				ifFalse: [ aStream print: delimString ] ]
+		do: [ :elem | aStream print: elem ]
+		separatedBy: [ aStream print: delimString ]
+		lastSeparatedBy: [ aStream print: lastDelimString ]
 ]
 
 { #category : #enumerating }
