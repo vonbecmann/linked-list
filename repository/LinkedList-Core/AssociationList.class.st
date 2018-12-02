@@ -93,6 +93,40 @@ AssociationList >> anySatisfy: aBlock [
 	^ false
 ]
 
+{ #category : #converting }
+AssociationList >> asArray [
+	"Answer an Array whose elements are the elements of the receiver."
+
+	"Optimized for efficiency"
+
+	| newArray index |
+	newArray := Array new: self size.
+	index := 0.
+	self do: [ :each | newArray at: (index := index + 1) put: each ].
+	^ newArray
+]
+
+{ #category : #converting }
+AssociationList >> asBag [
+	"Answer a Bag whose elements are the elements of the receiver."
+
+	^ Bag withAll: self
+]
+
+{ #category : #converting }
+AssociationList >> asByteArray [
+	"Answer a ByteArray whose elements are the elements of the receiver.
+	Implementation note: Cannot use ''ByteArray withAll: self'' as that only
+	works for SequenceableCollections which support the replacement 
+	primitive."
+
+	| array index |
+	array := ByteArray new: self size.
+	index := 0.
+	self do: [ :each | array at: (index := index + 1) put: each ].
+	^ array
+]
+
 { #category : #printing }
 AssociationList >> asCommaString [
 	"Return collection printed as 'a, b, c' "
@@ -105,6 +139,27 @@ AssociationList >> asCommaStringAnd [
 	"Return collection printed as 'a, b and c' "
 
 	^ String streamContents: [ :s | self asStringOn: s delimiter: ', ' last: ' and ' ]
+]
+
+{ #category : #converting }
+AssociationList >> asIdentitySet [
+	"Answer a IdentitySet whose elements are the elements of the receiver."
+
+	^ IdentitySet withAll: self
+]
+
+{ #category : #converting }
+AssociationList >> asOrderedCollection [
+	"Answer an OrderedCollection whose elements are the elements of the receiver."
+
+	^ OrderedCollection withAll: self
+]
+
+{ #category : #converting }
+AssociationList >> asSet [
+	"Answer a Set whose elements are the elements of the receiver."
+
+	^ Set withAll: self
 ]
 
 { #category : #printing }

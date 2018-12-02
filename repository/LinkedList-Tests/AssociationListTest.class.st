@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #CollectionRootTest,
-	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest',
-	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait',
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest + TConvertTest',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait + TConvertTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -70,6 +70,13 @@ AssociationListTest >> collectionClass [
 ]
 
 { #category : #requirements }
+AssociationListTest >> collectionWithoutEqualElements [
+	" return a collection without equal elements"
+
+	^ nonEmpty5ElementsNoDuplicates
+]
+
+{ #category : #requirements }
 AssociationListTest >> collectionWithoutNilElements [
 	" return a collection that doesn't includes a nil element  and that doesn't includes equal elements'"
 
@@ -91,6 +98,13 @@ AssociationListTest >> empty [
 { #category : #requirements }
 AssociationListTest >> emptyDict [
 	^ emptyList
+]
+
+{ #category : #requirements }
+AssociationListTest >> integerCollectionWithoutEqualElements [
+	" return a collection of integer without equal elements"
+
+	^ nonEmpty5ElementsNoDuplicates
 ]
 
 { #category : #requirements }
@@ -139,12 +153,13 @@ AssociationListTest >> setUp [
 		at: #b put: 30;
 		at: #c put: 1;
 		at: #d put: -2.
-	nonEmpty5ElementsNoDuplicates := self classToBeTested new.
-	nonEmpty5ElementsNoDuplicates
-		at: #a put: 1;
-		at: #b put: 30;
-		at: #c put: 13;
-		at: #d put: -2.
+	nonEmpty5ElementsNoDuplicates := self classToBeTested new
+		at: #a put: 5;
+		at: #b put: 4;
+		at: #c put: 7;
+		at: #d put: 6;
+		at: #e put: 9; 
+		yourself.
 	valueNotIn := 666.
 	keyNotIn := #z.
 	associationNotIn := keyNotIn -> valueNotIn.
