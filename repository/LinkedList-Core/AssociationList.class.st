@@ -311,7 +311,14 @@ AssociationList >> detect: aBlock ifNone: exceptionBlock [
 AssociationList >> do: aBlock [
 	"Evaluate aBlock with each association's value"
 
-	self associationsDo: [ :assoc | aBlock value: assoc value ]
+	"Optimized."
+
+	| current |
+	current := firstNode.
+	[ current isNil ]
+		whileFalse: [ 
+			aBlock value: current value value.
+			current := current nextNode ]
 ]
 
 { #category : #enumerating }
