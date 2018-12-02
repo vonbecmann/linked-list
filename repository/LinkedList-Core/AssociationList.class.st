@@ -162,6 +162,23 @@ AssociationList >> asSet [
 	^ Set withAll: self
 ]
 
+{ #category : #converting }
+AssociationList >> asSortedCollection [
+	"Answer a SortedCollection whose elements are the elements of the receiver. The sort order is the default less than or equal. Note that you should use #sorted: if you don't really need a SortedCollection, but a sorted collection."
+
+	^ SortedCollection withAll: self
+]
+
+{ #category : #converting }
+AssociationList >> asSortedCollection: aSortBlock [
+	"Answer a SortedCollection whose elements are the elements of the receiver. The sort order is defined by the argument, aSortBlock. Note that this is better to use #sorted: if you don't really need a SortedCollection, but a sorted collection!!"
+
+	^ (SortedCollection new: self size)
+		sortBlock: aSortBlock;
+		addAll: self;
+		yourself
+]
+
 { #category : #printing }
 AssociationList >> asStringOn: aStream delimiter: delimString [
 	"Print elements on a stream separated
