@@ -633,7 +633,9 @@ AssociationList >> printElementsOn: aStream [
 
 { #category : #printing }
 AssociationList >> printNameOn: aStream [
-	super printOn: aStream
+	aStream
+		nextPutAll: 'an ';
+		nextPutAll: self class name
 ]
 
 { #category : #printing }
