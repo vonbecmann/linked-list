@@ -36,7 +36,7 @@ AssociationList >> = associationList [
 AssociationList >> add: anAssociation [
 	self
 		associationsDo: [ :assoc | 
-			assoc key = anAssociation key
+			(self is: assoc key equalTo: anAssociation key)
 				ifTrue: [ 
 					assoc value: anAssociation value.
 					^ anAssociation ] ].
@@ -142,7 +142,7 @@ AssociationList >> associationAt: key [
 AssociationList >> associationAt: key ifAbsent: aBlock [
 	self
 		associationsDo: [ :assoc | 
-			assoc key = key
+			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ assoc ] ].
 	^ aBlock value
 ]
@@ -188,7 +188,7 @@ AssociationList >> at: key ifAbsent: aBlock [
 
 	self
 		associationsDo: [ :assoc | 
-			assoc key = key
+			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ assoc value ] ].
 	^ aBlock value
 ]
@@ -200,7 +200,7 @@ AssociationList >> at: key put: anObject [
 
 	self
 		associationsDo: [ :assoc | 
-			assoc key = key
+			(self is: key equalTo: assoc key)
 				ifTrue: [ 
 					assoc value: anObject.
 					^ anObject ] ].
@@ -467,7 +467,10 @@ AssociationList >> includesAny: aCollection [
 AssociationList >> includesKey: key [
 	"Answer whether the receiver has a key equal to the argument, key."
 
-	self associationsDo: [ :assoc | assoc key = key ifTrue: [ ^ true ] ].
+	self
+		associationsDo: [ :assoc | 
+			(self is: assoc key equalTo: key)
+				ifTrue: [ ^ true ] ].
 	^ false
 ]
 
@@ -489,6 +492,13 @@ AssociationList >> inject: thisValue into: binaryBlock [
 	nextValue := thisValue.
 	self do: [ :each | nextValue := binaryBlock value: nextValue value: each ].
 	^ nextValue
+]
+
+{ #category : #private }
+AssociationList >> is: firstKey equalTo: secondKey [
+	" is first key equal to second key?"
+
+	^ firstKey = secondKey
 ]
 
 { #category : #testing }
@@ -597,7 +607,7 @@ AssociationList >> previousNodeAt: key ifAbsent: aBlock [
 	current := firstNode.
 	[ current isNil ]
 		whileFalse: [ 
-			current value key = key
+			(self is: current value key equalTo: key)
 				ifTrue: [ ^ previous ].
 			previous := current.
 			current := current nextNode ].
