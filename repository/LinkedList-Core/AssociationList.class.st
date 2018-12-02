@@ -594,6 +594,50 @@ AssociationList >> previousNodeAt: key ifAbsent: aBlock [
 	^ aBlock value
 ]
 
+{ #category : #printing }
+AssociationList >> printElementsOn: aStream [
+	"The original code used #skip:, but some streams do not support that,
+	 and we don't really need it."
+
+	aStream nextPut: $(.
+	self do: [ :element | aStream print: element ] separatedBy: [ aStream space ].
+	aStream nextPut: $)
+]
+
+{ #category : #printing }
+AssociationList >> printNameOn: aStream [
+	super printOn: aStream
+]
+
+{ #category : #printing }
+AssociationList >> printOn: aStream delimiter: delimString [
+	"Print elements on a stream separated
+	with a delimiter String like: 'a, b, c' "
+
+	self do: [ :elem | aStream print: elem ] separatedBy: [ aStream print: delimString ]
+]
+
+{ #category : #printing }
+AssociationList >> printOn: aStream delimiter: delimString last: lastDelimString [
+	"Print elements on a stream separated
+	with a delimiter between all the elements and with
+	a special one before the last like: 'a, b and c'
+
+	Note: Feel free to improve the code to detect the last element."
+
+	| n sz |
+	n := 1.
+	sz := self size.
+	self
+		do: [ :elem | 
+			n := n + 1.
+			aStream print: elem ]
+		separatedBy: [ 
+			n = sz
+				ifTrue: [ aStream print: lastDelimString ]
+				ifFalse: [ aStream print: delimString ] ]
+]
+
 { #category : #enumerating }
 AssociationList >> reject: aBlock [
 	"Evaluate aBlock with each of my values as the argument. Collect into a collection 
