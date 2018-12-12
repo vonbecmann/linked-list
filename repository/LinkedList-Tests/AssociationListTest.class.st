@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #CollectionRootTest,
-	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest + TConvertTest + TConvertAsSortedTest',
-	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait + TConvertTest classTrait + TConvertAsSortedTest classTrait',
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest + TConvertTest + TConvertAsSortedTest + (TCopyTest - {#testCopyEmptyWithout. #testCopyNonEmptyWithout. #testCopyNonEmptyWithoutNotIncluded})',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait + TConvertTest classTrait + TConvertAsSortedTest classTrait + TCopyTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -11,7 +11,9 @@ Class {
 		'nonEmpty5ElementsNoDuplicates',
 		'emptyList',
 		'notIncludedList',
-		'nonEmpty1Element'
+		'nonEmpty1Element',
+		'collectionIncluded',
+		'collectionNotIncluded'
 	],
 	#category : #'LinkedList-Tests'
 }
@@ -70,6 +72,20 @@ AssociationListTest >> collectionClass [
 ]
 
 { #category : #requirements }
+AssociationListTest >> collectionNotIncluded [
+	" return a collection for wich each element is not included in 'nonEmpty' "
+
+	^ collectionNotIncluded
+]
+
+{ #category : #requirements }
+AssociationListTest >> collectionWithElementsToRemove [
+	" return a collection of elements included in 'nonEmpty'  "
+
+	^ collectionIncluded
+]
+
+{ #category : #requirements }
 AssociationListTest >> collectionWithSortableElements [
 	" return a collection elements that can be sorte ( understanding message ' < '  or ' > ')"
 
@@ -95,6 +111,13 @@ AssociationListTest >> elementNotIn [
 	"return an element not included in 'nonEmpty' "
 
 	^ 739
+]
+
+{ #category : #requirements }
+AssociationListTest >> elementToAdd [
+	" return an element of type 'nonEmpy' elements'type'  not  yet included in nonEmpty"
+
+	^ #u -> 5
 ]
 
 { #category : #requirements }
@@ -175,7 +198,9 @@ AssociationListTest >> setUp [
 		yourself.
 	nonEmpty1Element := self classToBeTested new
 		at: #a put: 5;
-		yourself
+		yourself.
+	collectionIncluded := { 1 }.
+	collectionNotIncluded := { valueNotIn. valueNotIn }
 ]
 
 { #category : #requirements }

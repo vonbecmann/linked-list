@@ -317,6 +317,23 @@ AssociationList >> collect: collectBlock thenSelect: selectBlock [
 	^ newCollection
 ]
 
+{ #category : #copying }
+AssociationList >> copyWith: newElement [
+	" Answer a new collection with newElement added "
+
+	^ self copy
+		add: newElement;
+		yourself
+]
+
+{ #category : #copying }
+AssociationList >> copyWithoutAll: aCollection [
+	"Answer a copy of the receiver that does not contain any elements 
+	equal to those in aCollection."
+
+	^ self reject: [ :each | aCollection includes: each ]
+]
+
 { #category : #adding }
 AssociationList >> declare: key from: aDictionary [
 	"Add key to the receiver. If key already exists, do nothing. If aDictionary 
