@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #CollectionRootTest,
-	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest + TConvertTest + TConvertAsSortedTest + (TCopyTest - {#testCopyEmptyWithout. #testCopyNonEmptyWithout. #testCopyNonEmptyWithoutNotIncluded})',
-	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait + TConvertTest classTrait + TConvertAsSortedTest classTrait + TCopyTest classTrait',
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest + TConvertTest + TConvertAsSortedTest + (TCopyTest - {#testCopyEmptyWithout. #testCopyNonEmptyWithout. #testCopyNonEmptyWithoutNotIncluded}) + TSetArithmetic',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait + TConvertTest classTrait + TConvertAsSortedTest classTrait + TCopyTest classTrait + TSetArithmetic classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -40,6 +40,20 @@ AssociationListTest >> anotherElementNotIn [
 ]
 
 { #category : #requirements }
+AssociationListTest >> anotherElementOrAssociationIn [
+	" return an element (or an association for Dictionary ) present  in 'collection' "
+
+	^ self collection associations anyOne
+]
+
+{ #category : #requirements }
+AssociationListTest >> anotherElementOrAssociationNotIn [
+	" return an element (or an association for Dictionary) not present in 'collection' "
+
+	^ associationNotIn
+]
+
+{ #category : #requirements }
 AssociationListTest >> anotherValue [
 	" return a value ( not eual to 'aValue' ) to put into nonEmpty "
 
@@ -62,6 +76,11 @@ AssociationListTest >> associationWithKeyNotInToAdd [
 { #category : #coverage }
 AssociationListTest >> classToBeTested [
 	^ AssociationList
+]
+
+{ #category : #requirements }
+AssociationListTest >> collection [
+	^ self nonEmptyDict
 ]
 
 { #category : #requirements }

@@ -13,6 +13,30 @@ Class {
 	#category : #'LinkedList-Core'
 }
 
+{ #category : #'instance creation' }
+AssociationList class >> empty [
+	^ self new
+]
+
+{ #category : #'instance creation' }
+AssociationList class >> with: anAssociation [
+	"Answer an instance of me containing anAssociation."
+
+	^ self empty
+		add: anAssociation;
+		yourself
+]
+
+{ #category : #'instance creation' }
+AssociationList class >> with: firstAssoc with: secondAssoc [
+	"Answer an instance of me containing the two arguments as elements."
+
+	^ self new
+		add: firstAssoc;
+		add: secondAssoc;
+		yourself
+]
+
 { #category : #copying }
 AssociationList >> , aCollection [
 	^ self copy
@@ -219,6 +243,19 @@ AssociationList >> associationAt: key ifAbsent: aBlock [
 	^ aBlock value
 ]
 
+{ #category : #accessing }
+AssociationList >> associations [
+	"Answer a Collection containing the receiver's associations."
+
+	"Optimized for efficiency"
+
+	| newArray index |
+	newArray := Array new: self size.
+	index := 0.
+	self associationsDo: [ :each | newArray at: (index := index + 1) put: each ].
+	^ newArray
+]
+
 { #category : #enumerating }
 AssociationList >> associationsDo: aBlock [
 	"Evaluate aBlock with each association"
@@ -394,6 +431,20 @@ AssociationList >> detect: aBlock ifNone: exceptionBlock [
 	evaluate to true, then evaluate the argument, exceptionBlock."
 
 	^ self detect: aBlock ifFound: [ :element | element ] ifNone: exceptionBlock
+]
+
+{ #category : #enumerating }
+AssociationList >> difference: aCollection [
+	"Answer the set theoretic difference of two collections. This is a specialized version for Dictionaries keeping the keys of the objects. At a slightly higher price of an additional Set to track duplicates."
+
+	| other duplicates |
+	other := aCollection asSet.
+	duplicates := Set new.
+	^ self
+		select: [ :each | 
+			((other includes: each) not and: [ (duplicates includes: each) not ])
+				ifTrue: [ duplicates add: each. true ]
+				ifFalse: [ false ] ]
 ]
 
 { #category : #enumerating }
@@ -588,6 +639,20 @@ AssociationList >> inject: thisValue into: binaryBlock [
 	nextValue := thisValue.
 	self do: [ :each | nextValue := binaryBlock value: nextValue value: each ].
 	^ nextValue
+]
+
+{ #category : #enumerating }
+AssociationList >> intersection: aCollection [
+	"Answer the set theoretic intersection of two collections."
+
+	| other duplicates |
+	other := aCollection asSet.
+	duplicates := Set new.
+	^ self
+		select: [ :each | 
+			((other includes: each) and: [ (duplicates includes: each) not ])
+				ifTrue: [ duplicates add: each. true ]
+				ifFalse: [ false ] ]
 ]
 
 { #category : #private }
@@ -890,6 +955,15 @@ AssociationList >> sumNumbers: aBlock [
 	dealing with numbers."
 
 	^ self inject: 0 into: [ :sum :each | sum + (aBlock value: each) ]
+]
+
+{ #category : #enumerating }
+AssociationList >> union: aCollection [
+	"Answer the set theoretic union of the receiver and aCollection, using the receiver's notion of equality and not side effecting the receiver at all."
+
+	^ self copy
+		addAll: aCollection;
+		yourself
 ]
 
 { #category : #accessing }
