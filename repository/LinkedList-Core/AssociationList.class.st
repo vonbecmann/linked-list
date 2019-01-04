@@ -524,6 +524,13 @@ AssociationList >> errorKeyNotFound: aKey [
 ]
 
 { #category : #private }
+AssociationList >> errorNotFound: anObject [
+	"Raise a NotFound exception."
+
+	NotFound signalFor: anObject
+]
+
+{ #category : #private }
 AssociationList >> first [
 	"Answer the first association of the receiver"
 
