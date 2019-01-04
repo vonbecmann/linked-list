@@ -1,8 +1,8 @@
 Class {
 	#name : #AssociationListTest,
 	#superclass : #CollectionRootTest,
-	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest + TConvertTest + TConvertAsSortedTest + (TCopyTest - {#testCopyEmptyWithout. #testCopyNonEmptyWithout. #testCopyNonEmptyWithoutNotIncluded}) + TSetArithmetic',
-	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait + TConvertTest classTrait + TConvertAsSortedTest classTrait + TCopyTest classTrait + TSetArithmetic classTrait',
+	#traits : 'TIncludesTest + TDictionaryAddingTest + TDictionaryComparingTest + TDictionaryCopyingTest + TDictionaryEnumeratingTest + TDictionaryRemovingTest + (TPutBasicTest - {#testAtPutOutOfBounds}) + TAsStringCommaAndDelimiterTest + TPrintTest + TConvertTest + TConvertAsSortedTest + (TCopyTest - {#testCopyEmptyWithout. #testCopyNonEmptyWithout. #testCopyNonEmptyWithoutNotIncluded}) + TSetArithmetic + TDictionaryIncludesWithIdentityCheckTest',
+	#classTraits : 'TIncludesTest classTrait + TDictionaryAddingTest classTrait + TDictionaryComparingTest classTrait + TDictionaryCopyingTest classTrait + TDictionaryEnumeratingTest classTrait + TDictionaryRemovingTest classTrait + TPutBasicTest classTrait + TAsStringCommaAndDelimiterTest classTrait + TPrintTest classTrait + TConvertTest classTrait + TConvertAsSortedTest classTrait + TCopyTest classTrait + TSetArithmetic classTrait + TDictionaryIncludesWithIdentityCheckTest classTrait',
 	#instVars : [
 		'alist',
 		'valueNotIn',
@@ -13,7 +13,8 @@ Class {
 		'notIncludedList',
 		'nonEmpty1Element',
 		'collectionIncluded',
-		'collectionNotIncluded'
+		'collectionNotIncluded',
+		'nonEmptyWithFloat'
 	],
 	#category : #'LinkedList-Tests'
 }
@@ -157,6 +158,13 @@ AssociationListTest >> integerCollectionWithoutEqualElements [
 ]
 
 { #category : #requirements }
+AssociationListTest >> keyNotInNonEmpty [
+	" return a key not included in nonEmpty"
+
+	^ keyNotIn
+]
+
+{ #category : #requirements }
 AssociationListTest >> keyNotInNonEmptyDict [
 	" return a key not included in nonEmptyDict"
 
@@ -192,6 +200,13 @@ AssociationListTest >> nonEmptyDifferentFromNonEmptyDict [
 	^ notIncludedList
 ]
 
+{ #category : #requirements }
+AssociationListTest >> nonEmptyWithCopyNonIdentical [
+	" return a collection including elements for wich copy is not identical to the initial element ( this is not the cas of Integer )"
+
+	^ nonEmptyWithFloat
+]
+
 { #category : #running }
 AssociationListTest >> setUp [
 	super setUp.
@@ -219,7 +234,8 @@ AssociationListTest >> setUp [
 		at: #a put: 5;
 		yourself.
 	collectionIncluded := { 1 }.
-	collectionNotIncluded := { valueNotIn. valueNotIn }
+	collectionNotIncluded := { valueNotIn. valueNotIn }.
+	nonEmptyWithFloat := self classToBeTested new add: #A->2.5; add: #b->3.5; yourself.
 ]
 
 { #category : #requirements }
@@ -239,4 +255,11 @@ AssociationListTest >> testAddWithKeyNotIn [
 	self assert: result = association.
 	self assert: (dictionary at: association key) = association value.
 	self assert: dictionary size = (oldSize  + 1).
+]
+
+{ #category : #requirements }
+AssociationListTest >> valueNotInNonEmpty [
+	" return a value not included in nonEmpty"
+
+	^ valueNotIn
 ]

@@ -611,6 +611,19 @@ AssociationList >> includesAny: aCollection [
 ]
 
 { #category : #testing }
+AssociationList >> includesAssociation: anAssociation [
+	^ (self associationAt: anAssociation key ifAbsent: [ ^ false ]) value = anAssociation value
+]
+
+{ #category : #testing }
+AssociationList >> includesIdentity: anObject [
+	"Answer whether anObject is one of the values of the receiver.  Contrast #includes: in which there is only an equality check, here there is an identity check"
+
+	self do: [ :each | anObject == each ifTrue: [ ^ true ] ].
+	^ false
+]
+
+{ #category : #testing }
 AssociationList >> includesKey: key [
 	"Answer whether the receiver has a key equal to the argument, key."
 
