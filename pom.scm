@@ -1,4 +1,5 @@
-(pb:project 'spur32-latest-vm 'pharo-70)
+(pb:project 'spur32-stable-vm 'pharo-70)
+
 
 
 
