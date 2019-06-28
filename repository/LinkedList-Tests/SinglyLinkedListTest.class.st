@@ -83,9 +83,8 @@ SinglyLinkedListTest >> setUp [
 	list := self empty.
 	list
 		add: 1.2;
-		add: $a;
+		add: -2;
 		add: 7;
-		add: 'test';
 		add: true;
 		add: false.
 	otherList := self empty
@@ -225,5 +224,5 @@ SinglyLinkedListTest >> testSecond02 [
 
 { #category : #tests }
 SinglyLinkedListTest >> testSecond03 [
-	self assert: list second equals: $a
+	self assert: list second equals: -2
 ]
