@@ -515,10 +515,10 @@ SinglyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimStrin
 	[ current isNil ]
 		whileFalse: [ 
 			current == lastNode
-				ifTrue: [ aStream print: lastDelimString ]
+				ifTrue: [ aStream nextPutAll: lastDelimString ]
 				ifFalse: [ 
 					current == firstNode
-						ifFalse: [ aStream print: delimString ] ].
+						ifFalse: [ aStream nextPutAll: delimString ] ].
 			aStream print: current value.
 			current := current nextNode ]
 ]

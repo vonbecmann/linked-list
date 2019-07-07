@@ -828,8 +828,8 @@ AssociationList >> printOn: aStream delimiter: delimString last: lastDelimString
 
 	self
 		do: [ :elem | aStream print: elem ]
-		separatedBy: [ aStream print: delimString ]
-		lastSeparatedBy: [ aStream print: lastDelimString ]
+		separatedBy: [ aStream nextPutAll: delimString ]
+		lastSeparatedBy: [ aStream nextPutAll: lastDelimString ]
 ]
 
 { #category : #enumerating }

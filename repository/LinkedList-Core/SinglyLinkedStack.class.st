@@ -208,8 +208,8 @@ SinglyLinkedStack >> printOn: aStream delimiter: delimString last: lastDelimStri
 			aStream print: elem ]
 		separatedBy: [ 
 			n = sz
-				ifTrue: [ aStream print: lastDelimString ]
-				ifFalse: [ aStream print: delimString ] ]
+				ifTrue: [ aStream nextPutAll: lastDelimString ]
+				ifFalse: [ aStream nextPutAll: delimString ] ]
 ]
 
 { #category : #adding }
