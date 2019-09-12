@@ -77,6 +77,12 @@ AssociationList >> addAll: aKeyedCollection [
 ]
 
 { #category : #private }
+AssociationList >> addAssociationWithKey: newKey andValue: newValue [
+	self addLast: (Association basicNew key: newKey value: newValue).
+	^ newValue
+]
+
+{ #category : #private }
 AssociationList >> addLast: anObject [
 	"Add a node to the end of the receiver's list."
 
@@ -303,6 +309,58 @@ AssociationList >> at: key ifAbsent: aBlock [
 ]
 
 { #category : #accessing }
+AssociationList >> at: key ifAbsentPut: aBlock [
+	"Return the value at the given key.
+	If the key is not included in the receiver store and return the result 
+	of evaluating aBlock as the new value."
+
+	self
+		associationsDo: [ :assoc | 
+			(self is: assoc key equalTo: key)
+				ifTrue: [ ^ assoc value ] ].
+	^ self addAssociationWithKey: key andValue: aBlock value
+]
+
+{ #category : #accessing }
+AssociationList >> at: key ifPresent: aBlock [
+	"Lookup the given key in the receiver. If it is present, answer the
+	value of evaluating the given block optionally with the value associated
+	with the key.
+	Otherwise, answer nil."
+
+	self
+		associationsDo: [ :assoc | 
+			(self is: assoc key equalTo: key)
+				ifTrue: [ ^ aBlock cull: assoc value ] ].
+	^ nil
+]
+
+{ #category : #accessing }
+AssociationList >> at: key ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	"Lookup the given key in the receiver. If it is present, answer the
+	value of evaluating the first block optionally with the value associated
+	with the key.
+	Otherwise answer the value of the second block."
+
+	self at: key ifPresent: [ :v | ^ aPresentBlock cull: v ].
+	^ anAbsentBlock value
+]
+
+{ #category : #accessing }
+AssociationList >> at: key ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock [
+	"Lookup the given key in the receiver. If it is present, answer the
+	value of evaluating the first block optionally with the value associated
+	with the key.
+	Otherwise store and return the result of evaluating the second block as the
+	new value of the key."
+
+	^ self
+		at: key
+		ifPresent: aPresentBlock
+		ifAbsent: [ self at: key put: anAbsentBlock value ]
+]
+
+{ #category : #accessing }
 AssociationList >> at: key put: anObject [
 	"Set the value at key to be anObject.  If key is not found, create a
 	new entry for key and set is value to anObject. Answer anObject."
@@ -310,11 +368,9 @@ AssociationList >> at: key put: anObject [
 	self
 		associationsDo: [ :assoc | 
 			(self is: key equalTo: assoc key)
-				ifTrue: [ 
-					assoc value: anObject.
+				ifTrue: [ assoc value: anObject.
 					^ anObject ] ].
-	self addLast: (Association basicNew key: key value: anObject).
-	^ anObject
+	^ self addAssociationWithKey: key andValue: anObject
 ]
 
 { #category : #enumerating }
