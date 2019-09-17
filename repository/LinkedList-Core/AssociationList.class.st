@@ -275,6 +275,22 @@ AssociationList >> associationsDo: aBlock [
 ]
 
 { #category : #enumerating }
+AssociationList >> associationsDo: aBlock separatedBy: separatorBlock [
+	"Evaluate aBlock for each association in the receiver,
+	and evaluate the separatorBlock between."
+
+	"Optimized."
+
+	| current |
+	current := firstNode.
+	[ current isNil ]
+		whileFalse: [ 
+			current == firstNode	ifFalse: [ separatorBlock value ].
+			aBlock value: current value.
+			current := current nextNode ]
+]
+
+{ #category : #enumerating }
 AssociationList >> associationsSelect: aBlock [
 	"Evaluate aBlock with each of my associations as the argument. Collect
 	into a collection that is like me, only those associations for which aBlock evaluates
@@ -857,7 +873,9 @@ AssociationList >> printElementsOn: aStream [
 	 and we don't really need it."
 
 	aStream nextPut: $(.
-	self do: [ :element | aStream print: element ] separatedBy: [ aStream space ].
+	self
+		associationsDo: [ :element | aStream print: element ]
+		separatedBy: [ aStream space ].
 	aStream nextPut: $)
 ]
 
@@ -866,6 +884,14 @@ AssociationList >> printNameOn: aStream [
 	aStream
 		nextPutAll: 'an ';
 		nextPutAll: self class name
+]
+
+{ #category : #printing }
+AssociationList >> printOn: aStream [
+	"Append a sequence of characters that identify the receiver to aStream."
+
+	self printNameOn: aStream.
+	self printElementsOn: aStream
 ]
 
 { #category : #printing }
