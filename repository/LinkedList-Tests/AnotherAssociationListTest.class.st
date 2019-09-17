@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'alist'
 	],
-	#category : #'LinkedList-Tests'
+	#category : #'LinkedList-Tests-Unordered'
 }
 
 { #category : #running }
