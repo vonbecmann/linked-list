@@ -250,6 +250,19 @@ AssociationList >> associationAt: key ifAbsent: aBlock [
 ]
 
 { #category : #accessing }
+AssociationList >> associationAt: key ifPresent: aBlock [
+	"Answer the value of evaluating aBlock optionally with the association
+	for the given key.
+	If the key is not found, return nil."
+
+	self
+		associationsDo: [ :assoc | 
+			(self is: assoc key equalTo: key)
+				ifTrue: [ ^ aBlock cull: assoc ] ].
+	^ nil
+]
+
+{ #category : #accessing }
 AssociationList >> associations [
 	"Answer a Collection containing the receiver's associations."
 
@@ -603,6 +616,11 @@ AssociationList >> errorNotFound: anObject [
 ]
 
 { #category : #private }
+AssociationList >> errorValueNotFound: value [
+	ValueNotFound signalFor: value
+]
+
+{ #category : #private }
 AssociationList >> first [
 	"Answer the first association of the receiver"
 
@@ -774,6 +792,51 @@ AssociationList >> isEmptyOrNil [
 { #category : #testing }
 AssociationList >> isNotEmpty [
 	^ self isEmpty not
+]
+
+{ #category : #accessing }
+AssociationList >> keyAtIdentityValue: value [
+	"Answer the key that is the external name for the argument, value. If 
+	there is none, answer nil.
+	Note: There can be multiple keys with the same value. Only one is returned."
+
+	^ self
+		keyAtIdentityValue: value
+		ifAbsent: [ self errorValueNotFound: value ]
+]
+
+{ #category : #accessing }
+AssociationList >> keyAtIdentityValue: value ifAbsent: exceptionBlock [
+	"Answer the key that is the external name for the argument, value. If 
+	there is none, answer the result of evaluating exceptionBlock.
+	Note: There can be multiple keys with the same value. Only one is returned."
+
+	self
+		associationsDo: [ :association | 
+			value == association value
+				ifTrue: [ ^ association key ] ].
+	^ exceptionBlock value
+]
+
+{ #category : #accessing }
+AssociationList >> keyAtValue: value [
+	"Answer the key that is the external name for the argument, value. If 
+	there is none, signal an error."
+
+	^ self keyAtValue: value ifAbsent: [ self errorValueNotFound: value ]
+]
+
+{ #category : #accessing }
+AssociationList >> keyAtValue: value ifAbsent: exceptionBlock [
+	"Answer the key that is the external name for the argument, value. If 
+	there is none, answer the result of evaluating exceptionBlock.
+	: Use =, not ==, so stings like 'this' can be found.  Note that MethodDictionary continues to use == so it will be fast."
+
+	self
+		associationsDo: [ :association | 
+			value = association value
+				ifTrue: [ ^ association key ] ].
+	^ exceptionBlock value
 ]
 
 { #category : #accessing }
