@@ -17,3 +17,8 @@ AnotherAssociationListTest >> setUp [
 AnotherAssociationListTest >> testDetectWhenNotFound [
 	self should: [ alist detect: [ :each | false ] ] raise: NotFound
 ]
+
+{ #category : #tests }
+AnotherAssociationListTest >> testErrorValueNotFound [
+	self should: [ alist keyAtValue: 1 ] raise: Error
+]

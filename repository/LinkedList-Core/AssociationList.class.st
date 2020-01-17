@@ -617,7 +617,14 @@ AssociationList >> errorNotFound: anObject [
 
 { #category : #private }
 AssociationList >> errorValueNotFound: value [
-	ValueNotFound signalFor: value
+	Error
+		signal:
+			(String
+				streamContents: [ :stream | 
+					stream << 'value '.
+					stream print: value.
+					stream << ' not found in '.
+					stream print: self class ])
 ]
 
 { #category : #private }
