@@ -610,9 +610,13 @@ AssociationList >> errorKeyNotFound: aKey [
 
 { #category : #private }
 AssociationList >> errorNotFound: anObject [
-	"Raise a NotFound exception."
-
-	NotFound signalFor: anObject
+	Error
+		signal:
+			(String
+				streamContents: [ :stream | 
+					stream print: anObject.
+					stream << ' not found in '.
+					stream print: self class ])
 ]
 
 { #category : #private }
