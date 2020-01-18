@@ -166,7 +166,7 @@ SinglyLinkedListTest >> testDetectIfFoundWhenSomethingIsFoundIgnoringTheFoundObj
 
 { #category : #'test - iterate' }
 SinglyLinkedListTest >> testDetectWhenNobodyIsFound [
-	self should: [ self collectionWithoutNilElements detect: [ :each | each isNil ] ] raise: NotFound
+	self should: [ self collectionWithoutNilElements detect: [ :each | each isNil ] ] raise: Error
 ]
 
 { #category : #tests }

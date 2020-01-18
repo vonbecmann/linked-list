@@ -303,9 +303,13 @@ SinglyLinkedList >> emptyError [
 
 { #category : #private }
 SinglyLinkedList >> errorNotFound: anObject [
-	"Raise a NotFound exception."
-
-	NotFound signalFor: anObject
+	Error
+		signal:
+			(String
+				streamContents: [ :stream | 
+					stream print: anObject.
+					stream << ' not found in '.
+					stream print: self class ])
 ]
 
 { #category : #accessing }
