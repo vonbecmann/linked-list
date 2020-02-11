@@ -383,10 +383,11 @@ AssociationList >> at: key ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock [
 	Otherwise store and return the result of evaluating the second block as the
 	new value of the key."
 
-	^ self
-		at: key
-		ifPresent: aPresentBlock
-		ifAbsent: [ self at: key put: anAbsentBlock value ]
+	self
+		associationsDo: [ :assoc | 
+			(self is: assoc key equalTo: key)
+				ifTrue: [ ^ aPresentBlock cull: assoc value ] ].
+	^ self addAssociationWithKey: key andValue: anAbsentBlock value
 ]
 
 { #category : #accessing }
