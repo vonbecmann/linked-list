@@ -398,7 +398,8 @@ AssociationList >> at: key put: anObject [
 	self
 		associationsDo: [ :assoc | 
 			(self is: key equalTo: assoc key)
-				ifTrue: [ assoc value: anObject.
+				ifTrue: [ 
+					assoc value: anObject.
 					^ anObject ] ].
 	^ self addAssociationWithKey: key andValue: anObject
 ]
