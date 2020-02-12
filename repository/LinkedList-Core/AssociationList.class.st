@@ -700,24 +700,21 @@ AssociationList >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 
 { #category : #testing }
 AssociationList >> includes: anObject [
-	self do: [ :each | anObject = each ifTrue: [ ^ true ] ].
-	^ false
+	^ self anySatisfy: [ :each | each = anObject ]
 ]
 
 { #category : #testing }
 AssociationList >> includesAll: aCollection [
 	"Answer whether all the elements of aCollection are in the receiver."
 
-	aCollection do: [ :elem | (self includes: elem) ifFalse: [ ^ false ] ].
-	^ true
+	^ aCollection allSatisfy: [ :elem | self includes: elem ]
 ]
 
 { #category : #testing }
 AssociationList >> includesAny: aCollection [
 	"Answer whether any element of aCollection is one of the receiver's elements."
 
-	aCollection 	do: [ :elem | (self includes: elem) ifTrue: [ ^ true ] ].
-	^ false
+	^ aCollection anySatisfy: [ :elem | self includes: elem ]
 ]
 
 { #category : #testing }
