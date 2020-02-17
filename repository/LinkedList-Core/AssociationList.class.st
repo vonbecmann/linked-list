@@ -654,8 +654,7 @@ AssociationList >> hash [
 AssociationList >> identityIncludes: anObject [
 	"Answer whether anObject is one of the receiver's elements."
 
-	self do: [ :each | anObject == each ifTrue: [ ^ true ] ].
-	^ false
+	^ self anySatisfy: [ :each | each == anObject ]
 ]
 
 { #category : #testing }
@@ -726,8 +725,7 @@ AssociationList >> includesAssociation: anAssociation [
 AssociationList >> includesIdentity: anObject [
 	"Answer whether anObject is one of the values of the receiver.  Contrast #includes: in which there is only an equality check, here there is an identity check"
 
-	self do: [ :each | anObject == each ifTrue: [ ^ true ] ].
-	^ false
+	^ self anySatisfy: [ :each | each == anObject ]
 ]
 
 { #category : #testing }
@@ -777,7 +775,7 @@ AssociationList >> intersection: aCollection [
 
 { #category : #private }
 AssociationList >> is: firstKey equalTo: secondKey [
-	" is first key equal to second key?"
+	" is first key equal to second key?. i'm a utility method."
 
 	^ firstKey = secondKey
 ]
