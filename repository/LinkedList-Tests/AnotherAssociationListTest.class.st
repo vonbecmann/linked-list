@@ -14,6 +14,11 @@ AnotherAssociationListTest >> setUp [
 ]
 
 { #category : #tests }
+AnotherAssociationListTest >> testAnyOneWhenEmpty [
+	self should: [ alist anyOne ] raise: Error
+]
+
+{ #category : #tests }
 AnotherAssociationListTest >> testDetectWhenNotFound [
 	self should: [ alist detect: [ :each | false ] ] raise: Error
 ]
