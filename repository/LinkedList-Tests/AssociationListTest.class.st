@@ -16,7 +16,7 @@ Class {
 		'collectionNotIncluded',
 		'nonEmptyWithFloat'
 	],
-	#category : #'LinkedList-Tests-Unordered'
+	#category : #'LinkedList-Tests-Dictionaries'
 }
 
 { #category : #requirements }

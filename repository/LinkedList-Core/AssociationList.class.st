@@ -10,7 +10,7 @@ Class {
 		'firstNode',
 		'lastNode'
 	],
-	#category : #'LinkedList-Core'
+	#category : #'LinkedList-Core-Dictionaries'
 }
 
 { #category : #'instance creation' }
