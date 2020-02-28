@@ -9,7 +9,7 @@ Class {
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleAllAnyNoneSatisfyRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#AssociationList #noneSatisfy: #false)) #'2020-02-22T00:35:56.315061-03:00') #(#(#RGMethodDefinition #(#AssociationList #allSatisfy: #false)) #'2020-02-22T00:35:56.315411-03:00') #(#(#RGMethodDefinition #(#AssociationList #anySatisfy: #false)) #'2020-02-22T00:35:56.315708-03:00') )
+	^ #(#(#(#RGMethodDefinition #(#AssociationList #noneSatisfy: #false)) #'2020-02-22T00:35:56.315061-03:00') #(#(#RGMethodDefinition #(#AssociationList #allSatisfy: #false)) #'2020-02-22T00:35:56.315411-03:00') #(#(#RGMethodDefinition #(#AssociationList #anySatisfy: #false)) #'2020-02-22T00:35:56.315708-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #noneSatisfy: #false)) #'2020-02-28T14:37:08.442296-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #allSatisfy: #false)) #'2020-02-28T14:37:08.442187-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #anySatisfy: #false)) #'2020-02-28T14:37:08.442356-03:00') )
 ]
 
 { #category : #'code-critics' }
@@ -19,7 +19,7 @@ ManifestLinkedListCore class >> ruleCollectionProtocolRuleV1FalsePositive [
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleDetectContainsRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedList #noneSatisfy: #false)) #'2016-08-31T16:00:58.955449-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #allSatisfy: #false)) #'2016-08-31T16:00:58.95529-03:00') )
+	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedList #noneSatisfy: #false)) #'2016-08-31T16:00:58.955449-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #allSatisfy: #false)) #'2016-08-31T16:00:58.95529-03:00') #(#(#RGMethodDefinition #(#AssociationList #noneSatisfy: #false)) #'2020-02-28T14:37:08.212976-03:00') #(#(#RGMethodDefinition #(#AssociationList #allSatisfy: #false)) #'2020-02-28T14:37:08.212355-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #anySatisfy: #false)) #'2020-02-28T14:37:08.212699-03:00') #(#(#RGMethodDefinition #(#AssociationList #anySatisfy: #false)) #'2020-02-28T14:37:08.212943-03:00') )
 ]
 
 { #category : #'code-critics' }
