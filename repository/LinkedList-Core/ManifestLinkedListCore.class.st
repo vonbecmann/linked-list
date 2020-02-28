@@ -29,10 +29,10 @@ ManifestLinkedListCore class >> ruleInconsistentMethodClassificationRuleV1FalseP
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleNotEliminationRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#AssociationList #isNotEmpty #false)) #'2020-02-22T00:35:56.791647-03:00') )
+	^ #(#(#(#RGMethodDefinition #(#AssociationList #isNotEmpty #false)) #'2020-02-22T00:35:56.791647-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedQueue #isNotEmpty #false)) #'2020-02-28T07:28:09.080435-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #isNotEmpty #false)) #'2020-02-28T07:28:09.08075-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedStack #isNotEmpty #false)) #'2020-02-28T07:28:09.081007-03:00') )
 ]
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleUtilityMethodsRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#AssociationList #is:equalTo: #false)) #'2020-02-22T00:35:55.836527-03:00') )
+	^ #(#(#(#RGMethodDefinition #(#AssociationList #is:equalTo: #false)) #'2020-02-22T00:35:55.836527-03:00') #(#(#RGMethodDefinition #(#IdentityAssociationList #is:equalTo: #false)) #'2020-02-28T07:25:15.150901-03:00') )
 ]
