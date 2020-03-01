@@ -799,7 +799,7 @@ AssociationList >> isEmptyOrNil [
 
 { #category : #testing }
 AssociationList >> isNotEmpty [
-	^ self isEmpty not
+	^ firstNode isNotNil
 ]
 
 { #category : #accessing }

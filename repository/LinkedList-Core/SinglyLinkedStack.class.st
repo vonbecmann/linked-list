@@ -129,7 +129,7 @@ SinglyLinkedStack >> isEmptyOrNil [
 
 { #category : #testing }
 SinglyLinkedStack >> isNotEmpty [
-	^ self isEmpty not
+	^ firstNode isNotNil
 ]
 
 { #category : #testing }

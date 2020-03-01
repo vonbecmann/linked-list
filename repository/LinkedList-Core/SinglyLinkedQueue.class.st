@@ -144,7 +144,7 @@ SinglyLinkedQueue >> isEmptyOrNil [
 
 { #category : #testing }
 SinglyLinkedQueue >> isNotEmpty [
-	^ self isEmpty not
+	^ firstNode isNotNil
 ]
 
 { #category : #accessing }

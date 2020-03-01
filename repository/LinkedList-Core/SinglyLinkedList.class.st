@@ -423,7 +423,7 @@ SinglyLinkedList >> isEmptyOrNil [
 
 { #category : #testing }
 SinglyLinkedList >> isNotEmpty [
-	^ self isEmpty not
+	^ firstNode isNotNil
 ]
 
 { #category : #accessing }
