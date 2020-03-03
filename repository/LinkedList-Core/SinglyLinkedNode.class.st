@@ -11,7 +11,7 @@ Class {
 		'value',
 		'nextNode'
 	],
-	#category : #'LinkedList-Core'
+	#category : #'LinkedList-Core-Base'
 }
 
 { #category : #'instance creation' }

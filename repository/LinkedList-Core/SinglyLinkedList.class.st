@@ -11,7 +11,7 @@ Class {
 		'firstNode',
 		'lastNode'
 	],
-	#category : #'LinkedList-Core'
+	#category : #'LinkedList-Core-Sequenceable'
 }
 
 { #category : #'instance creation' }
