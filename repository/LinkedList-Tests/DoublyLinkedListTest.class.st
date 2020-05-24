@@ -1,8 +1,8 @@
 Class {
 	#name : #DoublyLinkedListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest',
+	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait',
 	#instVars : [
 		'list',
 		'otherList'
@@ -46,4 +46,11 @@ DoublyLinkedListTest >> setUp [
 	otherList := self empty
 		addAll: (7 to: 11);
 		yourself
+]
+
+{ #category : #requirements }
+DoublyLinkedListTest >> sizeCollection [
+	"Answers a collection not empty"
+
+	^ list
 ]
