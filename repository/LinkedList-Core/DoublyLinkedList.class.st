@@ -29,6 +29,18 @@ DoublyLinkedList >> addAll: aCollection [
 ]
 
 { #category : #adding }
+DoublyLinkedList >> addFirst: anObject [
+	"Add a node to the beginning of the receiver's list."
+
+	| node |
+	node := DoublyLinkedNode with: anObject next: firstNode.
+	firstNode ifNil: [ lastNode := node ] ifNotNil: [ firstNode previousNode: node ].
+	firstNode := node.
+	tally := tally + 1.
+	^ anObject
+]
+
+{ #category : #adding }
 DoublyLinkedList >> addLast: anObject [
 	"Add a node to the end of the receiver's list."
 
