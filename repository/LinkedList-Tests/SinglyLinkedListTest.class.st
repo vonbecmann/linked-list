@@ -52,8 +52,7 @@ SinglyLinkedListTest >> element [
 
 { #category : #requirements }
 SinglyLinkedListTest >> empty [
-	
-	^ SinglyLinkedList new
+	^ self classToBeTested new
 ]
 
 { #category : #requirements }
