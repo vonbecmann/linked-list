@@ -1,8 +1,8 @@
 Class {
 	#name : #DoublyLinkedListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn})',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice})',
+	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait',
 	#instVars : [
 		'list',
 		'otherList'
@@ -17,10 +17,25 @@ DoublyLinkedListTest >> classToBeTested [
 ]
 
 { #category : #requirements }
+DoublyLinkedListTest >> collectionWithElement [
+	"Returns a collection that already includes what is returned by #element."
+
+	^ self empty
+		add: self element;
+		yourself
+]
+
+{ #category : #requirements }
 DoublyLinkedListTest >> collectionWithoutNilElements [
 	" return a collection that doesn't includes a nil element  and that doesn't includes equal elements'"
 
 	^ list
+]
+
+{ #category : #requirements }
+DoublyLinkedListTest >> element [
+	"Returns an object that can be added to the collection returned by #collection."
+	^ 13
 ]
 
 { #category : #requirements }
@@ -31,6 +46,13 @@ DoublyLinkedListTest >> empty [
 { #category : #requirements }
 DoublyLinkedListTest >> nonEmpty [
 	^ list
+]
+
+{ #category : #requirements }
+DoublyLinkedListTest >> otherCollection [
+	"Returns a collection that does not include what is returned by #element."
+
+	^ otherList
 ]
 
 { #category : #running }

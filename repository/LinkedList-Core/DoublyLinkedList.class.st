@@ -271,6 +271,13 @@ DoublyLinkedList >> includes: anObject [
 	^ self anySatisfy: [ :each | each = anObject ]
 ]
 
+{ #category : #testing }
+DoublyLinkedList >> includesAll: aCollection [
+	"Answer whether all the elements of aCollection are in the receiver."
+
+	^ aCollection allSatisfy: [ :each | self includes: each ]
+]
+
 { #category : #initialization }
 DoublyLinkedList >> initialize [
 	super initialize.
