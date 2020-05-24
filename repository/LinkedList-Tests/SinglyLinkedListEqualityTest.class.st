@@ -5,7 +5,7 @@ equality tests.
 Class {
 	#name : #SinglyLinkedListEqualityTest,
 	#superclass : #TestCase,
-	#category : #'LinkedList-Tests'
+	#category : #'LinkedList-Tests-Sequenceable'
 }
 
 { #category : #tests }

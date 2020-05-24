@@ -1,24 +1,24 @@
-"
-tests for a singly linked node.
-
-"
 Class {
-	#name : #SinglyLinkedNodeTest,
+	#name : #DoublyLinkedNodeTest,
 	#superclass : #TestCase,
 	#category : #'LinkedList-Tests-Base'
 }
 
 { #category : #tests }
-SinglyLinkedNodeTest >> testAsString [
-	self assert: (SinglyLinkedNode with: 1) asString equals: 'SinglyLinkedNode(1)'.
-	self assert: (SinglyLinkedNode with: 1 next: nil) asString equals: 'SinglyLinkedNode(1)'
+DoublyLinkedNodeTest >> testAsString [
+	self
+		assert: (DoublyLinkedNode with: 1) asString
+		equals: 'DoublyLinkedNode(1)'.
+	self
+		assert: (DoublyLinkedNode with: 1 next: nil) asString
+		equals: 'DoublyLinkedNode(1)'
 ]
 
 { #category : #tests }
-SinglyLinkedNodeTest >> testEqual01 [
+DoublyLinkedNodeTest >> testEqual01 [
 	| one another |
-	one := SinglyLinkedNode with: 1.
-	another := SinglyLinkedNode with: 1.
+	one := DoublyLinkedNode with: 1.
+	another := DoublyLinkedNode with: 1.
 
 	self assert: one equals: another.
 	self assert: one hash equals: another hash.
@@ -28,10 +28,10 @@ SinglyLinkedNodeTest >> testEqual01 [
 ]
 
 { #category : #tests }
-SinglyLinkedNodeTest >> testEqual02 [
+DoublyLinkedNodeTest >> testEqual02 [
 	| one another |
-	one := SinglyLinkedNode with: 1 next: nil.
-	another := SinglyLinkedNode with: 1 next: nil.
+	one := DoublyLinkedNode with: 1 next: nil.
+	another := DoublyLinkedNode with: 1 next: nil.
 
 	self assert: one equals: another.
 	self assert: one hash equals: another hash.
@@ -41,11 +41,11 @@ SinglyLinkedNodeTest >> testEqual02 [
 ]
 
 { #category : #tests }
-SinglyLinkedNodeTest >> testEqual03 [
+DoublyLinkedNodeTest >> testEqual03 [
 	| next one another |
-	next := SinglyLinkedNode with: 2.
-	one := SinglyLinkedNode with: 1 next: next.
-	another := SinglyLinkedNode with: 1 next: next.
+	next := DoublyLinkedNode with: 2.
+	one := DoublyLinkedNode with: 1 next: next.
+	another := DoublyLinkedNode with: 1 next: next.
 
 	self assert: one equals: another.
 	self assert: one hash equals: another hash.

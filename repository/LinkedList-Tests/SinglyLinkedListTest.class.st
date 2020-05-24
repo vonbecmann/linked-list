@@ -7,7 +7,7 @@ Class {
 		'list',
 		'otherList'
 	],
-	#category : #'LinkedList-Tests'
+	#category : #'LinkedList-Tests-Sequenceable'
 }
 
 { #category : #coverage }
