@@ -14,6 +14,70 @@ Class {
 	#category : #'LinkedList-Core-Sequenceable'
 }
 
+{ #category : #'instance creation' }
+DoublyLinkedList class >> with: anObject [
+	"Answer an instance of me containing anObject."
+
+	^ self new
+		add: anObject;
+		yourself
+]
+
+{ #category : #'instance creation' }
+DoublyLinkedList class >> with: firstObject with: secondObject [
+	"Answer an instance of me containing firstObject and secondObject."
+
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		yourself
+]
+
+{ #category : #'instance creation' }
+DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject [
+	"Answer an instance of me containing the three arguments as elements."
+
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		yourself
+]
+
+{ #category : #'instance creation' }
+DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject [ 
+	"Answer an instance of me, containing the four arguments as the elements."
+
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		yourself
+]
+
+{ #category : #'instance creation' }
+DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject with: fifthObject [
+	"Answer an instance of me, containing the five arguments as the elements."
+
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		add: fifthObject;
+		yourself
+]
+
+{ #category : #'instance creation' }
+DoublyLinkedList class >> withAll: aCollection [
+	"Create a new collection containing all the elements from aCollection."
+
+	^ self new
+		addAll: aCollection;
+		yourself
+]
+
 { #category : #adding }
 DoublyLinkedList >> add: anObject [
 	^ self addLast: anObject

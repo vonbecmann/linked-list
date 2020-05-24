@@ -1,8 +1,8 @@
 Class {
 	#name : #DoublyLinkedListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice})',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice}) + (TCreationWithTest - {#testOfSize})',
+	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait + TCreationWithTest classTrait',
 	#instVars : [
 		'list',
 		'otherList'
@@ -14,6 +14,20 @@ Class {
 DoublyLinkedListTest >> classToBeTested [
 	
 	^ DoublyLinkedList
+]
+
+{ #category : #requirements }
+DoublyLinkedListTest >> collectionClass [ 
+	"Return the class to be used to create instances of the class tested"
+	
+	^ self classToBeTested
+]
+
+{ #category : #requirements }
+DoublyLinkedListTest >> collectionMoreThan5Elements [
+	" return a collection including at least 5 elements"
+
+	^ 10 to: 17
 ]
 
 { #category : #requirements }
