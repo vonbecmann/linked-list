@@ -337,6 +337,57 @@ DoublyLinkedList >> occurrencesOf: anObject [
 	^ count
 ]
 
+{ #category : #printing }
+DoublyLinkedList >> printElementsOn: aStream [
+	aStream nextPut: $(.
+	self
+		do: [ :element | aStream print: element ]
+		separatedBy: [ aStream space ].
+	aStream nextPut: $)
+]
+
+{ #category : #printing }
+DoublyLinkedList >> printNameOn: aStream [
+	aStream
+		nextPutAll: 'a ';
+		nextPutAll: self class name
+]
+
+{ #category : #printing }
+DoublyLinkedList >> printOn: aStream [
+	"Append a sequence of characters that identify the receiver to aStream."
+
+	self printNameOn: aStream.
+	self printElementsOn: aStream
+]
+
+{ #category : #printing }
+DoublyLinkedList >> printOn: aStream delimiter: delimString [
+	"Print elements on a stream separated
+	with a delimiter String like: 'a, b, c' "
+
+	self do: [ :elem | aStream print: elem ] separatedBy: [ aStream nextPutAll: delimString ]
+]
+
+{ #category : #printing }
+DoublyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimString [
+	"Print elements on a stream separated
+	with a delimiter between all the elements and with
+	a special one before the last like: 'a, b and c'"
+
+	| current |
+	current := firstNode.
+	[ current isNil ]
+		whileFalse: [ 
+			current == lastNode
+				ifTrue: [ aStream nextPutAll: lastDelimString ]
+				ifFalse: [ 
+					current == firstNode
+						ifFalse: [ aStream nextPutAll: delimString ] ].
+			aStream print: current value.
+			current := current nextNode ]
+]
+
 { #category : #enumerating }
 DoublyLinkedList >> reject: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
