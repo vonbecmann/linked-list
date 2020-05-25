@@ -78,6 +78,26 @@ DoublyLinkedList class >> withAll: aCollection [
 		yourself
 ]
 
+{ #category : #comparing }
+DoublyLinkedList >> = anObject [
+	| list1 list2 |
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	self size = anObject size
+		ifFalse: [ ^ false ].
+	list1 := self firstNode.
+	list2 := anObject firstNode.
+	[ list1 isNil ]
+		whileFalse: [ 
+			list1 value = list2 value
+				ifFalse: [ ^ false ].
+			list1 := list1 nextNode.
+			list2 := list2 nextNode ].
+	^ true
+]
+
 { #category : #adding }
 DoublyLinkedList >> add: anObject [
 	^ self addLast: anObject
@@ -142,6 +162,17 @@ DoublyLinkedList >> anySatisfy: aBlock [
 			(aBlock value: each)
 				ifTrue: [ ^ true ] ].
 	^ false
+]
+
+{ #category : #converting }
+DoublyLinkedList >> asArray [
+	"Optimized for efficiency"
+
+	| newArray index |
+	newArray := Array new: self size.
+	index := 0.
+	self do: [ :each | newArray at: (index := index + 1) put: each ].
+	^ newArray
 ]
 
 { #category : #enumerating }
@@ -288,6 +319,19 @@ DoublyLinkedList >> first [
 	^ firstNode ifNil: [ self emptyError ] ifNotNil: [ firstNode value ]
 ]
 
+{ #category : #private }
+DoublyLinkedList >> firstNode [
+	^ firstNode
+]
+
+{ #category : #comparing }
+DoublyLinkedList >> hash [
+	| hash |
+	hash := self class hash.
+	self do: [ :each | hash := (hash + each hash) hashMultiply ].
+	^ hash
+]
+
 { #category : #testing }
 DoublyLinkedList >> ifEmpty: aBlock [
 	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
@@ -380,6 +424,15 @@ DoublyLinkedList >> isNotEmpty [
 	^ firstNode isNotNil
 ]
 
+{ #category : #accessing }
+DoublyLinkedList >> last [
+	"Answer the last element of the receiver"
+
+	"Create an error notification if the receiver is 	empty."
+
+	^ lastNode ifNil: [ self emptyError ] ifNotNil: [ lastNode value ]
+]
+
 { #category : #enumerating }
 DoublyLinkedList >> noneSatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
@@ -406,6 +459,17 @@ DoublyLinkedList >> occurrencesOf: anObject [
 	count := 0.
 	self do: [ :each | anObject = each ifTrue: [ count := count + 1 ] ].
 	^ count
+]
+
+{ #category : #copying }
+DoublyLinkedList >> postCopy [
+	| node |
+	super postCopy.
+	firstNode
+		ifNotNil: [ 
+			node := firstNode := firstNode copy.
+			[ node nextNode isNil ] whileFalse: [ node nextNode: (node := node nextNode copy) ].
+			lastNode := node ]
 ]
 
 { #category : #printing }
@@ -501,6 +565,77 @@ DoublyLinkedList >> reject: rejectBlock thenDo: aBlock [
 		do: [ :each | 
 			(rejectBlock value: each)
 				ifFalse: [ aBlock value: each ] ]
+]
+
+{ #category : #removing }
+DoublyLinkedList >> removeAll [
+	"Implementation note: this has to be fast"
+
+	firstNode := lastNode := nil.
+	tally := 0
+]
+
+{ #category : #removing }
+DoublyLinkedList >> removeFirst [
+	"Remove the first element and answer it. If the receiver is empty, create 
+	an error notification."
+
+	| firstElement oldNode |
+	firstElement := self first.
+	oldNode := firstNode.
+	firstNode := firstNode nextNode.
+	firstNode ifNil: [ lastNode := nil ] ifNotNil: [ firstNode previousNode: nil ].
+	oldNode release.
+	tally := tally - 1.
+	^ firstElement
+]
+
+{ #category : #removing }
+DoublyLinkedList >> removeLast [
+	"Remove the last element and answer it. If the receiver is empty, create 
+	an error notification."
+
+	| lastElement oldNode |
+	lastElement := self last.
+	oldNode := lastNode.
+	lastNode := lastNode previousNode.
+	lastNode
+		ifNil: [ firstNode := nil ]
+		ifNotNil: [ lastNode nextNode: nil ].
+	oldNode release.
+	tally := tally - 1.
+	^ lastElement
+]
+
+{ #category : #enumerating }
+DoublyLinkedList >> reverseDo: aBlock [
+	"Execute block for each of my elements, in reverse order."
+
+	| current |
+	current := lastNode.
+	[ current isNil ]
+		whileFalse: [ 
+			aBlock value: current value.
+			current := current previousNode ]
+]
+
+{ #category : #converting }
+DoublyLinkedList >> reversed [
+	| newList |
+	newList := self class new.
+	self reverseDo: [ :each | newList addLast: each ].
+	^ newList
+]
+
+{ #category : #accessing }
+DoublyLinkedList >> second [
+	"Answer the second element of the receiver"
+
+	"Create an error notification if the receiver is 	empty."
+
+	^ firstNode
+		ifNil: [ self emptyError ]
+		ifNotNil: [ firstNode nextNode ifNil: [ self emptyError ] ifNotNil: [ firstNode nextNode value ] ]
 ]
 
 { #category : #enumerating }

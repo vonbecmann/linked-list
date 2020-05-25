@@ -1,8 +1,8 @@
 Class {
 	#name : #DoublyLinkedListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice}) + (TCreationWithTest - {#testOfSize})',
-	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait + TCreationWithTest classTrait',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice}) + (TCreationWithTest - {#testOfSize}) + TCloneTest',
+	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait + TCreationWithTest classTrait + TCloneTest classTrait',
 	#instVars : [
 		'list',
 		'otherList'
@@ -89,4 +89,16 @@ DoublyLinkedListTest >> sizeCollection [
 	"Answers a collection not empty"
 
 	^ list
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testReverseDo [
+	| value |
+	list := self empty.
+	list addAll: (1 to: 10).
+	value := 10.
+	list
+		reverseDo: [ :each | 
+			self assert: each equals: value.
+			value := value - 1 ]
 ]
