@@ -74,7 +74,7 @@ DoublyLinkedNode >> previousNode [
 
 { #category : #accessing }
 DoublyLinkedNode >> previousNode: aNode [
-	^ previousNode := aNode
+	previousNode := aNode
 ]
 
 { #category : #printing }
