@@ -181,6 +181,27 @@ AnotherDoublyLinkedListTest >> test13RemoveLast [
 ]
 
 { #category : #tests }
+AnotherDoublyLinkedListTest >> test14AddFirst [
+	self assert: list isEmpty.
+	list addFirst: 1.
+	self deny: list isEmpty.
+	self assert: list size equals: 1.
+	self assert: list first equals: 1
+]
+
+{ #category : #tests }
+AnotherDoublyLinkedListTest >> test15AddFirst [
+	self assert: list isEmpty.
+	list
+		addFirst: 1;
+		addFirst: 2.
+	self deny: list isEmpty.
+	self assert: list size equals: 2.
+	self assert: list first equals: 2.
+	self assert: list second equals: 1
+]
+
+{ #category : #tests }
 AnotherDoublyLinkedListTest >> testReversed [
 	| reversed |
 	self assert: list isEmpty.

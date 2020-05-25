@@ -92,6 +92,110 @@ DoublyLinkedListTest >> sizeCollection [
 ]
 
 { #category : #tests }
+DoublyLinkedListTest >> testDetectIfFoundIfNoneWhenNobodyIsFound [
+	| wasFound |
+	wasFound := self collectionWithoutNilElements detect: [ :each | each isNil ] ifFound: [ true ] ifNone: [ false ].
+	self deny: wasFound
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testDetectIfFoundIfNoneWhenSomethingIsFound [
+	| wasFound foundObject |
+	foundObject := nil.
+	wasFound := self collectionWithoutNilElements
+		detect: [ :each | each notNil ]
+		ifFound: [ :element | 
+			foundObject := element.
+			true ]
+		ifNone: [ false ].
+	self
+		assert: wasFound;
+		assert: (self collectionWithoutNilElements includes: foundObject)
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testDetectIfFoundIfNoneWhenSomethingIsFoundIgnoringTheFoundObject [
+	"The foundBlock can be a zero argument block ignoring the object found"
+
+	| wasFound |
+	wasFound := self collectionWithoutNilElements detect: [ :each | each notNil ] ifFound: [ true ] ifNone: [ false ].
+	self assert: wasFound
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testDetectIfFoundWhenNobodyIsFound [
+	| wasFound |
+	wasFound := false.
+	self collectionWithoutNilElements detect: [ :each | each isNil ] ifFound: [ wasFound := true ].
+	self deny: wasFound
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testDetectIfFoundWhenSomethingIsFound [
+	| wasFound foundObject |
+	wasFound := false.
+	foundObject := nil.
+	self collectionWithoutNilElements
+		detect: [ :each | each notNil ]
+		ifFound: [ :element | 
+			foundObject := element.
+			wasFound := true ].
+	self
+		assert: wasFound;
+		assert: (self collectionWithoutNilElements includes: foundObject)
+
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testDetectIfFoundWhenSomethingIsFoundIgnoringTheFoundObject [
+	"The foundBlock can be a zero argument block ignoring the object found"
+
+	| wasFound |
+	wasFound := false.
+	self collectionWithoutNilElements detect: [ :each | each notNil ] ifFound: [ wasFound := true ].
+	self assert: wasFound
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testDetectWhenNobodyIsFound [
+	self should: [ self collectionWithoutNilElements detect: [ :each | each isNil ] ] raise: Error
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testFirst01 [
+	self
+		should: [ self empty first ]
+		raise: Error
+		withExceptionDo: [ :ex | self assert: ex messageText equals: 'collection is empty!' ]
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testFirst02 [
+	self assert: self nonEmpty first equals: 1.2
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testLast01 [
+	self
+		should: [ self empty last ]
+		raise: Error
+		withExceptionDo: [ :ex | self assert: ex messageText equals: 'collection is empty!' ]
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testLast02 [
+	self assert: self nonEmpty last equals: false
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testLast03 [
+	| newList |
+	newList := self empty.
+	newList addAll: (1 to: 11).
+	self assert: newList last equals: 11
+]
+
+{ #category : #tests }
 DoublyLinkedListTest >> testReverseDo [
 	| value |
 	list := self empty.
@@ -101,4 +205,28 @@ DoublyLinkedListTest >> testReverseDo [
 		reverseDo: [ :each | 
 			self assert: each equals: value.
 			value := value - 1 ]
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testSecond01 [
+	| newList |
+	newList := self empty.
+	newList add: 1.
+	self
+		should: [ newList second ]
+		raise: Error
+		withExceptionDo: [ :ex | self assert: ex messageText equals: 'collection is empty!' ]
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testSecond02 [
+	self
+		should: [ self empty second ]
+		raise: Error
+		withExceptionDo: [ :ex | self assert: ex messageText equals: 'collection is empty!' ]
+]
+
+{ #category : #tests }
+DoublyLinkedListTest >> testSecond03 [
+	self assert: list second equals: -2
 ]

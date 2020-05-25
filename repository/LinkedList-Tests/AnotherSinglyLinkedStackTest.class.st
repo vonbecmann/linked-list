@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'stack'
 	],
-	#category : #'LinkedList-Tests'
+	#category : #'LinkedList-Tests-Sequenceable'
 }
 
 { #category : #running }

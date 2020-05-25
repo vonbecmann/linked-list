@@ -9,7 +9,7 @@ Class {
 	#classInstVars : [
 		'testSize'
 	],
-	#category : #'LinkedList-Tests'
+	#category : #'LinkedList-Tests-Sequenceable'
 }
 
 { #category : #coverage }
