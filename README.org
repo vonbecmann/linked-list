@@ -1,8 +1,9 @@
 * linked-list
-  a crappy linked list [[https://travis-ci.org/vonbecmann/linked-list][https://travis-ci.org/vonbecmann/linked-list.svg?branch=master]]
+  a crappy linked list [[https://travis-ci.org/vonbecmann/linked-list][https://travis-ci.org/vonbecmann/linked-list.svg?branch=pharo7]]
 
-
-
-
-
-
+#+BEGIN_SRC
+Metacello new
+   baseline: 'LinkedList';
+   repository: 'github://vonbecmann/linked-list:pharo7/repository';
+   load.
+#+END_SRC
