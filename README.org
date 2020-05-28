@@ -1,6 +1,12 @@
 * linked-list
   a crappy linked list [[https://travis-ci.org/vonbecmann/linked-list][https://travis-ci.org/vonbecmann/linked-list.svg?branch=master]]
 
+#+BEGIN_SRC
+Metacello new
+   baseline: 'LinkedList';
+   repository: 'github://vonbecmann/linked-list/repository';
+   load.
+#+END_SRC
 
 
 
