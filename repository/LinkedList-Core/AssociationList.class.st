@@ -263,6 +263,19 @@ AssociationList >> associationAt: key ifPresent: aBlock [
 ]
 
 { #category : #accessing }
+AssociationList >> associationAt: key ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	"Lookup the given key in the receiver. If it is present, answer the
+	value of evaluating the first block optionally with the association for the key.
+	Otherwise answer the value of the second block."
+
+	self
+		associationsDo: [ :assoc | 
+			(self is: assoc key equalTo: key)
+				ifTrue: [ ^ aPresentBlock cull: assoc ] ].
+	^ anAbsentBlock value
+]
+
+{ #category : #accessing }
 AssociationList >> associations [
 	"Answer a Collection containing the receiver's associations."
 
