@@ -1085,15 +1085,13 @@ AssociationList >> removeKey: key ifAbsent: aBlock [
 
 	| previous assoc oldNode |
 	previous := self previousNodeAt: key ifAbsent: [ ^ aBlock value ].
-	previous isNil
-		ifTrue: [ 
-			assoc := firstNode value.
+	previous
+		ifNil: [ assoc := firstNode value.
 			oldNode := firstNode.
 			firstNode := firstNode == lastNode
 				ifTrue: [ lastNode := nil ]
 				ifFalse: [ firstNode nextNode ] ]
-		ifFalse: [ 
-			assoc := previous nextNode value.
+		ifNotNil: [ assoc := previous nextNode value.
 			oldNode := previous nextNode.
 			previous nextNode == lastNode
 				ifTrue: [ lastNode := previous ].
