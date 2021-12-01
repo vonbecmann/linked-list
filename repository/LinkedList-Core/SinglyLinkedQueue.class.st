@@ -126,7 +126,6 @@ SinglyLinkedQueue >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 { #category : #initialization }
 SinglyLinkedQueue >> initialize [
 	super initialize.
-	firstNode := lastNode := nil.
 	tally := 0
 ]
 

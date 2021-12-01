@@ -754,7 +754,6 @@ AssociationList >> includesKey: key [
 
 { #category : #initialization }
 AssociationList >> initialize [
-	firstNode := lastNode := nil.
 	tally := 0
 ]
 
