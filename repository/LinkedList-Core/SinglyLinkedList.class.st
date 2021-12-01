@@ -391,7 +391,6 @@ SinglyLinkedList >> includesAll: aCollection [
 { #category : #initialization }
 SinglyLinkedList >> initialize [
 	super initialize.
-	firstNode := lastNode := nil.
 	tally := 0
 ]
 

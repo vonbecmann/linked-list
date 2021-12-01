@@ -389,7 +389,6 @@ DoublyLinkedList >> includesAll: aCollection [
 { #category : #initialization }
 DoublyLinkedList >> initialize [
 	super initialize.
-	firstNode := lastNode := nil.
 	tally := 0
 ]
 

@@ -111,7 +111,6 @@ SinglyLinkedStack >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 { #category : #initialization }
 SinglyLinkedStack >> initialize [
 	super initialize.
-	firstNode := nil.
 	tally := 0
 ]
 
