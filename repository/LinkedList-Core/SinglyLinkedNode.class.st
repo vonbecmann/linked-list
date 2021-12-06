@@ -71,6 +71,11 @@ SinglyLinkedNode >> release [
 	super release
 ]
 
+{ #category : #removing }
+SinglyLinkedNode >> removeNodeFrom: anAssociationList [
+	^ anAssociationList removeNextNodeTo: self
+]
+
 { #category : #accessing }
 SinglyLinkedNode >> value [
 	^ value

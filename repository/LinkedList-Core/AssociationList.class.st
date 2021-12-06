@@ -1067,6 +1067,19 @@ AssociationList >> release [
 	super release
 ]
 
+{ #category : #private }
+AssociationList >> removeFirstNode [
+	| assoc oldNode |
+	assoc := firstNode value.
+	oldNode := firstNode.
+	firstNode := firstNode == lastNode
+		ifTrue: [ lastNode := nil ]
+		ifFalse: [ firstNode nextNode ].
+	oldNode release.
+	tally := tally - 1.
+	^ assoc value
+]
+
 { #category : #removing }
 AssociationList >> removeKey: key [
 	"Remove key from the receiver.
@@ -1083,19 +1096,18 @@ AssociationList >> removeKey: key ifAbsent: aBlock [
 
 	"if previous isNil then remove firstNode otherwise remove previous nextNode."
 
-	| previous assoc oldNode |
-	previous := self previousNodeAt: key ifAbsent: [ ^ aBlock value ].
-	previous
-		ifNil: [ assoc := firstNode value.
-			oldNode := firstNode.
-			firstNode := firstNode == lastNode
-				ifTrue: [ lastNode := nil ]
-				ifFalse: [ firstNode nextNode ] ]
-		ifNotNil: [ assoc := previous nextNode value.
-			oldNode := previous nextNode.
-			previous nextNode == lastNode
-				ifTrue: [ lastNode := previous ].
-			previous nextNode: previous nextNode nextNode ].
+	^ (self previousNodeAt: key ifAbsent: [ ^ aBlock value ])
+		removeNodeFrom: self
+]
+
+{ #category : #private }
+AssociationList >> removeNextNodeTo: previous [
+	| assoc oldNode |
+	assoc := previous nextNode value.
+	oldNode := previous nextNode.
+	previous nextNode == lastNode
+		ifTrue: [ lastNode := previous ].
+	previous nextNode: previous nextNode nextNode.
 	oldNode release.
 	tally := tally - 1.
 	^ assoc value
