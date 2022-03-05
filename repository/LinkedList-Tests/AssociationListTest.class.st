@@ -14,7 +14,7 @@ Class {
 		'nonEmpty1Element',
 		'collectionIncluded',
 		'collectionNotIncluded',
-		'nonEmptyWithFloat'
+		'nonEmptyWithString'
 	],
 	#category : #'LinkedList-Tests-Dictionaries'
 }
@@ -218,7 +218,7 @@ AssociationListTest >> nonEmptyDifferentFromNonEmptyDict [
 AssociationListTest >> nonEmptyWithCopyNonIdentical [
 	" return a collection including elements for wich copy is not identical to the initial element ( this is not the cas of Integer )"
 
-	^ nonEmptyWithFloat
+	^ nonEmptyWithString
 ]
 
 { #category : #requirements }
@@ -243,7 +243,7 @@ AssociationListTest >> setUp [
 		at: #b put: 4;
 		at: #c put: 7;
 		at: #d put: 6;
-		at: #e put: 9; 
+		at: #e put: 9;
 		yourself.
 	valueNotIn := 666.
 	keyNotIn := #z.
@@ -254,9 +254,13 @@ AssociationListTest >> setUp [
 	nonEmpty1Element := self classToBeTested new
 		at: #a put: 5;
 		yourself.
-	collectionIncluded := { 1 }.
-	collectionNotIncluded := { valueNotIn. valueNotIn }.
-	nonEmptyWithFloat := self classToBeTested new add: #A->2.5; add: #b->3.5; yourself.
+	collectionIncluded := {1}.
+	collectionNotIncluded := {valueNotIn.
+	valueNotIn}.
+	nonEmptyWithString := self classToBeTested new
+		add: #A -> 'foo';
+		add: #b -> 'bar';
+		yourself
 ]
 
 { #category : #requirements }
