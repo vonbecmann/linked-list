@@ -1,5 +1,5 @@
 * linked-list
-  a crappy linked list [[https://travis-ci.org/vonbecmann/linked-list][https://travis-ci.org/vonbecmann/linked-list.svg?branch=master]]
+  a crappy linked list [[https://github.com/vonbecmann/linked-list/actions/workflows/CI.yml][https://github.com/vonbecmann/linked-list/actions/workflows/CI.yml/badge.svg]]
 
 #+BEGIN_SRC
 Metacello new
