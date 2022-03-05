@@ -1,5 +1,9 @@
 * linked-list
+<<<<<<< HEAD
   a crappy linked list [[https://travis-ci.org/vonbecmann/linked-list][https://travis-ci.org/vonbecmann/linked-list.svg?branch=pharo8]]
+=======
+  a crappy linked list [[https://github.com/vonbecmann/linked-list/actions/workflows/CI.yml][https://github.com/vonbecmann/linked-list/actions/workflows/CI.yml/badge.svg]]
+>>>>>>> 8be3f42... update status badge
 
 #+BEGIN_SRC
 Metacello new
