@@ -1,7 +1,7 @@
 Class {
 	#name : #SinglyLinkedListTest,
 	#superclass : #ClassTestCase,
-	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurences. #testTWrite. #testTWriteTwice}) + (TCreationWithTest - {#testOfSize}) + TCloneTest',
+	#traits : 'TIterateTest + TEmptyTest + TSizeTest + (TPrintTest - {#testStoreOn}) + (TAddTest - {#testTAddIfNotPresentWithElementAlreadyIn. #testTAddIfNotPresentWithNewElement. #testTAddWithOccurrences. #testTWrite. #testTWriteTwice}) + (TCreationWithTest - {#testOfSize}) + TCloneTest',
 	#classTraits : 'TIterateTest classTrait + TEmptyTest classTrait + TSizeTest classTrait + TPrintTest classTrait + TAddTest classTrait + TCreationWithTest classTrait + TCloneTest classTrait',
 	#instVars : [
 		'list',
