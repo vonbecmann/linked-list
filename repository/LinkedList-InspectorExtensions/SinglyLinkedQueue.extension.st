@@ -1,12 +1,6 @@
 Extension { #name : #SinglyLinkedQueue }
 
 { #category : #'*LinkedList-InspectorExtensions' }
-SinglyLinkedQueue class >> gtExample [
-	<gtExample>
-	^ SinglyLinkedQueue withAll: ($a to: $h)
-]
-
-{ #category : #'*LinkedList-InspectorExtensions' }
 SinglyLinkedQueue >> gtInspectorItemsIn: composite [
 	<gtInspectorPresentationOrder: 0>
 	^ composite list
