@@ -9,6 +9,8 @@ Class {
 
 { #category : #running }
 AnotherDoublyLinkedListTest >> setUp [
+
+	super setUp.
 	list := DoublyLinkedList new
 ]
 

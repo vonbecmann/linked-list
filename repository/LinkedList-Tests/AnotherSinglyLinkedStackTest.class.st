@@ -12,6 +12,8 @@ Class {
 
 { #category : #running }
 AnotherSinglyLinkedStackTest >> setUp [
+
+	super setUp.
 	stack := SinglyLinkedStack new
 ]
 
@@ -76,15 +78,12 @@ AnotherSinglyLinkedStackTest >> test06TopReturnsLastPushedObject [
 AnotherSinglyLinkedStackTest >> test07TopDoesNotRemoveObjectFromStack [
 
 	| pushedObject |
-	
 	pushedObject := 'Something'.
-	
+
 	stack push: pushedObject.
-	
-	self assert: stack size = 1.
+	self assert: stack size equals: 1.
 	stack top.
-	self assert: stack size = 1.
-	
+	self assert: stack size equals: 1
 ]
 
 { #category : #tests }
@@ -156,20 +155,18 @@ AnotherSinglyLinkedStackTest >> testPop02 [
 AnotherSinglyLinkedStackTest >> testPop03 [
 
 	| res elem |
-	elem := 'anElement'.	
+	elem := 'anElement'.
 	self assert: stack isEmpty.
-	
+
 	stack push: 'a'.
 	stack push: elem.
-	res := stack pop.	
+	res := stack pop.
 	self assert: res equals: elem.
-	self assert: res == elem.
-	
+	self assert: res identicalTo: elem.
+
 	self assert: stack size equals: 1.
 	stack pop.
-	self assert: stack isEmpty.
-
-
+	self assert: stack isEmpty
 ]
 
 { #category : #tests }

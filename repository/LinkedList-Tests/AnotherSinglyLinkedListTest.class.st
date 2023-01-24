@@ -13,8 +13,9 @@ Class {
 
 { #category : #running }
 AnotherSinglyLinkedListTest >> setUp [
-	list := SinglyLinkedList new.
-	
+
+	super setUp.
+	list := SinglyLinkedList new
 ]
 
 { #category : #tests }

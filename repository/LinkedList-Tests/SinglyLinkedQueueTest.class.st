@@ -30,6 +30,8 @@ SinglyLinkedQueueTest >> nonEmpty [
 
 { #category : #running }
 SinglyLinkedQueueTest >> setUp [
+
+	super setUp.
 	nonEmpty := SinglyLinkedQueue new.
 	nonEmpty nextPut: 1.
 	nonEmpty nextPut: -2.

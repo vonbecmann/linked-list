@@ -30,6 +30,8 @@ SinglyLinkedStackTest >> nonEmpty [
 
 { #category : #running }
 SinglyLinkedStackTest >> setUp [
+
+	super setUp.
 	nonEmpty := SinglyLinkedStack new.
 	nonEmpty push: 1.
 	nonEmpty push: -2.

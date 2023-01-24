@@ -16,6 +16,7 @@ SinglyLinkedNodeTest >> testAsString [
 
 { #category : #tests }
 SinglyLinkedNodeTest >> testEqual01 [
+
 	| one another |
 	one := SinglyLinkedNode with: 1.
 	another := SinglyLinkedNode with: 1.
@@ -24,11 +25,12 @@ SinglyLinkedNodeTest >> testEqual01 [
 	self assert: one hash equals: another hash.
 	self assert: another equals: one.
 	self assert: another hash equals: one hash.
-	self deny: one == another
+	self deny: one identicalTo: another
 ]
 
 { #category : #tests }
 SinglyLinkedNodeTest >> testEqual02 [
+
 	| one another |
 	one := SinglyLinkedNode with: 1 next: nil.
 	another := SinglyLinkedNode with: 1 next: nil.
@@ -37,11 +39,12 @@ SinglyLinkedNodeTest >> testEqual02 [
 	self assert: one hash equals: another hash.
 	self assert: another equals: one.
 	self assert: another hash equals: one hash.
-	self deny: one == another
+	self deny: one identicalTo: another
 ]
 
 { #category : #tests }
 SinglyLinkedNodeTest >> testEqual03 [
+
 	| next one another |
 	next := SinglyLinkedNode with: 2.
 	one := SinglyLinkedNode with: 1 next: next.
@@ -51,5 +54,5 @@ SinglyLinkedNodeTest >> testEqual03 [
 	self assert: one hash equals: another hash.
 	self assert: another equals: one.
 	self assert: another hash equals: one hash.
-	self deny: one == another
+	self deny: one identicalTo: another
 ]

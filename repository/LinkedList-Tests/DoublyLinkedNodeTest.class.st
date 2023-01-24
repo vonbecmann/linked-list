@@ -16,6 +16,7 @@ DoublyLinkedNodeTest >> testAsString [
 
 { #category : #tests }
 DoublyLinkedNodeTest >> testEqual01 [
+
 	| one another |
 	one := DoublyLinkedNode with: 1.
 	another := DoublyLinkedNode with: 1.
@@ -24,11 +25,12 @@ DoublyLinkedNodeTest >> testEqual01 [
 	self assert: one hash equals: another hash.
 	self assert: another equals: one.
 	self assert: another hash equals: one hash.
-	self deny: one == another
+	self deny: one identicalTo: another
 ]
 
 { #category : #tests }
 DoublyLinkedNodeTest >> testEqual02 [
+
 	| one another |
 	one := DoublyLinkedNode with: 1 next: nil.
 	another := DoublyLinkedNode with: 1 next: nil.
@@ -37,11 +39,12 @@ DoublyLinkedNodeTest >> testEqual02 [
 	self assert: one hash equals: another hash.
 	self assert: another equals: one.
 	self assert: another hash equals: one hash.
-	self deny: one == another
+	self deny: one identicalTo: another
 ]
 
 { #category : #tests }
 DoublyLinkedNodeTest >> testEqual03 [
+
 	| next one another |
 	next := DoublyLinkedNode with: 2.
 	one := DoublyLinkedNode with: 1 next: next.
@@ -51,5 +54,5 @@ DoublyLinkedNodeTest >> testEqual03 [
 	self assert: one hash equals: another hash.
 	self assert: another equals: one.
 	self assert: another hash equals: one hash.
-	self deny: one == another
+	self deny: one identicalTo: another
 ]
