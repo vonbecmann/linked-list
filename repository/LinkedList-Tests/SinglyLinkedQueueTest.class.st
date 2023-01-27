@@ -6,9 +6,6 @@ Class {
 	#instVars : [
 		'nonEmpty'
 	],
-	#classInstVars : [
-		'testSize'
-	],
 	#category : #'LinkedList-Tests-Sequenceable'
 }
 
