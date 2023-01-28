@@ -98,6 +98,67 @@ SinglyLinkedListTest >> sizeCollection [
 	^ list
 ]
 
+{ #category : #'tests - fixture' }
+SinglyLinkedListTest >> test0FixtureIterateTest [
+
+	| res |
+	self collectionWithoutNilElements.
+	self
+		assert: (self collectionWithoutNilElements occurrencesOf: nil)
+		equals: 0.
+	res := true.
+	self collectionWithoutNilElements
+		detect: [ :each | 
+		(self collectionWithoutNilElements occurrencesOf: each) > 1 ]
+		ifNone: [ res := false ].
+	self deny: res
+]
+
+{ #category : #'tests - iterating' }
+SinglyLinkedListTest >> testBasicCollect [
+
+	| res index |
+	index := 0.
+	res := self collectionWithoutNilElements collect: [ :each | 
+		       index := index + 1.
+		       each ].
+
+	res do: [ :each | 
+		self
+			assert: (self collectionWithoutNilElements occurrencesOf: each)
+			equals: (res occurrencesOf: each) ].
+	self assert: index equals: self collectionWithoutNilElements size
+]
+
+{ #category : #'tests - copy - clone' }
+SinglyLinkedListTest >> testCopyCreatesNewObject [
+
+	| copy |
+	copy := self nonEmpty copy.
+	self deny: self nonEmpty identicalTo: copy
+]
+
+{ #category : #'tests - copy - clone' }
+SinglyLinkedListTest >> testCopyNonEmpty [
+
+	| copy |
+	copy := self nonEmpty copy.
+	self denyEmpty: copy.
+	self assert: copy size equals: self nonEmpty size.
+	self nonEmpty do: [ :each | copy includes: each ]
+]
+
+{ #category : #'tests - iterating' }
+SinglyLinkedListTest >> testDetect [
+
+	| res element |
+	element := self collectionWithoutNilElements anyOne.
+
+	res := self collectionWithoutNilElements detect: [ :each | 
+		       each = element ].
+	self assert: res equals: element
+]
+
 { #category : #'test - iterate' }
 SinglyLinkedListTest >> testDetectIfFoundIfNoneWhenNobodyIsFound [
 	| wasFound |
@@ -163,6 +224,22 @@ SinglyLinkedListTest >> testDetectIfFoundWhenSomethingIsFoundIgnoringTheFoundObj
 	self assert: wasFound
 ]
 
+{ #category : #'tests - iterating' }
+SinglyLinkedListTest >> testDetectIfNone [
+
+	| res element |
+	res := self collectionWithoutNilElements
+		       detect: [ :each | each notNil not ]
+		       ifNone: [ 100 ].
+	self assert: res equals: 100.
+
+	element := self collectionWithoutNilElements anyOne.
+	res := self collectionWithoutNilElements
+		       detect: [ :each | each = element ]
+		       ifNone: [ 100 ].
+	self assert: res equals: element
+]
+
 { #category : #'test - iterate' }
 SinglyLinkedListTest >> testDetectWhenNobodyIsFound [
 	self should: [ self collectionWithoutNilElements detect: [ :each | each isNil ] ] raise: Error
@@ -179,6 +256,26 @@ SinglyLinkedListTest >> testFirst01 [
 { #category : #tests }
 SinglyLinkedListTest >> testFirst02 [
 	self assert: self nonEmpty first equals: 1.2
+]
+
+{ #category : #'tests - empty' }
+SinglyLinkedListTest >> testIfNotEmpty [
+
+	self empty ifNotEmpty: [ self assert: false ].
+	self nonEmpty ifNotEmpty: [ self assert: true ].
+	self
+		assert: (self nonEmpty ifNotEmpty: [ :s | s ])
+		equals: self nonEmpty
+]
+
+{ #category : #'tests - iterating' }
+SinglyLinkedListTest >> testInjectInto [
+
+	| result |
+	result := self collectionWithoutNilElements
+		          inject: 0
+		          into: [ :inj :ele | ele notNil ifTrue: [ inj + 1 ] ].
+	self assert: self collectionWithoutNilElements size equals: result
 ]
 
 { #category : #tests }
@@ -224,4 +321,41 @@ SinglyLinkedListTest >> testSecond02 [
 { #category : #tests }
 SinglyLinkedListTest >> testSecond03 [
 	self assert: list second equals: -2
+]
+
+{ #category : #'tests - adding' }
+SinglyLinkedListTest >> testTAdd [
+
+	| added collection |
+	collection := self otherCollection.
+	added := collection add: self element.
+	self assert: added identicalTo: self element.
+	self assert: (collection includes: self element).
+	self assert: (self collectionWithElement includes: self element)
+]
+
+{ #category : #'tests - adding' }
+SinglyLinkedListTest >> testTAddAll [
+
+	| added collection toBeAdded |
+	collection := self collectionWithElement.
+	toBeAdded := self otherCollection.
+	added := collection addAll: toBeAdded.
+	self assert: added identicalTo: toBeAdded.
+	self assert: (collection includesAll: toBeAdded)
+]
+
+{ #category : #'tests - adding' }
+SinglyLinkedListTest >> testTAddTwice [
+
+	| added oldSize collection anElement |
+	collection := self collectionWithElement.
+	anElement := self element.
+	oldSize := collection size.
+	added := collection
+		         add: anElement;
+		         add: anElement.
+	self assert: added identicalTo: anElement.
+	self assert: (collection includes: anElement).
+	self assert: collection size equals: oldSize + 2
 ]
