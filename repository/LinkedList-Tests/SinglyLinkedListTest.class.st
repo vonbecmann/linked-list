@@ -553,9 +553,8 @@ SinglyLinkedListTest >> testPrintElementsOn [
 { #category : #'tests - printing' }
 SinglyLinkedListTest >> testPrintNameOn [
 
-	| aStream result |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| aStream |
+	aStream := ReadWriteStream on: ''.
 	self nonEmpty printNameOn: aStream.
 	self nonEmpty class name first isVowel
 		ifTrue: [ 
