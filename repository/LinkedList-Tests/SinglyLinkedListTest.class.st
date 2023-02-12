@@ -610,7 +610,7 @@ SinglyLinkedListTest >> testPrintOnDelimiterLast [
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
 	printed := String streamContents: [ :s | 
-		           self nonEmpty printOn: s delimiter: ', ' last: 'and' ].
+		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
 	1 to: allElementsAsString size do: [ :i | 
