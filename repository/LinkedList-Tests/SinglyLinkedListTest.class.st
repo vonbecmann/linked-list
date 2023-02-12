@@ -535,49 +535,40 @@ SinglyLinkedListTest >> testNotEmpty [
 { #category : #'tests - printing' }
 SinglyLinkedListTest >> testPrintElementsOn [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	self nonEmpty printElementsOn: aStream.
-	allElementsAsString := result findBetweenSubstrings: ' '.
-	1 to: allElementsAsString size do: [ :i | 
+	printed := String streamContents: [ :s | 
+		          self nonEmpty printElementsOn: s ].
+	allElementsAsString := printed findBetweenSubstrings: '( )'.
+	allElementsAsString do: [ :each | 
 		self
-			assert: (tmp occurrencesOf: (allElementsAsString at: i))
-			equals:
-			(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ]
+			assert: (tmp occurrencesOf: each)
+			equals: (allElementsAsString occurrencesOf: each) ]
 ]
 
 { #category : #'tests - printing' }
 SinglyLinkedListTest >> testPrintNameOn [
 
-	| aStream |
-	aStream := ReadWriteStream on: ''.
-	self nonEmpty printNameOn: aStream.
+	| printed |
+	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
 	self nonEmpty class name first isVowel
 		ifTrue: [ 
-			self
-				assert: aStream contents
-				equals: 'an ' , self nonEmpty class name ]
+		self assert: printed equals: 'an ' , self nonEmpty class name ]
 		ifFalse: [ 
-			self
-				assert: aStream contents
-				equals: 'a ' , self nonEmpty class name ]
+		self assert: printed equals: 'a ' , self nonEmpty class name ]
 ]
 
 { #category : #'tests - printing' }
 SinglyLinkedListTest >> testPrintOn [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| tmp printed allElementsAsString |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	self nonEmpty printOn: aStream.
-	allElementsAsString := result findBetweenSubstrings: ' '.
+	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
+	allElementsAsString := printed findBetweenSubstrings: '( )'.
 	1 to: allElementsAsString size do: [ :i | 
 		i = 1 ifTrue: [ 
 			self collectionClass name first isVowel
@@ -597,14 +588,14 @@ SinglyLinkedListTest >> testPrintOn [
 { #category : #'tests - printing' }
 SinglyLinkedListTest >> testPrintOnDelimiter [
 	
-	| result allElementsAsString tmp |
+	| printed allElementsAsString tmp |
 	
-	result := String streamContents: [ :aStream |
+	printed := String streamContents: [ :aStream |
 		tmp := OrderedCollection new.
 		self nonEmpty do: [:each | tmp add: each asString].
 		self nonEmpty printOn: aStream delimiter: ', ' ].
 	
-	allElementsAsString := (result findBetweenSubstrings: ', ').
+	allElementsAsString := (printed findBetweenSubstrings: ', ').
 	
 	1 to: allElementsAsString size do:
 		[:i | 
@@ -614,15 +605,14 @@ SinglyLinkedListTest >> testPrintOnDelimiter [
 { #category : #'tests - printing' }
 SinglyLinkedListTest >> testPrintOnDelimiterLast [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	self nonEmpty printOn: aStream delimiter: ', ' last: 'and'.
+	printed := String streamContents: [ :s | 
+		           self nonEmpty printOn: s delimiter: ', ' last: 'and' ].
 
-	allElementsAsString := result findBetweenSubstrings: ', '.
+	allElementsAsString := printed findBetweenSubstrings: ', '.
 	1 to: allElementsAsString size do: [ :i | 
 		i < (allElementsAsString size - 1) ifTrue: [ 
 			self
@@ -630,7 +620,7 @@ SinglyLinkedListTest >> testPrintOnDelimiterLast [
 				equals:
 				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ].
 		i = (allElementsAsString size - 1) ifTrue: [ 
-			self deny: (allElementsAsString at: i) equals: 'and' asString ].
+			self assert: (allElementsAsString at: i) equals: 'and' asString ].
 		i = allElementsAsString size ifTrue: [ 
 			self
 				assert: (tmp occurrencesOf: (allElementsAsString at: i))

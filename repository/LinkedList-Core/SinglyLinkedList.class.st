@@ -509,21 +509,24 @@ SinglyLinkedList >> printOn: aStream delimiter: delimString [
 
 { #category : #printing }
 SinglyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimString [
+
 	"Print elements on a stream separated
 	with a delimiter between all the elements and with
 	a special one before the last like: 'a, b and c'"
 
 	| current |
 	current := firstNode.
-	[ current isNil ]
-		whileFalse: [ 
-			current == lastNode
-				ifTrue: [ aStream nextPutAll: lastDelimString ]
-				ifFalse: [ 
-					current == firstNode
-						ifFalse: [ aStream nextPutAll: delimString ] ].
-			aStream print: current value.
-			current := current nextNode ]
+	[ current isNil ] whileFalse: [ 
+		current == lastNode
+			ifTrue: [ 
+				aStream
+					space;
+					nextPutAll: lastDelimString;
+					space ]
+			ifFalse: [ 
+			current == firstNode ifFalse: [ aStream nextPutAll: delimString ] ].
+		aStream print: current value.
+		current := current nextNode ]
 ]
 
 { #category : #enumerating }
