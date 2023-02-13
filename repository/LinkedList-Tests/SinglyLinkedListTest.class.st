@@ -968,10 +968,7 @@ SinglyLinkedListTest >> testSize [
 SinglyLinkedListTest >> testSumNumbers [
 
 	| result |
-	result := self collectionWithoutNilElements sumNumbers: [ :ele | 
-		          ele notNil
-			          ifTrue: [ 1 ]
-			          ifFalse: [ 0 ] ].
+	result := self collectionWithoutNilElements sumNumbers: [ :each | each ifNotNil: [ 1 ] ifNil: [ 0 ] ].
 	self assert: self collectionWithoutNilElements size equals: result
 ]
 
