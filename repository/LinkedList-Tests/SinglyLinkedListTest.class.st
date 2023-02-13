@@ -428,6 +428,100 @@ SinglyLinkedListTest >> testDoWithout [
 ]
 
 { #category : #tests }
+SinglyLinkedListTest >> testEqual01 [
+
+	| one another |
+	one := SinglyLinkedList with: 1.
+	another := SinglyLinkedList with: 1.
+
+	self assert: one equals: another.
+	self assert: one hash equals: another hash.
+	self assert: another equals: one.
+	self assert: another hash equals: one hash.
+	self deny: one identicalTo: another
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testEqual02 [
+
+	| one another |
+	one := SinglyLinkedList new.
+	another := SinglyLinkedList new.
+
+	self assert: one equals: another.
+	self assert: one hash equals: another hash.
+	self assert: another equals: one.
+	self assert: another hash equals: one hash.
+	self deny: one identicalTo: another
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testEqual03 [
+
+	| one another |
+	one := SinglyLinkedList with: 2 with: 3.
+	another := SinglyLinkedList with: 2 with: 3.
+
+	self assert: one equals: another.
+	self assert: one hash equals: another hash.
+	self assert: another equals: one.
+	self assert: another hash equals: one hash.
+	self deny: one identicalTo: another
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testEqual04 [
+
+	| one another |
+	one := SinglyLinkedList with: 2 with: 3.
+	another := SinglyLinkedList with: 3 with: 2.
+	self deny: one equals: another.
+	self deny: one hash equals: another hash.
+	self deny: another equals: one.
+	self deny: another hash equals: one hash.
+	self deny: one identicalTo: another
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testEqual05 [
+
+	| one another |
+	one := SinglyLinkedList with: 2 with: 3.
+	another := SinglyLinkedList with: 2 with: 2.
+	self deny: one equals: another.
+	self deny: one hash equals: another hash.
+	self deny: another equals: one.
+	self deny: another hash equals: one hash.
+	self deny: one identicalTo: another
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testEqual06 [
+
+	| one another |
+	one := SinglyLinkedList with: 2 with: 3.
+	another := SinglyLinkedList with: 2.
+	self deny: one equals: another.
+	self deny: one hash equals: another hash.
+	self deny: another equals: one.
+	self deny: another hash equals: one hash.
+	self deny: one identicalTo: another
+]
+
+{ #category : #tests }
+SinglyLinkedListTest >> testEqual07 [
+
+	| one another |
+	one := SinglyLinkedList with: 2.
+	another := SinglyLinkedList with: 2 with: 3.
+	self deny: one equals: another.
+	self deny: one hash equals: another hash.
+	self deny: another equals: one.
+	self deny: another hash equals: one hash.
+	self deny: one identicalTo: another
+]
+
+{ #category : #tests }
 SinglyLinkedListTest >> testFirst01 [
 	self
 		should: [ self empty first ]
