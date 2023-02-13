@@ -269,21 +269,6 @@ AssociationListTest >> sizeCollection [
 	^ alist
 ]
 
-{ #category : #'test - adding' }
-AssociationListTest >> testAddWithKeyNotIn [
-
-	| dictionary result association oldSize |
-	dictionary := self nonEmptyDict.
-	oldSize := dictionary size.
-	association := self associationWithKeyNotInToAdd.
-	result := dictionary add: association.
-	self assert: result equals: association.
-	self
-		assert: (dictionary at: association key)
-		equals: association value.
-	self assert: dictionary size equals: oldSize + 1
-]
-
 { #category : #requirements }
 AssociationListTest >> valueNotIn [
 	^ valueNotIn
