@@ -149,36 +149,45 @@ SinglyLinkedQueueTest >> testPrintElementsOn [
 SinglyLinkedQueueTest >> testPrintNameOn [
 
 	| aStream result |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
+	result := ''.
+	aStream := ReadWriteStream on: result.
 	self nonEmpty printNameOn: aStream.
 	self nonEmpty class name first isVowel
-		ifTrue:[ self assert: aStream contents =('an ',self nonEmpty class name ) ]
-		ifFalse:[self assert: aStream contents =('a ',self nonEmpty class name)].
+		ifTrue: [ 
+			self
+				assert: aStream contents
+				equals: 'an ' , self nonEmpty class name ]
+		ifFalse: [ 
+			self
+				assert: aStream contents
+				equals: 'a ' , self nonEmpty class name ]
 ]
 
 { #category : #'tests - printing' }
 SinglyLinkedQueueTest >> testPrintOn [
+
 	| aStream result allElementsAsString tmp |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
-	tmp:= OrderedCollection new.
-	self nonEmpty do: [:each | tmp add: each asString].
-	
-	self nonEmpty printOn: aStream .
-	allElementsAsString:=(result findBetweenSubstrings: ' ' ).
-	1 to: allElementsAsString size do:
-		[:i | 
-		i=1
-			ifTrue:[
-			self accessCollection class name first isVowel 
-				ifTrue:[self assert: (allElementsAsString at:i)='an' ]
-				ifFalse:[self assert: (allElementsAsString at:i)='a'].].
-		i=2
-			ifTrue:[self assert: (allElementsAsString at:i)=self accessCollection class name].
-		i>2
-			ifTrue:[self assert: (tmp occurrencesOf:(allElementsAsString at:i))=(allElementsAsString  occurrencesOf:(allElementsAsString at:i)).].	
-			].
+	result := ''.
+	aStream := ReadWriteStream on: result.
+	tmp := OrderedCollection new.
+	self nonEmpty do: [ :each | tmp add: each asString ].
+
+	self nonEmpty printOn: aStream.
+	allElementsAsString := result findBetweenSubstrings: ' '.
+	1 to: allElementsAsString size do: [ :i | 
+		i = 1 ifTrue: [ 
+			self accessCollection class name first isVowel
+				ifTrue: [ self assert: (allElementsAsString at: i) equals: 'an' ]
+				ifFalse: [ self assert: (allElementsAsString at: i) equals: 'a' ] ].
+		i = 2 ifTrue: [ 
+			self
+				assert: (allElementsAsString at: i)
+				equals: self accessCollection class name ].
+		i > 2 ifTrue: [ 
+			self
+				assert: (tmp occurrencesOf: (allElementsAsString at: i))
+				equals:
+				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
 ]
 
 { #category : #'tests - printing' }
@@ -202,23 +211,27 @@ SinglyLinkedQueueTest >> testPrintOnDelimiter [
 SinglyLinkedQueueTest >> testPrintOnDelimiterLast [
 
 	| aStream result allElementsAsString tmp |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
-	tmp:= OrderedCollection new.
-	self nonEmpty do: [:each | tmp add: each asString].
-	
+	result := ''.
+	aStream := ReadWriteStream on: result.
+	tmp := OrderedCollection new.
+	self nonEmpty do: [ :each | tmp add: each asString ].
+
 	self nonEmpty printOn: aStream delimiter: ', ' last: 'and'.
-	
-	allElementsAsString:=(result findBetweenSubstrings: ', ' ).
-	1 to: allElementsAsString size do:
-		[:i | 
-		i<(allElementsAsString size-1 )
-			ifTrue: [self assert: (tmp occurrencesOf: (allElementsAsString at:i))=(allElementsAsString  occurrencesOf: (allElementsAsString at:i))].
-		i=(allElementsAsString size-1)
-			ifTrue:[ self deny: (allElementsAsString at:i)=('and')asString].
-		i=(allElementsAsString size)
-			ifTrue: [self assert: (tmp occurrencesOf: (allElementsAsString at:i))=(allElementsAsString  occurrencesOf: (allElementsAsString at:i))].
-			].
+
+	allElementsAsString := result findBetweenSubstrings: ', '.
+	1 to: allElementsAsString size do: [ :i | 
+		i < (allElementsAsString size - 1) ifTrue: [ 
+			self
+				assert: (tmp occurrencesOf: (allElementsAsString at: i))
+				equals:
+				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ].
+		i = (allElementsAsString size - 1) ifTrue: [ 
+			self deny: (allElementsAsString at: i) equals: 'and' asString ].
+		i = allElementsAsString size ifTrue: [ 
+			self
+				assert: (tmp occurrencesOf: (allElementsAsString at: i))
+				equals:
+				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
 ]
 
 { #category : #'tests - size capacity' }
