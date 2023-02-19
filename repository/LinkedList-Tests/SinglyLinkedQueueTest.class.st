@@ -73,11 +73,10 @@ SinglyLinkedQueueTest >> test0TSizeTest [
 
 { #category : #'tests - copy - clone' }
 SinglyLinkedQueueTest >> testCopyCreatesNewObject [
-	 
-	
-	| copy | 
+
+	| copy |
 	copy := self nonEmpty copy.
-	self deny: self nonEmpty == copy.
+	self deny: self nonEmpty identicalTo: copy
 ]
 
 { #category : #'tests - copy - clone' }
@@ -99,9 +98,12 @@ SinglyLinkedQueueTest >> testIfEmptyifNotEmpty [
 
 { #category : #'tests - empty' }
 SinglyLinkedQueueTest >> testIfNotEmpty [
+
 	self empty ifNotEmpty: [ self assert: false ].
 	self nonEmpty ifNotEmpty: [ self assert: true ].
-	self assert: (self nonEmpty ifNotEmpty: [ :s | s ]) = self nonEmpty
+	self
+		assert: (self nonEmpty ifNotEmpty: [ :s | s ])
+		equals: self nonEmpty
 ]
 
 { #category : #'tests - empty' }
@@ -132,17 +134,18 @@ SinglyLinkedQueueTest >> testNotEmpty [
 SinglyLinkedQueueTest >> testPrintElementsOn [
 
 	| aStream result allElementsAsString tmp |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
-	tmp:= OrderedCollection new.
-	self nonEmpty do: [:each | tmp add: each asString].
-	
-	self nonEmpty printElementsOn: aStream .
-	allElementsAsString:=(result findBetweenSubstrings: ' ' ).
-	1 to: allElementsAsString size do:
-		[:i | 
-		self assert: (tmp occurrencesOf:(allElementsAsString at:i))=(allElementsAsString  occurrencesOf:(allElementsAsString at:i)).
-			].
+	result := ''.
+	aStream := ReadWriteStream on: result.
+	tmp := OrderedCollection new.
+	self nonEmpty do: [ :each | tmp add: each asString ].
+
+	self nonEmpty printElementsOn: aStream.
+	allElementsAsString := result findBetweenSubstrings: ' '.
+	1 to: allElementsAsString size do: [ :i | 
+		self
+			assert: (tmp occurrencesOf: (allElementsAsString at: i))
+			equals:
+			(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ]
 ]
 
 { #category : #'tests - printing' }
@@ -238,9 +241,8 @@ SinglyLinkedQueueTest >> testPrintOnDelimiterLast [
 SinglyLinkedQueueTest >> testSize [
 
 	| size |
-	self assert: self empty size = 0.
+	self assert: self empty size equals: 0.
 	size := 0.
-	self sizeCollection do: [ :each | size := size + 1].
-	
-	self assert: self sizeCollection size = size.
+	self sizeCollection do: [ :each | size := size + 1 ].
+	self assert: self sizeCollection size equals: size
 ]

@@ -73,11 +73,10 @@ SinglyLinkedStackTest >> test0TSizeTest [
 
 { #category : #'tests - copy - clone' }
 SinglyLinkedStackTest >> testCopyCreatesNewObject [
-	 
-	
-	| copy | 
+
+	| copy |
 	copy := self nonEmpty copy.
-	self deny: self nonEmpty == copy.
+	self deny: self nonEmpty identicalTo: copy
 ]
 
 { #category : #'tests - copy - clone' }
@@ -99,9 +98,12 @@ SinglyLinkedStackTest >> testIfEmptyifNotEmpty [
 
 { #category : #'tests - empty' }
 SinglyLinkedStackTest >> testIfNotEmpty [
+
 	self empty ifNotEmpty: [ self assert: false ].
 	self nonEmpty ifNotEmpty: [ self assert: true ].
-	self assert: (self nonEmpty ifNotEmpty: [ :s | s ]) = self nonEmpty
+	self
+		assert: (self nonEmpty ifNotEmpty: [ :s | s ])
+		equals: self nonEmpty
 ]
 
 { #category : #'tests - empty' }
@@ -132,53 +134,56 @@ SinglyLinkedStackTest >> testNotEmpty [
 SinglyLinkedStackTest >> testPrintElementsOn [
 
 	| aStream result allElementsAsString tmp |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
-	tmp:= OrderedCollection new.
-	self nonEmpty do: [:each | tmp add: each asString].
-	
-	self nonEmpty printElementsOn: aStream .
-	allElementsAsString:=(result findBetweenSubstrings: ' ' ).
-	1 to: allElementsAsString size do:
-		[:i | 
-		self assert: (tmp occurrencesOf:(allElementsAsString at:i))=(allElementsAsString  occurrencesOf:(allElementsAsString at:i)).
-			].
+	result := ''.
+	aStream := ReadWriteStream on: result.
+	tmp := OrderedCollection new.
+	self nonEmpty do: [ :each | tmp add: each asString ].
+
+	self nonEmpty printElementsOn: aStream.
+	allElementsAsString := result findBetweenSubstrings: ' '.
+	1 to: allElementsAsString size do: [ :i | 
+		self
+			assert: (tmp occurrencesOf: (allElementsAsString at: i))
+			equals:
+			(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ]
 ]
 
 { #category : #'tests - printing' }
 SinglyLinkedStackTest >> testPrintNameOn [
 
-	| aStream result |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
-	self nonEmpty printNameOn: aStream.
-	self nonEmpty class name first isVowel
-		ifTrue:[ self assert: aStream contents =('an ',self nonEmpty class name ) ]
-		ifFalse:[self assert: aStream contents =('a ',self nonEmpty class name)].
+	| printed |
+	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
+	self 
+		assert: printed 
+		equals: (self nonEmpty class name first isVowel
+					 ifTrue: [ 'an ' ] ifFalse: [ 'a ' ]) , self nonEmpty class name
 ]
 
 { #category : #'tests - printing' }
 SinglyLinkedStackTest >> testPrintOn [
+
 	| aStream result allElementsAsString tmp |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
-	tmp:= OrderedCollection new.
-	self nonEmpty do: [:each | tmp add: each asString].
-	
-	self nonEmpty printOn: aStream .
-	allElementsAsString:=(result findBetweenSubstrings: ' ' ).
-	1 to: allElementsAsString size do:
-		[:i | 
-		i=1
-			ifTrue:[
-			self accessCollection class name first isVowel 
-				ifTrue:[self assert: (allElementsAsString at:i)='an' ]
-				ifFalse:[self assert: (allElementsAsString at:i)='a'].].
-		i=2
-			ifTrue:[self assert: (allElementsAsString at:i)=self accessCollection class name].
-		i>2
-			ifTrue:[self assert: (tmp occurrencesOf:(allElementsAsString at:i))=(allElementsAsString  occurrencesOf:(allElementsAsString at:i)).].	
-			].
+	result := ''.
+	aStream := ReadWriteStream on: result.
+	tmp := OrderedCollection new.
+	self nonEmpty do: [ :each | tmp add: each asString ].
+
+	self nonEmpty printOn: aStream.
+	allElementsAsString := result findBetweenSubstrings: ' '.
+	1 to: allElementsAsString size do: [ :i | 
+		i = 1 ifTrue: [ 
+			self accessCollection class name first isVowel
+				ifTrue: [ self assert: (allElementsAsString at: i) equals: 'an' ]
+				ifFalse: [ self assert: (allElementsAsString at: i) equals: 'a' ] ].
+		i = 2 ifTrue: [ 
+			self
+				assert: (allElementsAsString at: i)
+				equals: self accessCollection class name ].
+		i > 2 ifTrue: [ 
+			self
+				assert: (tmp occurrencesOf: (allElementsAsString at: i))
+				equals:
+				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
 ]
 
 { #category : #'tests - printing' }
@@ -202,32 +207,35 @@ SinglyLinkedStackTest >> testPrintOnDelimiter [
 SinglyLinkedStackTest >> testPrintOnDelimiterLast [
 
 	| aStream result allElementsAsString tmp |
-	result:=''.
-	aStream:= ReadWriteStream on: result.
-	tmp:= OrderedCollection new.
-	self nonEmpty do: [:each | tmp add: each asString].
-	
+	result := ''.
+	aStream := ReadWriteStream on: result.
+	tmp := OrderedCollection new.
+	self nonEmpty do: [ :each | tmp add: each asString ].
+
 	self nonEmpty printOn: aStream delimiter: ', ' last: 'and'.
-	
-	allElementsAsString:=(result findBetweenSubstrings: ', ' ).
-	1 to: allElementsAsString size do:
-		[:i | 
-		i<(allElementsAsString size-1 )
-			ifTrue: [self assert: (tmp occurrencesOf: (allElementsAsString at:i))=(allElementsAsString  occurrencesOf: (allElementsAsString at:i))].
-		i=(allElementsAsString size-1)
-			ifTrue:[ self deny: (allElementsAsString at:i)=('and')asString].
-		i=(allElementsAsString size)
-			ifTrue: [self assert: (tmp occurrencesOf: (allElementsAsString at:i))=(allElementsAsString  occurrencesOf: (allElementsAsString at:i))].
-			].
+
+	allElementsAsString := result findBetweenSubstrings: ', '.
+	1 to: allElementsAsString size do: [ :i | 
+		i < (allElementsAsString size - 1) ifTrue: [ 
+			self
+				assert: (tmp occurrencesOf: (allElementsAsString at: i))
+				equals:
+				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ].
+		i = (allElementsAsString size - 1) ifTrue: [ 
+			self deny: (allElementsAsString at: i) equals: 'and' asString ].
+		i = allElementsAsString size ifTrue: [ 
+			self
+				assert: (tmp occurrencesOf: (allElementsAsString at: i))
+				equals:
+				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
 ]
 
 { #category : #'tests - size capacity' }
 SinglyLinkedStackTest >> testSize [
 
 	| size |
-	self assert: self empty size = 0.
+	self assert: self empty size equals: 0.
 	size := 0.
-	self sizeCollection do: [ :each | size := size + 1].
-	
-	self assert: self sizeCollection size = size.
+	self sizeCollection do: [ :each | size := size + 1 ].
+	self assert: self sizeCollection size equals: size
 ]
