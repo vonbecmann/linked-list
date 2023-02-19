@@ -556,23 +556,21 @@ DoublyLinkedListTest >> testPrintNameOn [
 { #category : #'tests - printing' }
 DoublyLinkedListTest >> testPrintOn [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	self nonEmpty printOn: aStream.
-	allElementsAsString := result findBetweenSubstrings: ' '.
+	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
+	allElementsAsString := printed findBetweenSubstrings: ' ()'.
 	1 to: allElementsAsString size do: [ :i | 
 		i = 1 ifTrue: [ 
-			self accessCollection class name first isVowel
+			self classToBeTested class name first isVowel
 				ifTrue: [ self assert: (allElementsAsString at: i) equals: 'an' ]
 				ifFalse: [ self assert: (allElementsAsString at: i) equals: 'a' ] ].
 		i = 2 ifTrue: [ 
 			self
 				assert: (allElementsAsString at: i)
-				equals: self accessCollection class name ].
+				equals: self classToBeTested name ].
 		i > 2 ifTrue: [ 
 			self
 				assert: (tmp occurrencesOf: (allElementsAsString at: i))
