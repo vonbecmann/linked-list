@@ -151,19 +151,12 @@ SinglyLinkedQueueTest >> testPrintElementsOn [
 { #category : #'tests - printing' }
 SinglyLinkedQueueTest >> testPrintNameOn [
 
-	| aStream result |
-	result := ''.
-	aStream := ReadWriteStream on: result.
-	self nonEmpty printNameOn: aStream.
-	self nonEmpty class name first isVowel
-		ifTrue: [ 
-			self
-				assert: aStream contents
-				equals: 'an ' , self nonEmpty class name ]
-		ifFalse: [ 
-			self
-				assert: aStream contents
-				equals: 'a ' , self nonEmpty class name ]
+	| printed |
+	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
+	
+	self 
+		assert: printed 
+		equals: (self nonEmpty class name first isVowel ifTrue: [ 'an ' ] ifFalse: [ 'a ' ]) , self nonEmpty class name
 ]
 
 { #category : #'tests - printing' }

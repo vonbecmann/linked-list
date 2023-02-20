@@ -647,11 +647,10 @@ SinglyLinkedListTest >> testPrintNameOn [
 
 	| printed |
 	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
-	self nonEmpty class name first isVowel
-		ifTrue: [ 
-		self assert: printed equals: 'an ' , self nonEmpty class name ]
-		ifFalse: [ 
-		self assert: printed equals: 'a ' , self nonEmpty class name ]
+	
+	self 
+		assert: printed 
+		equals: (self nonEmpty class name first isVowel ifTrue: [ 'an ' ] ifFalse: [ 'a ' ]) , self nonEmpty class name
 ]
 
 { #category : #'tests - printing' }
