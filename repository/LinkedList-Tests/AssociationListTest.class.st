@@ -2090,19 +2090,17 @@ AssociationListTest >> testOccurrencesOfNotIn [
 { #category : #'tests - printing' }
 AssociationListTest >> testPrintElementsOn [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
-	self nonEmpty do: [ :each | tmp add: each asString ].
+	self nonEmpty associationsDo: [ :each | tmp add: each asString ].
 
-	self nonEmpty printElementsOn: aStream.
-	allElementsAsString := result findBetweenSubstrings: ' '.
-	1 to: allElementsAsString size do: [ :i | 
+	printed := String streamContents: [ :s | 
+		           self nonEmpty printElementsOn: s ].
+	allElementsAsString := printed findBetweenSubstrings: '( )'.
+	allElementsAsString do: [ :each | 
 		self
-			assert: (tmp occurrencesOf: (allElementsAsString at: i))
-			equals:
-			(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ]
+			assert: (tmp occurrencesOf: each)
+			equals: (allElementsAsString occurrencesOf: each) ]
 ]
 
 { #category : #'tests - printing' }
