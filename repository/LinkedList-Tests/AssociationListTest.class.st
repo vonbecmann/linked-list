@@ -2144,15 +2144,15 @@ AssociationListTest >> testPrintOnDelimiter [
 	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
-	
-	printed := String streamContents: [ :aStream | self nonEmpty printOn: aStream delimiter: ', ' ].
+
+	printed := String streamContents: [ :aStream | 
+		           self nonEmpty printOn: aStream delimiter: ', ' ].
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
 
-	allElementsAsString do: [ :each | 
-		self
-			assert: (tmp occurrencesOf: each)
-			equals: (allElementsAsString occurrencesOf: each) ]
+	allElementsAsString
+		collect: [ :each | Array with: each with: (allElementsAsString occurrencesOf: each) ]
+		thenDo: [ :each | self assert: (tmp occurrencesOf: each first) equals: each second ]
 ]
 
 { #category : #'tests - printing' }
