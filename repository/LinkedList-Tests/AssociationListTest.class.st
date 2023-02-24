@@ -2125,9 +2125,9 @@ AssociationListTest >> testPrintOn [
 	allElementsAsString := printed findBetweenSubstrings: ' ()'.
 	1 to: allElementsAsString size do: [ :i | 
 		i = 1 ifTrue: [ 
-			self classToBeTested class name first isVowel
-				ifTrue: [ self assert: (allElementsAsString at: i) equals: 'an' ]
-				ifFalse: [ self assert: (allElementsAsString at: i) equals: 'a' ] ].
+			self
+				assert: (allElementsAsString at: i)
+				equals: (self classToBeTested class name first isVowel ifTrue: [ 'an' ] ifFalse: [ 'a' ]) ].
 		i = 2 ifTrue: [ 
 			self
 				assert: (allElementsAsString at: i)
@@ -2135,8 +2135,7 @@ AssociationListTest >> testPrintOn [
 		i > 2 ifTrue: [ 
 			self
 				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
+				equals: (allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
 ]
 
 { #category : #'tests - printing' }
