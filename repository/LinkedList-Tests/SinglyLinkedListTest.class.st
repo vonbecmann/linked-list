@@ -662,20 +662,18 @@ SinglyLinkedListTest >> testPrintOn [
 
 	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	1 to: allElementsAsString size do: [ :i | 
+	allElementsAsString withIndexDo: [ :each :i | 
 		i = 1 ifTrue: [ 
-			self collectionClass name first isVowel
-				ifTrue: [ self assert: (allElementsAsString at: i) equals: 'an' ]
-				ifFalse: [ self assert: (allElementsAsString at: i) equals: 'a' ] ].
-		i = 2 ifTrue: [ 
 			self
-				assert: (allElementsAsString at: i)
-				equals: self collectionClass name ].
+				assert: each
+				equals: (self classToBeTested class name first isVowel
+						 ifTrue: [ 'an' ]
+						 ifFalse: [ 'a' ]) ].
+		i = 2 ifTrue: [ self assert: each equals: self classToBeTested name ].
 		i > 2 ifTrue: [ 
 			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
+				assert: (tmp occurrencesOf: each)
+				equals: (allElementsAsString occurrencesOf: each) ] ]
 ]
 
 { #category : #'tests - printing' }
@@ -690,9 +688,9 @@ SinglyLinkedListTest >> testPrintOnDelimiter [
 	
 	allElementsAsString := (printed findBetweenSubstrings: ', ').
 	
-	1 to: allElementsAsString size do:
-		[:i | 
-		self assert: (tmp occurrencesOf:(allElementsAsString at:i)) equals: (allElementsAsString  occurrencesOf:(allElementsAsString at:i)) ].
+	allElementsAsString
+		collect: [ :each | Array with: each with: (allElementsAsString occurrencesOf: each) ]
+		thenDo: [ :each | self assert: (tmp occurrencesOf: each first) equals: each second ]
 ]
 
 { #category : #'tests - printing' }
@@ -706,19 +704,13 @@ SinglyLinkedListTest >> testPrintOnDelimiterLast [
 		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
-	1 to: allElementsAsString size do: [ :i | 
-		i < (allElementsAsString size - 1) ifTrue: [ 
-			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ].
-		i = (allElementsAsString size - 1) ifTrue: [ 
-			self assert: (allElementsAsString at: i) equals: 'and' asString ].
-		i = allElementsAsString size ifTrue: [ 
-			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
+	allElementsAsString withIndexDo: [ :each :i | 
+		i = (allElementsAsString size - 1)
+			ifTrue: [ self assert: each equals: 'and' ]
+			ifFalse: [ 
+				self
+					assert: (tmp occurrencesOf: each)
+					equals: (allElementsAsString occurrencesOf: each) ] ]
 ]
 
 { #category : #'tests - iterating' }
