@@ -2123,19 +2123,16 @@ AssociationListTest >> testPrintOn [
 
 	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: ' ()'.
-	1 to: allElementsAsString size do: [ :i | 
+	allElementsAsString withIndexDo: [ :each :i | 
 		i = 1 ifTrue: [ 
 			self
-				assert: (allElementsAsString at: i)
+				assert: each
 				equals: (self classToBeTested class name first isVowel ifTrue: [ 'an' ] ifFalse: [ 'a' ]) ].
-		i = 2 ifTrue: [ 
-			self
-				assert: (allElementsAsString at: i)
-				equals: self classToBeTested name ].
+		i = 2 ifTrue: [ self assert: each equals: self classToBeTested name ].
 		i > 2 ifTrue: [ 
 			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals: (allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
+				assert: (tmp occurrencesOf: each)
+				equals: (allElementsAsString occurrencesOf: each) ] ]
 ]
 
 { #category : #'tests - printing' }
@@ -2158,28 +2155,21 @@ AssociationListTest >> testPrintOnDelimiter [
 { #category : #'tests - printing' }
 AssociationListTest >> testPrintOnDelimiterLast [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
+	printed := String streamContents: [ :s | 
+		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
-	self nonEmpty printOn: aStream delimiter: ', ' last: 'and'.
 
-	allElementsAsString := result findBetweenSubstrings: ', '.
-	1 to: allElementsAsString size do: [ :i | 
-		i < (allElementsAsString size - 1) ifTrue: [ 
-			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ].
-		i = (allElementsAsString size - 1) ifTrue: [ 
-			self deny: (allElementsAsString at: i) equals: 'and' asString ].
-		i = allElementsAsString size ifTrue: [ 
-			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
+	allElementsAsString := printed findBetweenSubstrings: ', '.
+	allElementsAsString withIndexDo: [ :each :i | 
+		i = (allElementsAsString size - 1)
+			ifTrue: [ self assert: each equals: 'and' ]
+			ifFalse: [ 
+				self
+					assert: (tmp occurrencesOf: each)
+					equals: (allElementsAsString occurrencesOf: each) ] ]
 ]
 
 { #category : #'tests - dictionnary enumerating' }
