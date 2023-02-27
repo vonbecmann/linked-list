@@ -133,19 +133,17 @@ SinglyLinkedStackTest >> testNotEmpty [
 { #category : #'tests - printing' }
 SinglyLinkedStackTest >> testPrintElementsOn [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	self nonEmpty printElementsOn: aStream.
-	allElementsAsString := result findBetweenSubstrings: ' '.
-	1 to: allElementsAsString size do: [ :i | 
+	printed := String streamContents: [ :s | 
+		          self nonEmpty printElementsOn: s ].
+	allElementsAsString := printed findBetweenSubstrings: '( )'.
+	allElementsAsString do: [ :each | 
 		self
-			assert: (tmp occurrencesOf: (allElementsAsString at: i))
-			equals:
-			(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ]
+			assert: (tmp occurrencesOf: each)
+			equals: (allElementsAsString occurrencesOf: each) ]
 ]
 
 { #category : #'tests - printing' }
@@ -162,70 +160,61 @@ SinglyLinkedStackTest >> testPrintNameOn [
 { #category : #'tests - printing' }
 SinglyLinkedStackTest >> testPrintOn [
 
-	| printed allElementsAsString tmp |
+	| tmp printed allElementsAsString |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
 	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
-	allElementsAsString := printed findBetweenSubstrings: ' ()'.
-	1 to: allElementsAsString size do: [ :i | 
+	allElementsAsString := printed findBetweenSubstrings: '( )'.
+	allElementsAsString withIndexDo: [ :each :i | 
 		i = 1 ifTrue: [ 
-			self classToBeTested class name first isVowel
-				ifTrue: [ self assert: (allElementsAsString at: i) equals: 'an' ]
-				ifFalse: [ self assert: (allElementsAsString at: i) equals: 'a' ] ].
-		i = 2 ifTrue: [ 
 			self
-				assert: (allElementsAsString at: i)
-				equals: self classToBeTested name ].
+				assert: each
+				equals: (self classToBeTested class name first isVowel
+						 ifTrue: [ 'an' ]
+						 ifFalse: [ 'a' ]) ].
+		i = 2 ifTrue: [ self assert: each equals: self classToBeTested name ].
 		i > 2 ifTrue: [ 
 			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
+				assert: (tmp occurrencesOf: each)
+				equals: (allElementsAsString occurrencesOf: each) ] ]
 ]
 
 { #category : #'tests - printing' }
 SinglyLinkedStackTest >> testPrintOnDelimiter [
 	
-	| result allElementsAsString tmp |
+	| printed allElementsAsString tmp |
 	
-	result := String streamContents: [ :aStream |
+	printed := String streamContents: [ :aStream |
 		tmp := OrderedCollection new.
 		self nonEmpty do: [:each | tmp add: each asString].
 		self nonEmpty printOn: aStream delimiter: ', ' ].
 	
-	allElementsAsString := (result findBetweenSubstrings: ', ').
+	allElementsAsString := (printed findBetweenSubstrings: ', ').
 	
-	1 to: allElementsAsString size do:
-		[:i | 
-		self assert: (tmp occurrencesOf:(allElementsAsString at:i)) equals: (allElementsAsString  occurrencesOf:(allElementsAsString at:i)) ].
+	allElementsAsString
+		collect: [ :each | Array with: each with: (allElementsAsString occurrencesOf: each) ]
+		thenDo: [ :each | self assert: (tmp occurrencesOf: each first) equals: each second ]
 ]
 
 { #category : #'tests - printing' }
 SinglyLinkedStackTest >> testPrintOnDelimiterLast [
 
-	| aStream result allElementsAsString tmp |
-	result := ''.
-	aStream := ReadWriteStream on: result.
+	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	self nonEmpty printOn: aStream delimiter: ', ' last: 'and'.
+	printed := String streamContents: [ :s | 
+		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
-	allElementsAsString := result findBetweenSubstrings: ', '.
-	1 to: allElementsAsString size do: [ :i | 
-		i < (allElementsAsString size - 1) ifTrue: [ 
-			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ].
-		i = (allElementsAsString size - 1) ifTrue: [ 
-			self deny: (allElementsAsString at: i) equals: 'and' asString ].
-		i = allElementsAsString size ifTrue: [ 
-			self
-				assert: (tmp occurrencesOf: (allElementsAsString at: i))
-				equals:
-				(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ] ]
+	allElementsAsString := printed findBetweenSubstrings: ', '.
+	allElementsAsString withIndexDo: [ :each :i | 
+		i = (allElementsAsString size - 1)
+			ifTrue: [ self assert: each equals: 'and' ]
+			ifFalse: [ 
+				self
+					assert: (tmp occurrencesOf: each)
+					equals: (allElementsAsString occurrencesOf: each) ] ]
 ]
 
 { #category : #'tests - size capacity' }
