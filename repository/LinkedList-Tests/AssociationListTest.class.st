@@ -728,15 +728,13 @@ AssociationListTest >> testAsCommaStringMore [
 
 	"verifying esultAnd :"
 	allElementsAsString := resultAnd findBetweenSubstrings: ', '.
-	1 to: allElementsAsString size do: [ :i | 
-		i < (allElementsAsString size - 1) | (i = allElementsAsString size) 
-			ifTrue: [ 
+	allElementsAsString withIndexDo: [ :each :i | 
+		i = (allElementsAsString size - 1)
+			ifTrue: [ self assert: each equals: 'and' ]
+			ifFalse: [ 
 				self
-					assert: (tmp occurrencesOf: (allElementsAsString at: i))
-					equals:
-					(allElementsAsString occurrencesOf: (allElementsAsString at: i)) ].
-		i = (allElementsAsString size - 1) ifTrue: [ 
-			self assert: (allElementsAsString at: i) equals: 'and' ] ]
+					assert: (tmp occurrencesOf: each)
+					equals: (allElementsAsString occurrencesOf: each) ] ]
 ]
 
 { #category : #'tests - as string comma delimiter sequenceable' }

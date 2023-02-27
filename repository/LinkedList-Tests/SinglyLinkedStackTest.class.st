@@ -182,19 +182,19 @@ SinglyLinkedStackTest >> testPrintOn [
 
 { #category : #'tests - printing' }
 SinglyLinkedStackTest >> testPrintOnDelimiter [
-	
+
 	| printed allElementsAsString tmp |
-	
-	printed := String streamContents: [ :aStream |
-		tmp := OrderedCollection new.
-		self nonEmpty do: [:each | tmp add: each asString].
-		self nonEmpty printOn: aStream delimiter: ', ' ].
-	
-	allElementsAsString := (printed findBetweenSubstrings: ', ').
-	
+	tmp := OrderedCollection new.
+	self nonEmpty do: [ :each | tmp add: each asString ].
+	printed := String streamContents: [ :aStream | self nonEmpty printOn: aStream delimiter: ', ' ].
+
+	allElementsAsString := printed findBetweenSubstrings: ', '.
+
 	allElementsAsString
-		collect: [ :each | Array with: each with: (allElementsAsString occurrencesOf: each) ]
-		thenDo: [ :each | self assert: (tmp occurrencesOf: each first) equals: each second ]
+		collect: [ :each | 
+			Array with: each with: (allElementsAsString occurrencesOf: each) ]
+		thenDo: [ :each | 
+			self assert: (tmp occurrencesOf: each first) equals: each second ]
 ]
 
 { #category : #'tests - printing' }
