@@ -60,15 +60,6 @@ AssociationListTest >> anotherValue [
 ]
 
 { #category : #asserting }
-AssociationListTest >> assertNoDuplicates: aCollection whenConvertedTo: aClass [
-
-	| result |
-	result := self collectionWithEqualElements asIdentitySet.
-	self assert: (result class includesBehavior: IdentitySet).
-	self collectionWithEqualElements do: [ :initial | self assert: (result occurrencesOf: initial) equals: 1 ]
-]
-
-{ #category : #asserting }
 AssociationListTest >> assertNonDuplicatedContents: aCollection whenConvertedTo: aClass [
 
 	| result |
