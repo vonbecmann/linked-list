@@ -204,6 +204,22 @@ AnotherDoublyLinkedListTest >> test15AddFirst [
 ]
 
 { #category : #tests }
+AnotherDoublyLinkedListTest >> test16Sum [
+
+	list
+		add: 1;
+		add: 2;
+		add: 32.
+	self assert: list sum equals: 35
+]
+
+{ #category : #tests }
+AnotherDoublyLinkedListTest >> test17Sum [
+
+	self should: [ list sum ] raise: Error
+]
+
+{ #category : #tests }
 AnotherDoublyLinkedListTest >> testReversed [
 	| reversed |
 	self assert: list isEmpty.

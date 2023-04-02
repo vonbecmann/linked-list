@@ -187,6 +187,22 @@ AnotherSinglyLinkedListTest >> test13RemoveLast [
 ]
 
 { #category : #tests }
+AnotherSinglyLinkedListTest >> test14Sum [
+
+	list
+		add: 1;
+		add: 2;
+		add: 32.
+	self assert: list sum equals: 35
+]
+
+{ #category : #tests }
+AnotherSinglyLinkedListTest >> test15Sum [
+
+	self should: [ list sum ] raise: Error
+]
+
+{ #category : #tests }
 AnotherSinglyLinkedListTest >> testReversed [
 	| reversed |
 	self assert: list isEmpty.
