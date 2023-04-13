@@ -199,12 +199,6 @@ AssociationListTest >> emptyDict [
 ]
 
 { #category : #requirements }
-AssociationListTest >> expectedElementByDetect [
-
-	^ -2
-]
-
-{ #category : #requirements }
 AssociationListTest >> integerCollectionWithoutEqualElements [
 	" return a collection of integer without equal elements"
 
@@ -230,11 +224,6 @@ AssociationListTest >> keyNotInNonEmptyDict [
 	" return a key not included in nonEmptyDict"
 
 	^ keyNotIn
-]
-
-{ #category : #requirements }
-AssociationListTest >> newEmptyDict [
-	^ self emptyDict copy
 ]
 
 { #category : #requirements }
