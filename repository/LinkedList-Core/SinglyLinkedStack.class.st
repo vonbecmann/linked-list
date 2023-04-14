@@ -48,7 +48,7 @@ SinglyLinkedStack >> do: aBlock [
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			aBlock value: current value.
 			current := current nextNode ]
 ]
@@ -58,11 +58,11 @@ SinglyLinkedStack >> do: elementBlock separatedBy: separatorBlock [
 	"Evaluate the elementBlock for all elements in the receiver,
 	and evaluate the separatorBlock between."
 	"Optimized."
-		
+
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == firstNode ifFalse: [ separatorBlock value ].
 			elementBlock value: current value.
 			current := current nextNode ]
@@ -155,7 +155,7 @@ SinglyLinkedStack >> postCopy [
 	| node |
 	super postCopy.
 	firstNode
-		ifNotNil: [ 
+		ifNotNil: [
 			node := firstNode := firstNode copy.
 			[ node nextNode isNil ] whileFalse: [ node nextNode: (node := node nextNode copy) ] ]
 ]
@@ -202,10 +202,10 @@ SinglyLinkedStack >> printOn: aStream delimiter: delimString last: lastDelimStri
 	n := 1.
 	sz := self size.
 	self
-		do: [ :elem | 
+		do: [ :elem |
 			n := n + 1.
 			aStream print: elem ]
-		separatedBy: [ 
+		separatedBy: [
 			n = sz
 				ifTrue: [ aStream nextPutAll: lastDelimString ]
 				ifFalse: [ aStream nextPutAll: delimString ] ]
@@ -222,7 +222,7 @@ SinglyLinkedStack >> push: anObject [
 
 { #category : #adding }
 SinglyLinkedStack >> pushAll: aCollection [
-	"Include all the elements of aCollection as the receiver's elements. Answer 
+	"Include all the elements of aCollection as the receiver's elements. Answer
 	aCollection. Actually, any object responding to #do: can be used as argument."
 
 	aCollection do: [ :each | self push: each ].
@@ -248,7 +248,7 @@ SinglyLinkedStack >> size [
 SinglyLinkedStack >> top [
 	"Answer the first element of the stack without removing it."
 
-	^ firstNode 
-			ifNil: [ Error signal: 'collection is empty!' ] 
+	^ firstNode
+			ifNil: [ Error signal: 'collection is empty!' ]
 			ifNotNil: [ firstNode value ]
 ]

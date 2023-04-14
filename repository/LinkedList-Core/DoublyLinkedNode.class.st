@@ -47,7 +47,7 @@ DoublyLinkedNode >> = anObject [
 
 { #category : #comparing }
 DoublyLinkedNode >> hash [
-	^ (self class hash + 
+	^ (self class hash +
 			(value hash	+ (previousNode identityHash + nextNode identityHash) hashMultiply)	hashMultiply)
 					hashMultiply
 ]

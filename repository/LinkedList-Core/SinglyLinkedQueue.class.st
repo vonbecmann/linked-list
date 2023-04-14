@@ -49,7 +49,7 @@ SinglyLinkedQueue >> do: aBlock [
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			aBlock value: current value.
 			current := current nextNode ]
 ]
@@ -59,11 +59,11 @@ SinglyLinkedQueue >> do: elementBlock separatedBy: separatorBlock [
 	"Evaluate the elementBlock for all elements in the receiver,
 	and evaluate the separatorBlock between."
 	"Optimized."
-		
+
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == firstNode ifFalse: [ separatorBlock value ].
 			elementBlock value: current value.
 			current := current nextNode ]
@@ -165,7 +165,7 @@ SinglyLinkedQueue >> next [
 
 { #category : #accessing }
 SinglyLinkedQueue >> nextPut: anObject [
-	"Insert the argument, anObject, as the next object accessible by the 
+	"Insert the argument, anObject, as the next object accessible by the
 	receiver. Answer anObject."
 
 	| node |
@@ -178,7 +178,7 @@ SinglyLinkedQueue >> nextPut: anObject [
 
 { #category : #accessing }
 SinglyLinkedQueue >> nextPutAll: aCollection [
-	"Append the elements of aCollection to the sequence of objects accessible 
+	"Append the elements of aCollection to the sequence of objects accessible
 	by the receiver. Answer aCollection."
 
 	aCollection do: [ :each | self nextPut: each ].
@@ -203,7 +203,7 @@ SinglyLinkedQueue >> postCopy [
 	| node |
 	super postCopy.
 	firstNode
-		ifNotNil: [ 
+		ifNotNil: [
 			node := firstNode := firstNode copy.
 			[ node nextNode isNil ] whileFalse: [ node nextNode: (node := node nextNode copy) ].
 			lastNode := node ]
@@ -250,10 +250,10 @@ SinglyLinkedQueue >> printOn: aStream delimiter: delimString last: lastDelimStri
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == lastNode
 				ifTrue: [ aStream nextPutAll: lastDelimString ]
-				ifFalse: [ 
+				ifFalse: [
 					current == firstNode
 						ifFalse: [ aStream nextPutAll: delimString ] ].
 			aStream print: current value.
@@ -268,7 +268,7 @@ SinglyLinkedQueue >> removeAll [
 
 { #category : #removing }
 SinglyLinkedQueue >> removeHead [
-	"Remove the head and answer it. If the receiver is empty, create 
+	"Remove the head and answer it. If the receiver is empty, create
 	an error notification."
 
 	^ firstNode

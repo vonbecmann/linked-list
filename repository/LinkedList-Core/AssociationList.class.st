@@ -50,7 +50,7 @@ AssociationList >> = associationList [
 	self class = associationList class ifFalse: [ ^ false ].
 	self size = associationList size ifFalse: [ ^ false ].
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(associationList at: assoc key ifAbsent: [ ^ false ]) = assoc value
 				ifFalse: [ ^ false ] ].
 	^ true
@@ -59,9 +59,9 @@ AssociationList >> = associationList [
 { #category : #adding }
 AssociationList >> add: anAssociation [
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: anAssociation key)
-				ifTrue: [ 
+				ifTrue: [
 					assoc value: anAssociation value.
 					^ anAssociation ] ].
 	^ self addLast: anAssociation
@@ -70,8 +70,8 @@ AssociationList >> add: anAssociation [
 { #category : #adding }
 AssociationList >> addAll: aKeyedCollection [
 	aKeyedCollection == self
-		ifFalse: [ 
-			aKeyedCollection 
+		ifFalse: [
+			aKeyedCollection
 				keysAndValuesDo: [ :key :value | self at: key put: value ] ].
 	^ aKeyedCollection
 ]
@@ -107,7 +107,7 @@ AssociationList >> allSatisfy: aBlock [
 { #category : #accessing }
 AssociationList >> anyOne [
 	"Answer a representative sample of the receiver. This method can
-	be helpful when needing to preinfer the nature of the contents of 
+	be helpful when needing to preinfer the nature of the contents of
 	semi-homogeneous collections."
 
 	^ self first value
@@ -147,7 +147,7 @@ AssociationList >> asBag [
 AssociationList >> asByteArray [
 	"Answer a ByteArray whose elements are the elements of the receiver.
 	Implementation note: Cannot use ''ByteArray withAll: self'' as that only
-	works for SequenceableCollections which support the replacement 
+	works for SequenceableCollections which support the replacement
 	primitive."
 
 	| array index |
@@ -243,7 +243,7 @@ AssociationList >> associationAt: key [
 { #category : #accessing }
 AssociationList >> associationAt: key ifAbsent: aBlock [
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ assoc ] ].
 	^ aBlock value
@@ -256,7 +256,7 @@ AssociationList >> associationAt: key ifPresent: aBlock [
 	If the key is not found, return nil."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ aBlock cull: assoc ] ].
 	^ nil
@@ -269,7 +269,7 @@ AssociationList >> associationAt: key ifPresent: aPresentBlock ifAbsent: anAbsen
 	Otherwise answer the value of the second block."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ aPresentBlock cull: assoc ] ].
 	^ anAbsentBlock value
@@ -295,7 +295,7 @@ AssociationList >> associationsDo: aBlock [
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			aBlock value: current value.
 			current := current nextNode ]
 ]
@@ -310,7 +310,7 @@ AssociationList >> associationsDo: aBlock separatedBy: separatorBlock [
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == firstNode	ifFalse: [ separatorBlock value ].
 			aBlock value: current value.
 			current := current nextNode ]
@@ -325,7 +325,7 @@ AssociationList >> associationsSelect: aBlock [
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(aBlock value: assoc)
 				ifTrue: [ newCollection addLast: assoc copy ] ].
 	^ newCollection
@@ -344,7 +344,7 @@ AssociationList >> at: key ifAbsent: aBlock [
 	answer the result of evaluating aBlock."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ assoc value ] ].
 	^ aBlock value
@@ -353,11 +353,11 @@ AssociationList >> at: key ifAbsent: aBlock [
 { #category : #accessing }
 AssociationList >> at: key ifAbsentPut: aBlock [
 	"Return the value at the given key.
-	If the key is not included in the receiver store and return the result 
+	If the key is not included in the receiver store and return the result
 	of evaluating aBlock as the new value."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ assoc value ] ].
 	^ self addAssociationWithKey: key andValue: aBlock value
@@ -371,7 +371,7 @@ AssociationList >> at: key ifPresent: aBlock [
 	Otherwise, answer nil."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ aBlock cull: assoc value ] ].
 	^ nil
@@ -397,7 +397,7 @@ AssociationList >> at: key ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock [
 	new value of the key."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ aPresentBlock cull: assoc value ] ].
 	^ self addAssociationWithKey: key andValue: anAbsentBlock value
@@ -409,9 +409,9 @@ AssociationList >> at: key put: anObject [
 	new entry for key and set is value to anObject. Answer anObject."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: key equalTo: assoc key)
-				ifTrue: [ 
+				ifTrue: [
 					assoc value: anObject.
 					^ anObject ] ].
 	^ self addAssociationWithKey: key andValue: anObject
@@ -426,7 +426,7 @@ AssociationList >> collect: aBlock [
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			newCollection
 				addLast: (Association basicNew key: assoc key value: (aBlock value: assoc value)) ].
 	^ newCollection
@@ -447,7 +447,7 @@ AssociationList >> collect: collectBlock thenSelect: selectBlock [
 	| newCollection newElement |
 	newCollection := self class new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			newElement := collectBlock value: assoc value.
 			(selectBlock value: newElement)
 				ifTrue: [ newCollection addLast: (Association basicNew key: assoc key value: newElement) ] ].
@@ -465,7 +465,7 @@ AssociationList >> copyWith: newElement [
 
 { #category : #copying }
 AssociationList >> copyWithoutAll: aCollection [
-	"Answer a copy of the receiver that does not contain any elements 
+	"Answer a copy of the receiver that does not contain any elements
 	equal to those in aCollection."
 
 	^ self reject: [ :each | aCollection includes: each ]
@@ -473,14 +473,14 @@ AssociationList >> copyWithoutAll: aCollection [
 
 { #category : #adding }
 AssociationList >> declare: key from: aDictionary [
-	"Add key to the receiver. If key already exists, do nothing. If aDictionary 
-	includes key, then remove it from aDictionary and use its association as 
+	"Add key to the receiver. If key already exists, do nothing. If aDictionary
+	includes key, then remove it from aDictionary and use its association as
 	the element of the receiver."
 
 	(self includesKey: key)
 		ifTrue: [ ^ self ].
 	(aDictionary includesKey: key)
-		ifTrue: [ 
+		ifTrue: [
 			self add: (aDictionary associationAt: key).
 			aDictionary removeKey: key ]
 		ifFalse: [ self add: key -> nil ]
@@ -488,7 +488,7 @@ AssociationList >> declare: key from: aDictionary [
 
 { #category : #enumerating }
 AssociationList >> detect: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument. 
+	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Answer the first element for which aBlock evaluates to true."
 
 	^ self detect: aBlock ifNone: [ self errorNotFound: aBlock ]
@@ -496,29 +496,29 @@ AssociationList >> detect: aBlock [
 
 { #category : #enumerating }
 AssociationList >> detect: aBlock ifFound: foundBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	If some element evaluates aBlock to true, then cull this element into 
-	foundBlock. 
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	If some element evaluates aBlock to true, then cull this element into
+	foundBlock.
 	If no element matches the criteria then do nothing.
 	Always returns self to avoid misuse and a potential isNil check on the sender."
 
 	self
 		detect: aBlock
 		ifFound: foundBlock
-		ifNone: [ 
+		ifNone: [
 			"Do nothing on purpose"
 			 ]
 ]
 
 { #category : #enumerating }
-AssociationList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [ 
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	If some element evaluates aBlock to true, then cull this element into 
-	foundBlock and answer the result of this evaluation. 
+AssociationList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	If some element evaluates aBlock to true, then cull this element into
+	foundBlock and answer the result of this evaluation.
 	If none evaluate to true, then evaluate exceptionBlock."
 
 	self
-		do: [ :each | 
+		do: [ :each |
 			(aBlock value: each)
 				ifTrue: [ ^ foundBlock cull: each ] ].
 	^ exceptionBlock value
@@ -526,8 +526,8 @@ AssociationList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 
 { #category : #enumerating }
 AssociationList >> detect: aBlock ifNone: exceptionBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	Answer the first element for which aBlock evaluates to true. If none  
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	Answer the first element for which aBlock evaluates to true. If none
 	evaluate to true, then evaluate the argument, exceptionBlock."
 
 	^ self detect: aBlock ifFound: [ :element | element ] ifNone: exceptionBlock
@@ -541,7 +541,7 @@ AssociationList >> difference: aCollection [
 	other := aCollection asSet.
 	duplicates := Set new.
 	^ self
-		select: [ :each | 
+		select: [ :each |
 			((other includes: each) not and: [ (duplicates includes: each) not ])
 				ifTrue: [ duplicates add: each. true ]
 				ifFalse: [ false ] ]
@@ -556,7 +556,7 @@ AssociationList >> do: aBlock [
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			aBlock value: current value value.
 			current := current nextNode ]
 ]
@@ -571,7 +571,7 @@ AssociationList >> do: elementBlock separatedBy: separatorBlock [
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == firstNode ifFalse: [ separatorBlock value ].
 			elementBlock value: current value value.
 			current := current nextNode ]
@@ -588,9 +588,9 @@ AssociationList >> do: elementBlock separatedBy: separatorBlock lastSeparatedBy:
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == firstNode
-				ifFalse: [ 
+				ifFalse: [
 					current == lastNode
 						ifTrue: [ lastSeparatorBlock value ]
 						ifFalse: [ separatorBlock value ] ].
@@ -600,7 +600,7 @@ AssociationList >> do: elementBlock separatedBy: separatorBlock lastSeparatedBy:
 
 { #category : #enumerating }
 AssociationList >> do: aBlock without: anItem [
-	"Enumerate all elements in the receiver. 
+	"Enumerate all elements in the receiver.
 	Execute aBlock for those elements that are not equal to the given item"
 
 	self do: [ :each | anItem = each ifFalse: [ aBlock value: each ] ]
@@ -616,7 +616,7 @@ AssociationList >> errorKeyNotFound: aKey [
 	Error
 		signal:
 			(String
-				streamContents: [ :stream | 
+				streamContents: [ :stream |
 					stream << 'key '.
 					stream print: aKey.
 					stream << ' not found in '.
@@ -628,7 +628,7 @@ AssociationList >> errorNotFound: anObject [
 	Error
 		signal:
 			(String
-				streamContents: [ :stream | 
+				streamContents: [ :stream |
 					stream print: anObject.
 					stream << ' not found in '.
 					stream print: self class ])
@@ -639,7 +639,7 @@ AssociationList >> errorValueNotFound: value [
 	Error
 		signal:
 			(String
-				streamContents: [ :stream | 
+				streamContents: [ :stream |
 					stream << 'value '.
 					stream print: value.
 					stream << ' not found in '.
@@ -746,7 +746,7 @@ AssociationList >> includesKey: key [
 	"Answer whether the receiver has a key equal to the argument, key."
 
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(self is: assoc key equalTo: key)
 				ifTrue: [ ^ true ] ].
 	^ false
@@ -759,10 +759,10 @@ AssociationList >> initialize [
 
 { #category : #enumerating }
 AssociationList >> inject: thisValue into: binaryBlock [
-	"Accumulate a running value associated with evaluating the argument, 
-	binaryBlock, with the current value of the argument, thisValue, and the 
-	receiver as block arguments. For instance, to sum the numeric elements 
-	of a collection, aCollection inject: 0 into: [:subTotal :next | subTotal + 
+	"Accumulate a running value associated with evaluating the argument,
+	binaryBlock, with the current value of the argument, thisValue, and the
+	receiver as block arguments. For instance, to sum the numeric elements
+	of a collection, aCollection inject: 0 into: [:subTotal :next | subTotal +
 	next]."
 
 	| nextValue |
@@ -779,7 +779,7 @@ AssociationList >> intersection: aCollection [
 	other := aCollection asSet.
 	duplicates := Set new.
 	^ self
-		select: [ :each | 
+		select: [ :each |
 			((other includes: each) and: [ (duplicates includes: each) not ])
 				ifTrue: [ duplicates add: each. true ]
 				ifFalse: [ false ] ]
@@ -816,7 +816,7 @@ AssociationList >> isNotEmpty [
 
 { #category : #accessing }
 AssociationList >> keyAtIdentityValue: value [
-	"Answer the key that is the external name for the argument, value. If 
+	"Answer the key that is the external name for the argument, value. If
 	there is none, answer nil.
 	Note: There can be multiple keys with the same value. Only one is returned."
 
@@ -827,12 +827,12 @@ AssociationList >> keyAtIdentityValue: value [
 
 { #category : #accessing }
 AssociationList >> keyAtIdentityValue: value ifAbsent: exceptionBlock [
-	"Answer the key that is the external name for the argument, value. If 
+	"Answer the key that is the external name for the argument, value. If
 	there is none, answer the result of evaluating exceptionBlock.
 	Note: There can be multiple keys with the same value. Only one is returned."
 
 	self
-		associationsDo: [ :association | 
+		associationsDo: [ :association |
 			value == association value
 				ifTrue: [ ^ association key ] ].
 	^ exceptionBlock value
@@ -840,7 +840,7 @@ AssociationList >> keyAtIdentityValue: value ifAbsent: exceptionBlock [
 
 { #category : #accessing }
 AssociationList >> keyAtValue: value [
-	"Answer the key that is the external name for the argument, value. If 
+	"Answer the key that is the external name for the argument, value. If
 	there is none, signal an error."
 
 	^ self keyAtValue: value ifAbsent: [ self errorValueNotFound: value ]
@@ -848,12 +848,12 @@ AssociationList >> keyAtValue: value [
 
 { #category : #accessing }
 AssociationList >> keyAtValue: value ifAbsent: exceptionBlock [
-	"Answer the key that is the external name for the argument, value. If 
+	"Answer the key that is the external name for the argument, value. If
 	there is none, answer the result of evaluating exceptionBlock.
 	: Use =, not ==, so stings like 'this' can be found.  Note that MethodDictionary continues to use == so it will be fast."
 
 	self
-		associationsDo: [ :association | 
+		associationsDo: [ :association |
 			value = association value
 				ifTrue: [ ^ association key ] ].
 	^ exceptionBlock value
@@ -884,7 +884,7 @@ AssociationList >> keysAndValuesRemove: keyValueBlock [
 	| removals |
 	removals := OrderedCollection new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(keyValueBlock value: assoc key value: assoc value)
 				ifTrue: [ removals add: assoc key ] ].
 	removals do: [ :aKey | self removeKey: aKey ]
@@ -908,7 +908,7 @@ AssociationList >> keysSortedSafely [
 		new: self size
 		streamContents: [ :stream | self keysDo: [ :each | stream nextPut: each ] ].
 	sortedKeys
-		sort: [ :x :y | 
+		sort: [ :x :y |
 			"Should really be use <obj, string, num> compareSafely..."
 			((x isString and: [ y isString ])
 				or: [ x isNumber and: [ y isNumber ] ])
@@ -952,7 +952,7 @@ AssociationList >> postCopy [
 	| node |
 	super postCopy.
 	firstNode
-		ifNotNil: [ 
+		ifNotNil: [
 			node := firstNode := firstNode copy.
 			[ node nextNode isNil ] whileFalse: [ node nextNode: (node := node nextNode copy) ].
 			lastNode := node ]
@@ -964,7 +964,7 @@ AssociationList >> previousNodeAt: key ifAbsent: aBlock [
 	previous := nil.
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			(self is: current value key equalTo: key)
 				ifTrue: [ ^ previous ].
 			previous := current.
@@ -1021,13 +1021,13 @@ AssociationList >> printOn: aStream delimiter: delimString last: lastDelimString
 
 { #category : #enumerating }
 AssociationList >> reject: aBlock [
-	"Evaluate aBlock with each of my values as the argument. Collect into a collection 
+	"Evaluate aBlock with each of my values as the argument. Collect into a collection
 	that is like me, only those associations for which aBlock evaluates to false."
 
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(aBlock value: assoc value)
 				ifFalse: [ newCollection addLast: assoc copy ] ].
 	^ newCollection
@@ -1042,20 +1042,20 @@ AssociationList >> reject: rejectBlock thenCollect: collectBlock [
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(rejectBlock value: assoc value)
-				ifFalse: [ 
+				ifFalse: [
 					newCollection addLast: (Association basicNew key: assoc key value: (collectBlock value: assoc value)) ] ].
 	^ newCollection
 ]
 
 { #category : #enumerating }
 AssociationList >> reject: rejectBlock thenDo: doBlock [
-	"Utility method to improve readability. 
+	"Utility method to improve readability.
 	Do not create the intermediate collection."
 
 	self
-		do: [ :each | 
+		do: [ :each |
 			(rejectBlock value: each)
 				ifFalse: [ doBlock value: each ] ]
 ]
@@ -1090,8 +1090,8 @@ AssociationList >> removeKey: key [
 
 { #category : #removing }
 AssociationList >> removeKey: key ifAbsent: aBlock [
-	"Remove key (and its associated value) from the receiver. If key is not in 
-	the receiver, answer the result of evaluating aBlock. Otherwise, answer 
+	"Remove key (and its associated value) from the receiver. If key is not in
+	the receiver, answer the result of evaluating aBlock. Otherwise, answer
 	the value externally named by key."
 
 	"if previous isNil then remove firstNode otherwise remove previous nextNode."
@@ -1115,13 +1115,13 @@ AssociationList >> removeNextNodeTo: previous [
 
 { #category : #enumerating }
 AssociationList >> select: aBlock [
-	"Evaluate aBlock with each of my values as the argument. Collect into a collection 
+	"Evaluate aBlock with each of my values as the argument. Collect into a collection
 	that is like me, only those associations for which aBlock evaluates to true."
 
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(aBlock value: assoc value)
 				ifTrue: [ newCollection addLast: assoc copy ] ].
 	^ newCollection
@@ -1136,9 +1136,9 @@ AssociationList >> select: selectBlock thenCollect: collectBlock [
 	| newCollection |
 	newCollection := self class new.
 	self
-		associationsDo: [ :assoc | 
+		associationsDo: [ :assoc |
 			(selectBlock value: assoc value)
-				ifTrue: [ 
+				ifTrue: [
 					newCollection addLast: (Association basicNew key: assoc key value: (collectBlock value: assoc value)) ] ].
 	^ newCollection
 ]
@@ -1149,7 +1149,7 @@ AssociationList >> select: selectBlock thenDo: doBlock [
 	Do not create the intermediate collection."
 
 	self
-		do: [ :each | 
+		do: [ :each |
 			(selectBlock value: each)
 				ifTrue: [ doBlock value: each ] ]
 ]
@@ -1166,8 +1166,8 @@ AssociationList >> sumNumbers: aBlock [
 	"This is implemented using a variant of the normal inject:into: pattern
 	that is specific to handling numbers. aBlock is expected to return a number
 	for every element in the collection.
-	
-	Different from the sum: implementation, the default value is zero. While sum: is 
+
+	Different from the sum: implementation, the default value is zero. While sum: is
 	more general, sumNumbers: is meant to support the most often encountered use case of
 	dealing with numbers."
 

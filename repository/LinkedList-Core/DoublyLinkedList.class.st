@@ -45,7 +45,7 @@ DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject
 ]
 
 { #category : #'instance creation' }
-DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject [ 
+DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject [
 	"Answer an instance of me, containing the four arguments as the elements."
 
 	^ self new
@@ -90,7 +90,7 @@ DoublyLinkedList >> = anObject [
 	list1 := self firstNode.
 	list2 := anObject firstNode.
 	[ list1 isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			list1 value = list2 value
 				ifFalse: [ ^ false ].
 			list1 := list1 nextNode.
@@ -104,8 +104,8 @@ DoublyLinkedList >> add: anObject [
 ]
 
 { #category : #adding }
-DoublyLinkedList >> addAll: aCollection [ 
-	"Include all the elements of aCollection as the receiver's elements. Answer 
+DoublyLinkedList >> addAll: aCollection [
+	"Include all the elements of aCollection as the receiver's elements. Answer
 	aCollection. Actually, any object responding to #do: can be used as argument."
 
 	aCollection do: [:each | self add: each].
@@ -158,7 +158,7 @@ DoublyLinkedList >> anySatisfy: aBlock [
 	Otherwise return false."
 
 	self
-		do: [ :each | 
+		do: [ :each |
 			(aBlock value: each)
 				ifTrue: [ ^ true ] ].
 	^ false
@@ -177,8 +177,8 @@ DoublyLinkedList >> asArray [
 
 { #category : #enumerating }
 DoublyLinkedList >> collect: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	Collect the resulting values into a collection like the receiver. Answer  
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	Collect the resulting values into a collection like the receiver. Answer
 	the new collection."
 	"Optimized."
 
@@ -186,7 +186,7 @@ DoublyLinkedList >> collect: aBlock [
 	newCollection := self class new.
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			newCollection add: (aBlock value: current value).
 			current := current nextNode ].
 	^ newCollection
@@ -207,7 +207,7 @@ DoublyLinkedList >> collect: collectBlock thenSelect: selectBlock [
 	| newCollection newElement |
 	newCollection := self class new.
 	self
-		do: [ :each | 
+		do: [ :each |
 			newElement := collectBlock value: each.
 			(selectBlock value: newElement)
 				ifTrue: [ newCollection add: newElement ] ].
@@ -216,7 +216,7 @@ DoublyLinkedList >> collect: collectBlock thenSelect: selectBlock [
 
 { #category : #enumerating }
 DoublyLinkedList >> detect: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument. 
+	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Answer the first element for which aBlock evaluates to true."
 
 	^ self detect: aBlock ifNone: [ self errorNotFound: aBlock ]
@@ -224,29 +224,29 @@ DoublyLinkedList >> detect: aBlock [
 
 { #category : #enumerating }
 DoublyLinkedList >> detect: aBlock ifFound: foundBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	If some element evaluates aBlock to true, then cull this element into 
-	foundBlock. 
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	If some element evaluates aBlock to true, then cull this element into
+	foundBlock.
 	If no element matches the criteria then do nothing.
 	Always returns self to avoid misuse and a potential isNil check on the sender."
 
 	self
 		detect: aBlock
 		ifFound: foundBlock
-		ifNone: [ 
+		ifNone: [
 			"Do nothing on purpose"
 			 ]
 ]
 
 { #category : #enumerating }
-DoublyLinkedList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [ 
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	If some element evaluates aBlock to true, then cull this element into 
-	foundBlock and answer the result of this evaluation. 
+DoublyLinkedList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	If some element evaluates aBlock to true, then cull this element into
+	foundBlock and answer the result of this evaluation.
 	If none evaluate to true, then evaluate exceptionBlock."
 
 	self
-		do: [ :each | 
+		do: [ :each |
 			(aBlock value: each)
 				ifTrue: [ ^ foundBlock cull: each ] ].
 	^ exceptionBlock value
@@ -254,8 +254,8 @@ DoublyLinkedList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 
 { #category : #enumerating }
 DoublyLinkedList >> detect: aBlock ifNone: exceptionBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	Answer the first element for which aBlock evaluates to true. If none  
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	Answer the first element for which aBlock evaluates to true. If none
 	evaluate to true, then evaluate the argument, exceptionBlock."
 
 	^ self detect: aBlock ifFound: [ :element | element ] ifNone: exceptionBlock
@@ -266,7 +266,7 @@ DoublyLinkedList >> do: aBlock [
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			aBlock value: current value.
 			current := current nextNode ]
 ]
@@ -276,11 +276,11 @@ DoublyLinkedList >> do: elementBlock separatedBy: separatorBlock [
 	"Evaluate the elementBlock for all elements in the receiver,
 	and evaluate the separatorBlock between."
 	"Optimized."
-		
+
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == firstNode ifFalse: [ separatorBlock value ].
 			elementBlock value: current value.
 			current := current nextNode ]
@@ -288,7 +288,7 @@ DoublyLinkedList >> do: elementBlock separatedBy: separatorBlock [
 
 { #category : #enumerating }
 DoublyLinkedList >> do: aBlock without: anItem [
-	"Enumerate all elements in the receiver. 
+	"Enumerate all elements in the receiver.
 	Execute aBlock for those elements that are not equal to the given item"
 
 	^ self do: [ :each | anItem = each ifFalse: [ aBlock value: each ] ]
@@ -310,7 +310,7 @@ DoublyLinkedList >> errorNotFound: anObject [
 	Error
 		signal:
 			(String
-				streamContents: [ :stream | 
+				streamContents: [ :stream |
 					stream print: anObject.
 					stream << ' not found in '.
 					stream print: self class ])
@@ -400,10 +400,10 @@ DoublyLinkedList >> initialize [
 
 { #category : #enumerating }
 DoublyLinkedList >> inject: thisValue into: binaryBlock [
-	"Accumulate a running value associated with evaluating the argument, 
-	binaryBlock, with the current value of the argument, thisValue, and the 
-	receiver as block arguments. For instance, to sum the numeric elements 
-	of a collection, aCollection inject: 0 into: [:subTotal :next | subTotal + 
+	"Accumulate a running value associated with evaluating the argument,
+	binaryBlock, with the current value of the argument, thisValue, and the
+	receiver as block arguments. For instance, to sum the numeric elements
+	of a collection, aCollection inject: 0 into: [:subTotal :next | subTotal +
 	next]."
 
 	| nextValue |
@@ -471,7 +471,7 @@ DoublyLinkedList >> postCopy [
 	| node |
 	super postCopy.
 	firstNode
-		ifNotNil: [ 
+		ifNotNil: [
 			node := firstNode := firstNode copy.
 			[ node nextNode isNil ] whileFalse: [ node nextNode: (node := node nextNode copy) ].
 			lastNode := node ]
@@ -518,10 +518,10 @@ DoublyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimStrin
 	| current |
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			current == lastNode
 				ifTrue: [ aStream nextPutAll: lastDelimString ]
-				ifFalse: [ 
+				ifFalse: [
 					current == firstNode
 						ifFalse: [ aStream nextPutAll: delimString ] ].
 			aStream print: current value.
@@ -530,8 +530,8 @@ DoublyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimStrin
 
 { #category : #enumerating }
 DoublyLinkedList >> reject: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument. 
-	Collect into a new collection like the receiver only those elements for 
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	Collect into a new collection like the receiver only those elements for
 	which aBlock evaluates to false. Answer the new collection."
 	"Optimized."
 
@@ -539,7 +539,7 @@ DoublyLinkedList >> reject: aBlock [
 	newCollection := self class new.
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			(aBlock value: current value)
 				ifFalse: [ newCollection add: current value ].
 			current := current nextNode ].
@@ -555,7 +555,7 @@ DoublyLinkedList >> reject: rejectBlock thenCollect: collectBlock [
 	newCollection := self class new.
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			(rejectBlock value: current value)
 				ifFalse: [ newCollection add: (collectBlock value: current value) ].
 			current := current nextNode ].
@@ -567,7 +567,7 @@ DoublyLinkedList >> reject: rejectBlock thenDo: aBlock [
 	"Utility method to improve readability."
 
 	self
-		do: [ :each | 
+		do: [ :each |
 			(rejectBlock value: each)
 				ifFalse: [ aBlock value: each ] ]
 ]
@@ -582,7 +582,7 @@ DoublyLinkedList >> removeAll [
 
 { #category : #removing }
 DoublyLinkedList >> removeFirst [
-	"Remove the first element and answer it. If the receiver is empty, create 
+	"Remove the first element and answer it. If the receiver is empty, create
 	an error notification."
 
 	| firstElement oldNode |
@@ -597,7 +597,7 @@ DoublyLinkedList >> removeFirst [
 
 { #category : #removing }
 DoublyLinkedList >> removeLast [
-	"Remove the last element and answer it. If the receiver is empty, create 
+	"Remove the last element and answer it. If the receiver is empty, create
 	an error notification."
 
 	| lastElement oldNode |
@@ -619,7 +619,7 @@ DoublyLinkedList >> reverseDo: aBlock [
 	| current |
 	current := lastNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			aBlock value: current value.
 			current := current previousNode ]
 ]
@@ -645,8 +645,8 @@ DoublyLinkedList >> second [
 
 { #category : #enumerating }
 DoublyLinkedList >> select: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument. 
-	Collect into a new collection like the receiver, only those elements for 
+	"Evaluate aBlock with each of the receiver's elements as the argument.
+	Collect into a new collection like the receiver, only those elements for
 	which aBlock evaluates to true. Answer the new collection."
 	"Optimized."
 
@@ -654,7 +654,7 @@ DoublyLinkedList >> select: aBlock [
 	newCollection := self class new.
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			(aBlock value: current value)
 				ifTrue: [ newCollection add: current value ].
 			current := current nextNode ].
@@ -670,7 +670,7 @@ DoublyLinkedList >> select: selectBlock thenCollect: collectBlock [
 	newCollection := self class new.
 	current := firstNode.
 	[ current isNil ]
-		whileFalse: [ 
+		whileFalse: [
 			(selectBlock value: current value)
 				ifTrue: [ newCollection add: (collectBlock value: current value) ].
 			current := current nextNode ].
@@ -683,7 +683,7 @@ DoublyLinkedList >> select: selectBlock thenDo: doBlock [
 	Do not create the intermediate collection."
 
 	self
-		do: [ :each | 
+		do: [ :each |
 			(selectBlock value: each)
 				ifTrue: [ doBlock value: each ] ]
 ]
@@ -697,13 +697,13 @@ DoublyLinkedList >> size [
 
 { #category : #'math functions' }
 DoublyLinkedList >> sum [
-	"This is implemented using a variant of the normal inject:into: pattern. 
-	The reason for this is that it is not known whether we're in the normal 
-	number line, i.e. whether 0 is a good initial value for the sum. 
-	Consider a collection of measurement objects, 0 would be the unitless 
+	"This is implemented using a variant of the normal inject:into: pattern.
+	The reason for this is that it is not known whether we're in the normal
+	number line, i.e. whether 0 is a good initial value for the sum.
+	Consider a collection of measurement objects, 0 would be the unitless
 	value and would not be appropriate to add with the unit-ed objects."
 	| sum sample |
-	
+
 	self emptyCheck.
 	sample := self anyOne.
 	sum := self inject: sample into: [:accum :each | accum + each].
@@ -715,8 +715,8 @@ DoublyLinkedList >> sumNumbers: aBlock [
 	"This is implemented using a variant of the normal inject:into: pattern
 	that is specific to handling numbers. aBlock is expected to return a number
 	for every element in the collection.
-	
-	Different from the sum: implementation, the default value is zero. While sum: is 
+
+	Different from the sum: implementation, the default value is zero. While sum: is
 	more general, sumNumbers: is meant to support the most often encountered use case of
 	dealing with numbers."
 
