@@ -29,6 +29,13 @@ ManifestLinkedListCore class >> ruleDetectContainsRuleV1FalsePositive [
 ]
 
 { #category : #'code-critics' }
+ManifestLinkedListCore class >> ruleExcessiveArgumentsRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#'DoublyLinkedList class' #with:with:with:with:with: #true)) #'2023-04-14T20:40:57.044154-03:00') #(#(#RGMethodDefinition #(#'SinglyLinkedList class' #with:with:with:with:with: #true)) #'2023-04-14T20:40:57.043976-03:00') )
+]
+
+{ #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleInconsistentMethodClassificationRuleV1FalsePositive [
 
 	<ignoreForCoverage>
