@@ -1,5 +1,5 @@
 "
-I store metadata for this package. These meta data are used by other tools such as the SmalllintManifestChecker and the critics Browser
+Please describe the package using the class comment of the included manifest class. The manifest class also includes other additional metadata for the package. These meta data are used by other tools such as the SmalllintManifestChecker and the critics Browser
 "
 Class {
 	#name : #ManifestLinkedListCore,
@@ -9,17 +9,23 @@ Class {
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleAllAnyNoneSatisfyRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#AssociationList #noneSatisfy: #false)) #'2020-02-22T00:35:56.315061-03:00') #(#(#RGMethodDefinition #(#AssociationList #allSatisfy: #false)) #'2020-02-22T00:35:56.315411-03:00') #(#(#RGMethodDefinition #(#AssociationList #anySatisfy: #false)) #'2020-02-22T00:35:56.315708-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #noneSatisfy: #false)) #'2020-02-28T14:37:08.442296-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #allSatisfy: #false)) #'2020-02-28T14:37:08.442187-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #anySatisfy: #false)) #'2020-02-28T14:37:08.442356-03:00') )
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#AssociationList #noneSatisfy: #false)) #'2020-02-22T00:35:56.315061-03:00') #(#(#RGMethodDefinition #(#AssociationList #allSatisfy: #false)) #'2020-02-22T00:35:56.315411-03:00') #(#(#RGMethodDefinition #(#AssociationList #anySatisfy: #false)) #'2020-02-22T00:35:56.315708-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #noneSatisfy: #false)) #'2020-02-28T14:37:08.442296-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #allSatisfy: #false)) #'2020-02-28T14:37:08.442187-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #anySatisfy: #false)) #'2020-02-28T14:37:08.442356-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedList #noneSatisfy: #false)) #'2023-04-14T20:10:52.884145-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedList #allSatisfy: #false)) #'2023-04-14T20:10:52.884164-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedList #anySatisfy: #false)) #'2023-04-14T20:10:52.884086-03:00') )
 ]
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleCollectionProtocolRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedList #addAll: #false)) #'2016-08-30T12:24:15.621668-03:00') )
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedList #addAll: #false)) #'2016-08-30T12:24:15.621668-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedList #addAll: #false)) #'2023-04-14T20:10:52.891279-03:00') )
 ]
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleDetectContainsRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedList #noneSatisfy: #false)) #'2016-08-31T16:00:58.955449-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #allSatisfy: #false)) #'2016-08-31T16:00:58.95529-03:00') #(#(#RGMethodDefinition #(#AssociationList #noneSatisfy: #false)) #'2020-02-28T14:37:08.212976-03:00') #(#(#RGMethodDefinition #(#AssociationList #allSatisfy: #false)) #'2020-02-28T14:37:08.212355-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #anySatisfy: #false)) #'2020-02-28T14:37:08.212699-03:00') #(#(#RGMethodDefinition #(#AssociationList #anySatisfy: #false)) #'2020-02-28T14:37:08.212943-03:00') )
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedList #noneSatisfy: #false)) #'2016-08-31T16:00:58.955449-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #allSatisfy: #false)) #'2016-08-31T16:00:58.95529-03:00') #(#(#RGMethodDefinition #(#AssociationList #noneSatisfy: #false)) #'2020-02-28T14:37:08.212976-03:00') #(#(#RGMethodDefinition #(#AssociationList #allSatisfy: #false)) #'2020-02-28T14:37:08.212355-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #anySatisfy: #false)) #'2020-02-28T14:37:08.212699-03:00') #(#(#RGMethodDefinition #(#AssociationList #anySatisfy: #false)) #'2020-02-28T14:37:08.212943-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedList #allSatisfy: #false)) #'2023-04-14T20:10:52.874357-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedList #anySatisfy: #false)) #'2023-04-14T20:10:52.873897-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedList #noneSatisfy: #false)) #'2023-04-14T20:10:52.874166-03:00') )
 ]
 
 { #category : #'code-critics' }
@@ -30,6 +36,13 @@ ManifestLinkedListCore class >> ruleInconsistentMethodClassificationRuleV1FalseP
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleNotEliminationRuleV1FalsePositive [
 	^ #(#(#(#RGMethodDefinition #(#AssociationList #isNotEmpty #false)) #'2020-02-22T00:35:56.791647-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedQueue #isNotEmpty #false)) #'2020-02-28T07:28:09.080435-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedList #isNotEmpty #false)) #'2020-02-28T07:28:09.08075-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedStack #isNotEmpty #false)) #'2020-02-28T07:28:09.081007-03:00') )
+]
+
+{ #category : #'code-critics' }
+ManifestLinkedListCore class >> ruleRBOverridesDeprecatedMethodRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#AssociationList #asOrderedCollection #false)) #'2023-04-14T20:12:39.796219-03:00') )
 ]
 
 { #category : #'code-critics' }
