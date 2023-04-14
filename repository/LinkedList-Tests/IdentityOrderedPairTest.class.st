@@ -13,7 +13,15 @@ IdentityOrderedPairTest >> testAsString [
 	| one |
 	one := IdentityOrderedPair first: 'A' second: 1.
 
-	self assert: one asString equals: '<''A'', 1>'
+	self assert: one asString equals: 'IdentityOrderedPair<''A'', 1>'
+]
+
+{ #category : #tests }
+IdentityOrderedPairTest >> testDisplayString [
+	| one |
+	one := IdentityOrderedPair first: 'A' second: 1.
+
+	self assert: one displayString equals: '<''A'', 1>'
 ]
 
 { #category : #tests }

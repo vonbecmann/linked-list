@@ -1,5 +1,5 @@
 "
-a identity ordered pair.
+an identity ordered pair.
 
  < a1 , b1 > = < a2 , b2 > if and only if a1 == a2  and  b1 == b2 .
 "
@@ -18,6 +18,17 @@ IdentityOrderedPair >> = aPair [
 	^ first == aPair first and: [ second == aPair second ]
 ]
 
+{ #category : #displaying }
+IdentityOrderedPair >> displayStringOn: aStream [
+
+	aStream
+		nextPut: $<;
+		print: first;
+		nextPutAll: ', ';
+		print: second;
+		nextPut: $>
+]
+
 { #category : #comparing }
 IdentityOrderedPair >> hash [
 	^ (first identityHash + second identityHash) hashMultiply
@@ -25,7 +36,9 @@ IdentityOrderedPair >> hash [
 
 { #category : #printing }
 IdentityOrderedPair >> printOn: aStream [
+
 	aStream
+		nextPutAll: self className;
 		nextPut: $<;
 		print: first;
 		nextPutAll: ', ';

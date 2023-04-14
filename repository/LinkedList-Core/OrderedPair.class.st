@@ -58,6 +58,16 @@ OrderedPair >> = aPair [
 	^ first = aPair first and: [ second = aPair second ]
 ]
 
+{ #category : #displaying }
+OrderedPair >> displayStringOn: aStream [
+	aStream
+		nextPut: $(;
+		print: first;
+		nextPutAll: ', ';
+		print: second;
+		nextPut: $)
+]
+
 { #category : #accessing }
 OrderedPair >> first [
 	^ first
@@ -75,7 +85,9 @@ OrderedPair >> hash [
 
 { #category : #printing }
 OrderedPair >> printOn: aStream [
+
 	aStream
+		nextPutAll: self className;
 		nextPut: $(;
 		print: first;
 		nextPutAll: ', ';
