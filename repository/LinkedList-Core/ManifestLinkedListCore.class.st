@@ -30,7 +30,9 @@ ManifestLinkedListCore class >> ruleDetectContainsRuleV1FalsePositive [
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleInconsistentMethodClassificationRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedNode #value #false)) #'2016-08-30T12:24:15.598941-03:00') )
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#SinglyLinkedNode #value #false)) #'2016-08-30T12:24:15.598941-03:00') #(#(#RGMethodDefinition #(#SinglyLinkedNode #release #false)) #'2023-04-14T20:15:59.716734-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedNode #release #false)) #'2023-04-14T20:15:59.71611-03:00') #(#(#RGMethodDefinition #(#AssociationList #release #false)) #'2023-04-14T20:15:59.716503-03:00') #(#(#RGMethodDefinition #(#DoublyLinkedNode #value #false)) #'2023-04-14T20:15:59.716802-03:00') )
 ]
 
 { #category : #'code-critics' }
