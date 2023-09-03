@@ -63,5 +63,7 @@ ManifestLinkedListCore class >> ruleRBOverridesDeprecatedMethodRuleV1FalsePositi
 
 { #category : #'code-critics' }
 ManifestLinkedListCore class >> ruleUtilityMethodsRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#AssociationList #is:equalTo: #false)) #'2020-02-22T00:35:55.836527-03:00') #(#(#RGMethodDefinition #(#IdentityAssociationList #is:equalTo: #false)) #'2020-02-28T07:25:15.150901-03:00') )
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#AssociationList #is:equalTo: #false)) #'2020-02-22T00:35:55.836527-03:00') #(#(#RGMethodDefinition #(#IdentityAssociationList #is:equalTo: #false)) #'2020-02-28T07:25:15.150901-03:00') #(#(#RGMethodDefinition #(#UndefinedObject #removeNodeFrom: #false)) #'2023-09-03T12:34:42.786321-03:00') )
 ]
