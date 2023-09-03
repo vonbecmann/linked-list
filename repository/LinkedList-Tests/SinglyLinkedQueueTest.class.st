@@ -19,7 +19,7 @@ SinglyLinkedQueueTest >> empty [
 
 { #category : #requirements }
 SinglyLinkedQueueTest >> nonEmpty [
-	
+
  	^ nonEmpty
 ]
 
@@ -137,10 +137,10 @@ SinglyLinkedQueueTest >> testPrintElementsOn [
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		          self nonEmpty printElementsOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	allElementsAsString do: [ :each | 
+	allElementsAsString do: [ :each |
 		self
 			assert: (tmp occurrencesOf: each)
 			equals: (allElementsAsString occurrencesOf: each) ]
@@ -151,9 +151,9 @@ SinglyLinkedQueueTest >> testPrintNameOn [
 
 	| printed |
 	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
-	
-	self 
-		assert: printed 
+
+	self
+		assert: printed
 		equals: (self nonEmpty class name first isVowel ifTrue: [ 'an ' ] ifFalse: [ 'a ' ]) , self nonEmpty class name
 ]
 
@@ -166,15 +166,15 @@ SinglyLinkedQueueTest >> testPrintOn [
 
 	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	allElementsAsString withIndexDo: [ :each :i | 
-		i = 1 ifTrue: [ 
+	allElementsAsString withIndexDo: [ :each :i |
+		i = 1 ifTrue: [
 			self
 				assert: each
 				equals: (self classToBeTested class name first isVowel
 						 ifTrue: [ 'an' ]
 						 ifFalse: [ 'a' ]) ].
 		i = 2 ifTrue: [ self assert: each equals: self classToBeTested name ].
-		i > 2 ifTrue: [ 
+		i > 2 ifTrue: [
 			self
 				assert: (tmp occurrencesOf: each)
 				equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -191,9 +191,9 @@ SinglyLinkedQueueTest >> testPrintOnDelimiter [
 	allElementsAsString := printed findBetweenSubstrings: ', '.
 
 	allElementsAsString
-		collect: [ :each | 
+		collect: [ :each |
 			Array with: each with: (allElementsAsString occurrencesOf: each) ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: (tmp occurrencesOf: each first) equals: each second ]
 ]
 
@@ -204,14 +204,14 @@ SinglyLinkedQueueTest >> testPrintOnDelimiterLast [
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
-	allElementsAsString withIndexDo: [ :each :i | 
+	allElementsAsString withIndexDo: [ :each :i |
 		i = (allElementsAsString size - 1)
 			ifTrue: [ self assert: each equals: 'and' ]
-			ifFalse: [ 
+			ifFalse: [
 				self
 					assert: (tmp occurrencesOf: each)
 					equals: (allElementsAsString occurrencesOf: each) ] ]

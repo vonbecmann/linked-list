@@ -73,27 +73,27 @@ AnotherDoublyLinkedListTest >> test05add [
 
 { #category : #tests }
 AnotherDoublyLinkedListTest >> test06removeFirst [
-	
+
 	list add: 1.
 	list add: 2.
 	list add: 3.
 	list add: 4.
-	
+
 	self assert: list size equals: 4.
 	self assert: list first equals: 1.
-	
+
 	list removeFirst.
 	self assert: list size equals: 3.
 	self assert: list first equals: 2.
-	
+
 	list removeFirst.
 	self assert: list size equals: 2.
 	self assert: list first equals: 3.
-	
+
 	list removeFirst.
 	self assert: list size equals: 1.
 	self assert: list first equals: 4.
-	
+
 	list removeFirst.
 	self assert: list isEmpty.
 	self assert: list size equals: 0
@@ -126,14 +126,14 @@ AnotherDoublyLinkedListTest >> test08AsArray [
 { #category : #tests }
 AnotherDoublyLinkedListTest >> test09CollectCubes [
 	| result |
-	
+
 	list add: 1.
 	list add: 2.
 	list add: 3.
 	list add: 4.
-	
+
 	result := list collect: [ :each | each raisedTo: 3 ].
-	
+
 	self assert: result asArray equals: #(1 8 27 64)
 ]
 
@@ -144,7 +144,7 @@ AnotherDoublyLinkedListTest >> test10RemoveLast [
 	element := list last.
 	oldSize := list size.
 	result := list removeLast.
-	
+
 	self assert: result equals: element.
 	self assert: list size equals: (oldSize - 1)
 ]

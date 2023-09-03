@@ -10,14 +10,14 @@ Class {
 
 { #category : #coverage }
 DoublyLinkedListTest >> classToBeTested [
-	
+
 	^ DoublyLinkedList
 ]
 
 { #category : #requirements }
-DoublyLinkedListTest >> collectionClass [ 
+DoublyLinkedListTest >> collectionClass [
 	"Return the class to be used to create instances of the class tested"
-	
+
 	^ self classToBeTested
 ]
 
@@ -122,7 +122,7 @@ DoublyLinkedListTest >> test0FixtureIterateTest [
 		equals: 0.
 	res := true.
 	self collectionWithoutNilElements
-		detect: [ :each | 
+		detect: [ :each |
 		(self collectionWithoutNilElements occurrencesOf: each) > 1 ]
 		ifNone: [ res := false ].
 	self deny: res
@@ -158,19 +158,19 @@ DoublyLinkedListTest >> testAllSatisfy [
 	| element |
 	" when all element  satisfy the condition, should return true : "
 	self assert: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) ] ).
-	
+
 	" when all element don't satisfy the condition, should return false : "
 	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) not ] ).
-	
+
 	" when only one element doesn't satisfy the condition' should return false'"
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] ).
+	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] )
 ]
 
 { #category : #'tests - iterating' }
 DoublyLinkedListTest >> testAllSatisfyEmpty [
 
-	self assert: ( self empty allSatisfy: [:each | false]).
+	self assert: ( self empty allSatisfy: [:each | false])
 ]
 
 { #category : #'tests - iterating' }
@@ -179,13 +179,13 @@ DoublyLinkedListTest >> testAnySastify [
 	| element |
 	" when all elements satisty the condition, should return true :"
 	self assert: ( self collectionWithoutNilElements anySatisfy: [:each | each notNil ]).
-	
+
 	" when only one element satisfy the condition, should return true :"
 	element := self collectionWithoutNilElements anyOne.
 	self assert: ( self collectionWithoutNilElements  anySatisfy: [:each | (each = element)  ]   ).
-	
+
 	" when all elements don't satisty the condition, should return false :"
-	self deny: ( self collectionWithoutNilElements anySatisfy: [:each | (each notNil) not ]).
+	self deny: ( self collectionWithoutNilElements anySatisfy: [:each | (each notNil) not ])
 ]
 
 { #category : #'tests - iterating' }
@@ -193,11 +193,11 @@ DoublyLinkedListTest >> testBasicCollect [
 
 	| res index |
 	index := 0.
-	res := self collectionWithoutNilElements collect: [ :each | 
+	res := self collectionWithoutNilElements collect: [ :each |
 		       index := index + 1.
 		       each ].
 
-	res do: [ :each | 
+	res do: [ :each |
 		self
 			assert: (self collectionWithoutNilElements occurrencesOf: each)
 			equals: (res occurrencesOf: each) ].
@@ -216,14 +216,14 @@ DoublyLinkedListTest >> testBasicCollectThenDo [
 
 	| result index |
 	index := 0.
-	result := self collectionWithoutNilElements 
+	result := self collectionWithoutNilElements
 		collect: [ :each | nil ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each isNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
-	self assert: index equals: self collectionWithoutNilElements size.
+	self assert: index equals: self collectionWithoutNilElements size
 ]
 
 { #category : #'tests - iterating' }
@@ -287,7 +287,7 @@ DoublyLinkedListTest >> testDetectIfFoundIfNoneWhenSomethingIsFound [
 	foundObject := nil.
 	wasFound := self collectionWithoutNilElements
 		detect: [ :each | each notNil ]
-		ifFound: [ :element | 
+		ifFound: [ :element |
 			foundObject := element.
 			true ]
 		ifNone: [ false ].
@@ -320,13 +320,12 @@ DoublyLinkedListTest >> testDetectIfFoundWhenSomethingIsFound [
 	foundObject := nil.
 	self collectionWithoutNilElements
 		detect: [ :each | each notNil ]
-		ifFound: [ :element | 
+		ifFound: [ :element |
 			foundObject := element.
 			wasFound := true ].
 	self
 		assert: wasFound;
 		assert: (self collectionWithoutNilElements includes: foundObject)
-
 ]
 
 { #category : #tests }
@@ -365,7 +364,7 @@ DoublyLinkedListTest >> testDo2 [
 
 	"dc: Bad test, it assumes that a new instance of #speciesClass allows addition with #add:. This is not the case of Interval for which species is Array."
 
-	"res := self speciesClass new.  
+	"res := self speciesClass new.
 	self collection do: [:each | res add: each class].
 	self assert: res = self result. "
 
@@ -373,10 +372,10 @@ DoublyLinkedListTest >> testDo2 [
 	collection := self collectionWithoutNilElements.
 	cptElementsViewed := 0.
 	cptElementsIn := OrderedCollection new.
-	collection do: [ :each | 
+	collection do: [ :each |
 		cptElementsViewed := cptElementsViewed + 1.
 		" #do doesn't iterate with the same objects than those in the collection for FloatArray( I don' t know why ) . That's why I use #includes: and not #identityIncludes:  '"
-		(collection includes: each) ifTrue: [ " the collection used doesn't include equal elements. Therefore each element viewed should not have been viewed before " 
+		(collection includes: each) ifTrue: [ " the collection used doesn't include equal elements. Therefore each element viewed should not have been viewed before "
 			(cptElementsIn includes: each) ifFalse: [ cptElementsIn add: each ] ] ].
 	self assert: cptElementsViewed equals: collection size.
 	self assert: cptElementsIn size equals: collection size
@@ -393,7 +392,7 @@ DoublyLinkedListTest >> testDoSeparatedBy [
 
 	expectedString := ''.
 	beforeFirst := true.
-	self collectionWithoutNilElements do: [ :each | 
+	self collectionWithoutNilElements do: [ :each |
 		beforeFirst
 			ifTrue: [ beforeFirst := false ]
 			ifFalse: [ expectedString := expectedString , '|' ].
@@ -413,7 +412,7 @@ DoublyLinkedListTest >> testDoWithout [
 	self
 		assert: res size
 		equals: collection size - (collection occurrencesOf: element).
-	res do: [ :each | 
+	res do: [ :each |
 		self
 			assert: (collection occurrencesOf: each)
 			equals: (res occurrencesOf: each) ]
@@ -509,13 +508,13 @@ DoublyLinkedListTest >> testNoneSatisfy [
 	| element |
 	self assert: ( self collectionWithoutNilElements  noneSatisfy: [:each | each notNil not ] ).
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] ).
+	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] )
 ]
 
 { #category : #'tests - iterating' }
 DoublyLinkedListTest >> testNoneSatisfyEmpty [
 
-	self assert: ( self empty noneSatisfy: [:each | false]).
+	self assert: ( self empty noneSatisfy: [:each | false])
 ]
 
 { #category : #'tests - empty' }
@@ -531,10 +530,10 @@ DoublyLinkedListTest >> testPrintElementsOn [
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		          self nonEmpty printElementsOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	allElementsAsString do: [ :each | 
+	allElementsAsString do: [ :each |
 		self
 			assert: (tmp occurrencesOf: each)
 			equals: (allElementsAsString occurrencesOf: each) ]
@@ -545,8 +544,8 @@ DoublyLinkedListTest >> testPrintNameOn [
 
 	| printed |
 	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
-	self 
-		assert: printed 
+	self
+		assert: printed
 		equals: (self nonEmpty class name first isVowel
 					 ifTrue: [ 'an ' ] ifFalse: [ 'a ' ]) , self nonEmpty class name
 ]
@@ -560,15 +559,15 @@ DoublyLinkedListTest >> testPrintOn [
 
 	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	allElementsAsString withIndexDo: [ :each :i | 
-		i = 1 ifTrue: [ 
+	allElementsAsString withIndexDo: [ :each :i |
+		i = 1 ifTrue: [
 			self
 				assert: each
 				equals: (self classToBeTested class name first isVowel
 						 ifTrue: [ 'an' ]
 						 ifFalse: [ 'a' ]) ].
 		i = 2 ifTrue: [ self assert: each equals: self classToBeTested name ].
-		i > 2 ifTrue: [ 
+		i > 2 ifTrue: [
 			self
 				assert: (tmp occurrencesOf: each)
 				equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -585,9 +584,9 @@ DoublyLinkedListTest >> testPrintOnDelimiter [
 	allElementsAsString := printed findBetweenSubstrings: ', '.
 
 	allElementsAsString
-		collect: [ :each | 
+		collect: [ :each |
 			Array with: each with: (allElementsAsString occurrencesOf: each) ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: (tmp occurrencesOf: each first) equals: each second ]
 ]
 
@@ -598,14 +597,14 @@ DoublyLinkedListTest >> testPrintOnDelimiterLast [
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
-	allElementsAsString withIndexDo: [ :each :i | 
+	allElementsAsString withIndexDo: [ :each :i |
 		i = (allElementsAsString size - 1)
 			ifTrue: [ self assert: each equals: 'and' ]
-			ifFalse: [ 
+			ifFalse: [
 				self
 					assert: (tmp occurrencesOf: each)
 					equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -615,12 +614,12 @@ DoublyLinkedListTest >> testPrintOnDelimiterLast [
 DoublyLinkedListTest >> testReject [
 
 	| res element |
-	res := self collectionWithoutNilElements reject: [ :each | 
+	res := self collectionWithoutNilElements reject: [ :each |
 		       each notNil not ].
 	self assert: res size equals: self collectionWithoutNilElements size.
 
 	element := self collectionWithoutNilElements anyOne.
-	res := self collectionWithoutNilElements reject: [ :each | 
+	res := self collectionWithoutNilElements reject: [ :each |
 		       each = element ].
 	self
 		assert: res size
@@ -638,11 +637,11 @@ DoublyLinkedListTest >> testRejectAllThenCollect [
 { #category : #'tests - iterating' }
 DoublyLinkedListTest >> testRejectAllThenDo [
 	| result |
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | each notNil ] 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each | each notNil ]
 		thenDo: [ :each | self fail ].
-	
+
 	self assert: result equals: self collectionWithoutNilElements
 ]
 
@@ -658,7 +657,7 @@ DoublyLinkedListTest >> testRejectEmpty [
 DoublyLinkedListTest >> testRejectNoReject [
 
 	| res |
-	res := self collectionWithoutNilElements reject: [ :each | 
+	res := self collectionWithoutNilElements reject: [ :each |
 		       each notNil not ].
 	self assert: res size equals: self collectionWithoutNilElements size
 ]
@@ -667,28 +666,28 @@ DoublyLinkedListTest >> testRejectNoReject [
 DoublyLinkedListTest >> testRejectThenCollect [
 
 	| result index selectIndex pivot |
-	
+
 	index := 0.
 	selectIndex := 0.
 	pivot := self collectionWithoutNilElements anyOne.
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex = 1 ]
-		thenCollect: [ :each | 
+		thenCollect: [ :each |
 			self assert: each notNil.
 			index := index + 1.
 			pivot ].
-			
+
 	self assert: result ~= self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
 	self assert: index equals: self collectionWithoutNilElements size - 1.
-	
+
 	self assert: (self collectionWithoutNilElements occurrencesOf: pivot) equals: 1.
 	"should be > 1 for standard collection and = 1 for those that do not allow exact duplicates"
-	self assert: (result occurrencesOf: pivot) >= 1.
+	self assert: (result occurrencesOf: pivot) >= 1
 ]
 
 { #category : #'tests - iterating' }
@@ -700,22 +699,22 @@ DoublyLinkedListTest >> testRejectThenCollectEmpty [
 DoublyLinkedListTest >> testRejectThenDo [
 
 	| result index rejectIndex |
-	
+
 	index := 0.
 	rejectIndex := 0.
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each |
 			rejectIndex := rejectIndex + 1.
 			"reject the first element"
 			rejectIndex = 1 ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each notNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
 	self assert: rejectIndex equals: self collectionWithoutNilElements size.
-	self assert: index equals: self collectionWithoutNilElements size - 1.
+	self assert: index equals: self collectionWithoutNilElements size - 1
 ]
 
 { #category : #'tests - iterating' }
@@ -730,7 +729,7 @@ DoublyLinkedListTest >> testReverseDo [
 	list addAll: (1 to: 10).
 	value := 10.
 	list
-		reverseDo: [ :each | 
+		reverseDo: [ :each |
 			self assert: each equals: value.
 			value := value - 1 ]
 ]
@@ -765,10 +764,10 @@ DoublyLinkedListTest >> testSelect [
 	| result element |
 	result := self collectionWithoutNilElements select: [ :each | each notNil].
 	self assert: result size equals: self collectionWithoutNilElements size.
-	
+
 	element := self collectionWithoutNilElements anyOne.
 	result := self collectionWithoutNilElements select: [ :each | (each = element) not].
-	self assert: result size equals: (self collectionWithoutNilElements size - 1).
+	self assert: result size equals: (self collectionWithoutNilElements size - 1)
 ]
 
 { #category : #'tests - iterating' }
@@ -782,11 +781,11 @@ DoublyLinkedListTest >> testSelectNoneThenCollect [
 { #category : #'tests - iterating' }
 DoublyLinkedListTest >> testSelectNoneThenDo [
 	| result |
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | each isNil ] 
+
+	result := self collectionWithoutNilElements
+		select: [ :each | each isNil ]
 		thenDo: [ self fail ].
-	
+
 	self assert: result equals: self collectionWithoutNilElements
 ]
 
@@ -799,28 +798,28 @@ DoublyLinkedListTest >> testSelectOnEmpty [
 DoublyLinkedListTest >> testSelectThenCollect [
 
 	| result index selectIndex pivot |
-	
+
 	index := 0.
 	selectIndex := 0.
 	pivot := self collectionWithoutNilElements anyOne.
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | 
+
+	result := self collectionWithoutNilElements
+		select: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex > 1 ]
-		thenCollect: [ :each | 
+		thenCollect: [ :each |
 			self assert: each notNil.
 			index := index + 1.
 			pivot ].
-			
+
 	self assert: result ~= self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
 	self assert: index equals: self collectionWithoutNilElements size - 1.
-	
+
 	self assert: (self collectionWithoutNilElements occurrencesOf: pivot) equals: 1.
 	"should be > 1 for standard collection and = 1 for those that do not allow exact duplicates"
-	self assert: (result occurrencesOf: pivot) >= 1.
+	self assert: (result occurrencesOf: pivot) >= 1
 ]
 
 { #category : #'tests - iterating' }
@@ -832,22 +831,22 @@ DoublyLinkedListTest >> testSelectThenCollectOnEmpty [
 DoublyLinkedListTest >> testSelectThenDo [
 
 	| result index selectIndex |
-	
+
 	index := 0.
 	selectIndex := 0.
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | 
+
+	result := self collectionWithoutNilElements
+		select: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex > 1 ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each notNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
-	self assert: index equals: self collectionWithoutNilElements size - 1.
+	self assert: index equals: self collectionWithoutNilElements size - 1
 ]
 
 { #category : #'tests - iterating' }
@@ -869,7 +868,7 @@ DoublyLinkedListTest >> testSize [
 DoublyLinkedListTest >> testSumNumbers [
 
 	| result |
-	result := self collectionWithoutNilElements sumNumbers: [ :ele | 
+	result := self collectionWithoutNilElements sumNumbers: [ :ele |
 		          ele ifNotNil: [ 1 ] ifNil: [ 0 ] ].
 	self assert: self collectionWithoutNilElements size equals: result
 ]
@@ -913,11 +912,11 @@ DoublyLinkedListTest >> testTAddTwice [
 
 { #category : #'tests - creation' }
 DoublyLinkedListTest >> testWith [
-	
+
 	| aCol anElement |
 	anElement := self collectionMoreThan5Elements anyOne.
 	aCol := self collectionClass with: anElement.
-	self assert: (aCol includes: anElement).
+	self assert: (aCol includes: anElement)
 ]
 
 { #category : #'tests - creation' }
@@ -926,20 +925,20 @@ DoublyLinkedListTest >> testWithAll [
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection.
 	aCol := self collectionClass withAll: collection.
-	
+
 	collection do: [ :each | self assert: (aCol occurrencesOf: each ) equals: ( collection occurrencesOf: each ) ].
-	
+
 	self assert: aCol size equals: collection size
 ]
 
 { #category : #'tests - creation' }
 DoublyLinkedListTest >> testWithWith [
-	
+
 	| aCol collection element1 element2 |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom: 1 to: 2.
 	element1 := collection at: 1.
 	element2 := collection at: 2.
-	
+
 	aCol := self collectionClass with: element1  with: element2 .
 	self assert: (aCol occurrencesOf: element1 ) equals: (collection occurrencesOf: element1).
 	self assert: (aCol occurrencesOf: element2 ) equals: (collection occurrencesOf: element2)
@@ -947,21 +946,21 @@ DoublyLinkedListTest >> testWithWith [
 
 { #category : #'tests - creation' }
 DoublyLinkedListTest >> testWithWithWith [
-	
+
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom:1 to: 3 .
-	aCol := self collectionClass 
-						with: (collection at: 1) 
-						with: (collection at: 2) 
+	aCol := self collectionClass
+						with: (collection at: 1)
+						with: (collection at: 2)
 						with: (collection at: 3).
 
-	1 to: 3 do: [ :i | 
+	1 to: 3 do: [ :i |
 		self assert: (aCol occurrencesOf: (collection at: i)) equals: (collection occurrencesOf: (collection at: i)) ]
 ]
 
 { #category : #'tests - creation' }
 DoublyLinkedListTest >> testWithWithWithWith [
-	
+
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom: 1 to: 4.
 	aCol := self collectionClass with: (collection at:1) with: (collection at:2) with: (collection at: 3) with: (collection at: 4).
@@ -971,14 +970,14 @@ DoublyLinkedListTest >> testWithWithWithWith [
 
 { #category : #'tests - creation' }
 DoublyLinkedListTest >> testWithWithWithWithWith [
-	
+
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom: 1 to: 5.
-	aCol := self collectionClass 
-						with: (collection at: 1) 
-						with: (collection at: 2) 
-						with: (collection at: 3) 
-						with: (collection at: 4) 
+	aCol := self collectionClass
+						with: (collection at: 1)
+						with: (collection at: 2)
+						with: (collection at: 3)
+						with: (collection at: 4)
 						with: (collection at: 5).
 
 	1 to: 3 do: [ :i | self assert: (aCol occurrencesOf: (collection at: i)) equals: (collection occurrencesOf: (collection at: i)) ]

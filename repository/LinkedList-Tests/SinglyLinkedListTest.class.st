@@ -68,10 +68,9 @@ SinglyLinkedListTest >> otherCollection [
 { #category : #coverage }
 SinglyLinkedListTest >> selectorsToBeIgnored [
 
-	| private | 
+	| private |
 	private := #( #initialize #errorNotFound: #emptyError #firstNode #gtInspectorItemsIn: #postCopy).
 	^ super selectorsToBeIgnored, private
-
 ]
 
 { #category : #running }
@@ -129,7 +128,7 @@ SinglyLinkedListTest >> test0FixtureIterateTest [
 		equals: 0.
 	res := true.
 	self collectionWithoutNilElements
-		detect: [ :each | 
+		detect: [ :each |
 		(self collectionWithoutNilElements occurrencesOf: each) > 1 ]
 		ifNone: [ res := false ].
 	self deny: res
@@ -165,19 +164,19 @@ SinglyLinkedListTest >> testAllSatisfy [
 	| element |
 	" when all element  satisfy the condition, should return true : "
 	self assert: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) ] ).
-	
+
 	" when all element don't satisfy the condition, should return false : "
 	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) not ] ).
-	
+
 	" when only one element doesn't satisfy the condition' should return false'"
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] ).
+	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] )
 ]
 
 { #category : #'tests - iterating' }
 SinglyLinkedListTest >> testAllSatisfyEmpty [
 
-	self assert: ( self empty allSatisfy: [:each | false]).
+	self assert: ( self empty allSatisfy: [:each | false])
 ]
 
 { #category : #'tests - iterating' }
@@ -186,13 +185,13 @@ SinglyLinkedListTest >> testAnySastify [
 	| element |
 	" when all elements satisty the condition, should return true :"
 	self assert: ( self collectionWithoutNilElements anySatisfy: [:each | each notNil ]).
-	
+
 	" when only one element satisfy the condition, should return true :"
 	element := self collectionWithoutNilElements anyOne.
 	self assert: ( self collectionWithoutNilElements  anySatisfy: [:each | (each = element)  ]   ).
-	
+
 	" when all elements don't satisty the condition, should return false :"
-	self deny: ( self collectionWithoutNilElements anySatisfy: [:each | (each notNil) not ]).
+	self deny: ( self collectionWithoutNilElements anySatisfy: [:each | (each notNil) not ])
 ]
 
 { #category : #'tests - iterating' }
@@ -200,11 +199,11 @@ SinglyLinkedListTest >> testBasicCollect [
 
 	| res index |
 	index := 0.
-	res := self collectionWithoutNilElements collect: [ :each | 
+	res := self collectionWithoutNilElements collect: [ :each |
 		       index := index + 1.
 		       each ].
 
-	res do: [ :each | 
+	res do: [ :each |
 		self
 			assert: (self collectionWithoutNilElements occurrencesOf: each)
 			equals: (res occurrencesOf: each) ].
@@ -223,14 +222,14 @@ SinglyLinkedListTest >> testBasicCollectThenDo [
 
 	| result index |
 	index := 0.
-	result := self collectionWithoutNilElements 
+	result := self collectionWithoutNilElements
 		collect: [ :each | nil ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each isNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
-	self assert: index equals: self collectionWithoutNilElements size.
+	self assert: index equals: self collectionWithoutNilElements size
 ]
 
 { #category : #'tests - iterating' }
@@ -277,7 +276,7 @@ SinglyLinkedListTest >> testDetect [
 	| res element |
 	element := self collectionWithoutNilElements anyOne.
 
-	res := self collectionWithoutNilElements detect: [ :each | 
+	res := self collectionWithoutNilElements detect: [ :each |
 		       each = element ].
 	self assert: res equals: element
 ]
@@ -295,7 +294,7 @@ SinglyLinkedListTest >> testDetectIfFoundIfNoneWhenSomethingIsFound [
 	foundObject := nil.
 	wasFound := self collectionWithoutNilElements
 		detect: [ :each | each notNil ]
-		ifFound: [ :element | 
+		ifFound: [ :element |
 			foundObject := element.
 			true ]
 		ifNone: [ false ].
@@ -328,13 +327,12 @@ SinglyLinkedListTest >> testDetectIfFoundWhenSomethingIsFound [
 	foundObject := nil.
 	self collectionWithoutNilElements
 		detect: [ :each | each notNil ]
-		ifFound: [ :element | 
+		ifFound: [ :element |
 			foundObject := element.
 			wasFound := true ].
 	self
 		assert: wasFound;
 		assert: (self collectionWithoutNilElements includes: foundObject)
-
 ]
 
 { #category : #'test - iterate' }
@@ -373,7 +371,7 @@ SinglyLinkedListTest >> testDo2 [
 
 	"dc: Bad test, it assumes that a new instance of #speciesClass allows addition with #add:. This is not the case of Interval for which species is Array."
 
-	"res := self speciesClass new.  
+	"res := self speciesClass new.
 	self collection do: [:each | res add: each class].
 	self assert: res = self result. "
 
@@ -381,10 +379,10 @@ SinglyLinkedListTest >> testDo2 [
 	collection := self collectionWithoutNilElements.
 	cptElementsViewed := 0.
 	cptElementsIn := OrderedCollection new.
-	collection do: [ :each | 
+	collection do: [ :each |
 		cptElementsViewed := cptElementsViewed + 1.
 		" #do doesn't iterate with the same objects than those in the collection for FloatArray( I don' t know why ) . That's why I use #includes: and not #identityIncludes:  '"
-		(collection includes: each) ifTrue: [ " the collection used doesn't include equal elements. Therefore each element viewed should not have been viewed before " 
+		(collection includes: each) ifTrue: [ " the collection used doesn't include equal elements. Therefore each element viewed should not have been viewed before "
 			(cptElementsIn includes: each) ifFalse: [ cptElementsIn add: each ] ] ].
 	self assert: cptElementsViewed equals: collection size.
 	self assert: cptElementsIn size equals: collection size
@@ -401,8 +399,8 @@ SinglyLinkedListTest >> testDoSeparatedBy [
 
 	expectedString := ''.
 	beforeFirst := true.
-	self collectionWithoutNilElements do: [ :each | 
-		beforeFirst 
+	self collectionWithoutNilElements do: [ :each |
+		beforeFirst
 			ifTrue: [ beforeFirst := false ]
 			ifFalse: [ expectedString := expectedString , '|' ].
 		expectedString := expectedString , each asString ].
@@ -421,7 +419,7 @@ SinglyLinkedListTest >> testDoWithout [
 	self
 		assert: res size
 		equals: collection size - (collection occurrencesOf: element).
-	res do: [ :each | 
+	res do: [ :each |
 		self
 			assert: (collection occurrencesOf: each)
 			equals: (res occurrencesOf: each) ]
@@ -611,13 +609,13 @@ SinglyLinkedListTest >> testNoneSatisfy [
 	| element |
 	self assert: ( self collectionWithoutNilElements  noneSatisfy: [:each | each notNil not ] ).
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] ).
+	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] )
 ]
 
 { #category : #'tests - iterating' }
 SinglyLinkedListTest >> testNoneSatisfyEmpty [
 
-	self assert: ( self empty noneSatisfy: [:each | false]).
+	self assert: ( self empty noneSatisfy: [:each | false])
 ]
 
 { #category : #'tests - empty' }
@@ -633,10 +631,10 @@ SinglyLinkedListTest >> testPrintElementsOn [
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		          self nonEmpty printElementsOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	allElementsAsString do: [ :each | 
+	allElementsAsString do: [ :each |
 		self
 			assert: (tmp occurrencesOf: each)
 			equals: (allElementsAsString occurrencesOf: each) ]
@@ -647,9 +645,9 @@ SinglyLinkedListTest >> testPrintNameOn [
 
 	| printed |
 	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
-	
-	self 
-		assert: printed 
+
+	self
+		assert: printed
 		equals: (self nonEmpty class name first isVowel ifTrue: [ 'an ' ] ifFalse: [ 'a ' ]) , self nonEmpty class name
 ]
 
@@ -662,15 +660,15 @@ SinglyLinkedListTest >> testPrintOn [
 
 	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	allElementsAsString withIndexDo: [ :each :i | 
-		i = 1 ifTrue: [ 
+	allElementsAsString withIndexDo: [ :each :i |
+		i = 1 ifTrue: [
 			self
 				assert: each
 				equals: (self classToBeTested class name first isVowel
 						 ifTrue: [ 'an' ]
 						 ifFalse: [ 'a' ]) ].
 		i = 2 ifTrue: [ self assert: each equals: self classToBeTested name ].
-		i > 2 ifTrue: [ 
+		i > 2 ifTrue: [
 			self
 				assert: (tmp occurrencesOf: each)
 				equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -687,9 +685,9 @@ SinglyLinkedListTest >> testPrintOnDelimiter [
 	allElementsAsString := printed findBetweenSubstrings: ', '.
 
 	allElementsAsString
-		collect: [ :each | 
+		collect: [ :each |
 			Array with: each with: (allElementsAsString occurrencesOf: each) ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: (tmp occurrencesOf: each first) equals: each second ]
 ]
 
@@ -700,14 +698,14 @@ SinglyLinkedListTest >> testPrintOnDelimiterLast [
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
-	allElementsAsString withIndexDo: [ :each :i | 
+	allElementsAsString withIndexDo: [ :each :i |
 		i = (allElementsAsString size - 1)
 			ifTrue: [ self assert: each equals: 'and' ]
-			ifFalse: [ 
+			ifFalse: [
 				self
 					assert: (tmp occurrencesOf: each)
 					equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -717,12 +715,12 @@ SinglyLinkedListTest >> testPrintOnDelimiterLast [
 SinglyLinkedListTest >> testReject [
 
 	| res element |
-	res := self collectionWithoutNilElements reject: [ :each | 
+	res := self collectionWithoutNilElements reject: [ :each |
 		       each notNil not ].
 	self assert: res size equals: self collectionWithoutNilElements size.
 
 	element := self collectionWithoutNilElements anyOne.
-	res := self collectionWithoutNilElements reject: [ :each | 
+	res := self collectionWithoutNilElements reject: [ :each |
 		       each = element ].
 	self
 		assert: res size
@@ -740,11 +738,11 @@ SinglyLinkedListTest >> testRejectAllThenCollect [
 { #category : #'tests - iterating' }
 SinglyLinkedListTest >> testRejectAllThenDo [
 	| result |
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | each notNil ] 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each | each notNil ]
 		thenDo: [ :each | self fail ].
-	
+
 	self assert: result equals: self collectionWithoutNilElements
 ]
 
@@ -760,7 +758,7 @@ SinglyLinkedListTest >> testRejectEmpty [
 SinglyLinkedListTest >> testRejectNoReject [
 
 	| res |
-	res := self collectionWithoutNilElements reject: [ :each | 
+	res := self collectionWithoutNilElements reject: [ :each |
 		       each notNil not ].
 	self assert: res size equals: self collectionWithoutNilElements size
 ]
@@ -769,28 +767,28 @@ SinglyLinkedListTest >> testRejectNoReject [
 SinglyLinkedListTest >> testRejectThenCollect [
 
 	| result index selectIndex pivot |
-	
+
 	index := 0.
 	selectIndex := 0.
 	pivot := self collectionWithoutNilElements anyOne.
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex = 1 ]
-		thenCollect: [ :each | 
+		thenCollect: [ :each |
 			self assert: each notNil.
 			index := index + 1.
 			pivot ].
-			
+
 	self assert: result ~= self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
 	self assert: index equals: self collectionWithoutNilElements size - 1.
-	
+
 	self assert: (self collectionWithoutNilElements occurrencesOf: pivot) equals: 1.
 	"should be > 1 for standard collection and = 1 for those that do not allow exact duplicates"
-	self assert: (result occurrencesOf: pivot) >= 1.
+	self assert: (result occurrencesOf: pivot) >= 1
 ]
 
 { #category : #'tests - iterating' }
@@ -802,22 +800,22 @@ SinglyLinkedListTest >> testRejectThenCollectEmpty [
 SinglyLinkedListTest >> testRejectThenDo [
 
 	| result index rejectIndex |
-	
+
 	index := 0.
 	rejectIndex := 0.
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each |
 			rejectIndex := rejectIndex + 1.
 			"reject the first element"
 			rejectIndex = 1 ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each notNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
 	self assert: rejectIndex equals: self collectionWithoutNilElements size.
-	self assert: index equals: self collectionWithoutNilElements size - 1.
+	self assert: index equals: self collectionWithoutNilElements size - 1
 ]
 
 { #category : #'tests - iterating' }
@@ -855,10 +853,10 @@ SinglyLinkedListTest >> testSelect [
 	| result element |
 	result := self collectionWithoutNilElements select: [ :each | each notNil].
 	self assert: result size equals: self collectionWithoutNilElements size.
-	
+
 	element := self collectionWithoutNilElements anyOne.
 	result := self collectionWithoutNilElements select: [ :each | (each = element) not].
-	self assert: result size equals: (self collectionWithoutNilElements size - 1).
+	self assert: result size equals: (self collectionWithoutNilElements size - 1)
 ]
 
 { #category : #'tests - iterating' }
@@ -872,11 +870,11 @@ SinglyLinkedListTest >> testSelectNoneThenCollect [
 { #category : #'tests - iterating' }
 SinglyLinkedListTest >> testSelectNoneThenDo [
 	| result |
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | each isNil ] 
+
+	result := self collectionWithoutNilElements
+		select: [ :each | each isNil ]
 		thenDo: [ self fail ].
-	
+
 	self assert: result equals: self collectionWithoutNilElements
 ]
 
@@ -889,28 +887,28 @@ SinglyLinkedListTest >> testSelectOnEmpty [
 SinglyLinkedListTest >> testSelectThenCollect [
 
 	| result index selectIndex pivot |
-	
+
 	index := 0.
 	selectIndex := 0.
 	pivot := self collectionWithoutNilElements anyOne.
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | 
+
+	result := self collectionWithoutNilElements
+		select: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex > 1 ]
-		thenCollect: [ :each | 
+		thenCollect: [ :each |
 			self assert: each notNil.
 			index := index + 1.
 			pivot ].
-			
+
 	self assert: result ~= self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
 	self assert: index equals: self collectionWithoutNilElements size - 1.
-	
+
 	self assert: (self collectionWithoutNilElements occurrencesOf: pivot) equals: 1.
 	"should be > 1 for standard collection and = 1 for those that do not allow exact duplicates"
-	self assert: (result occurrencesOf: pivot) >= 1.
+	self assert: (result occurrencesOf: pivot) >= 1
 ]
 
 { #category : #'tests - iterating' }
@@ -922,22 +920,22 @@ SinglyLinkedListTest >> testSelectThenCollectOnEmpty [
 SinglyLinkedListTest >> testSelectThenDo [
 
 	| result index selectIndex |
-	
+
 	index := 0.
 	selectIndex := 0.
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | 
+
+	result := self collectionWithoutNilElements
+		select: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex > 1 ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each notNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
-	self assert: index equals: self collectionWithoutNilElements size - 1.
+	self assert: index equals: self collectionWithoutNilElements size - 1
 ]
 
 { #category : #'tests - iterating' }
@@ -1002,11 +1000,11 @@ SinglyLinkedListTest >> testTAddTwice [
 
 { #category : #'tests - creation' }
 SinglyLinkedListTest >> testWith [
-	
+
 	| aCol anElement |
 	anElement := self collectionMoreThan5Elements anyOne.
 	aCol := self collectionClass with: anElement.
-	self assert: (aCol includes: anElement).
+	self assert: (aCol includes: anElement)
 ]
 
 { #category : #'tests - creation' }
@@ -1015,20 +1013,20 @@ SinglyLinkedListTest >> testWithAll [
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection.
 	aCol := self collectionClass withAll: collection.
-	
+
 	collection do: [ :each | self assert: (aCol occurrencesOf: each ) equals: ( collection occurrencesOf: each ) ].
-	
+
 	self assert: aCol size equals: collection size
 ]
 
 { #category : #'tests - creation' }
 SinglyLinkedListTest >> testWithWith [
-	
+
 	| aCol collection element1 element2 |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom: 1 to: 2.
 	element1 := collection at: 1.
 	element2 := collection at: 2.
-	
+
 	aCol := self collectionClass with: element1  with: element2 .
 	self assert: (aCol occurrencesOf: element1 ) equals: (collection occurrencesOf: element1).
 	self assert: (aCol occurrencesOf: element2 ) equals: (collection occurrencesOf: element2)
@@ -1036,21 +1034,21 @@ SinglyLinkedListTest >> testWithWith [
 
 { #category : #'tests - creation' }
 SinglyLinkedListTest >> testWithWithWith [
-	
+
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom:1 to: 3 .
-	aCol := self collectionClass 
-						with: (collection at: 1) 
-						with: (collection at: 2) 
+	aCol := self collectionClass
+						with: (collection at: 1)
+						with: (collection at: 2)
 						with: (collection at: 3).
 
-	1 to: 3 do: [ :i | 
+	1 to: 3 do: [ :i |
 		self assert: (aCol occurrencesOf: (collection at: i)) equals: (collection occurrencesOf: (collection at: i)) ]
 ]
 
 { #category : #'tests - creation' }
 SinglyLinkedListTest >> testWithWithWithWith [
-	
+
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom: 1 to: 4.
 	aCol := self collectionClass with: (collection at:1) with: (collection at:2) with: (collection at: 3) with: (collection at: 4).
@@ -1060,14 +1058,14 @@ SinglyLinkedListTest >> testWithWithWithWith [
 
 { #category : #'tests - creation' }
 SinglyLinkedListTest >> testWithWithWithWithWith [
-	
+
 	| aCol collection |
 	collection := self collectionMoreThan5Elements asOrderedCollection copyFrom: 1 to: 5.
-	aCol := self collectionClass 
-						with: (collection at: 1) 
-						with: (collection at: 2) 
-						with: (collection at: 3) 
-						with: (collection at: 4) 
+	aCol := self collectionClass
+						with: (collection at: 1)
+						with: (collection at: 2)
+						with: (collection at: 3)
+						with: (collection at: 4)
 						with: (collection at: 5).
 
 	1 to: 3 do: [ :i | self assert: (aCol occurrencesOf: (collection at: i)) equals: (collection occurrencesOf: (collection at: i)) ]

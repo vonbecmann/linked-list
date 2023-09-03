@@ -138,7 +138,7 @@ AnotherSinglyLinkedQueueTest >> testRemoveHeadWhenIsNotEmpty [
 
 	self assert: queue removeHead equals: 42.
 	self assert: queue isEmpty.
-	self assert: queue size equals: 0.
+	self assert: queue size equals: 0
 ]
 
 { #category : #tests }

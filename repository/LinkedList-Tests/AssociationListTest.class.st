@@ -65,8 +65,8 @@ AssociationListTest >> assertNonDuplicatedContents: aCollection whenConvertedTo:
 	| result |
 	result := aCollection perform: ('as' , aClass name) asSymbol.
 	self assert: (result class includesBehavior: aClass).
-	result do: 
-		[ :each | 
+	result do:
+		[ :each |
 		self assert: (aCollection occurrencesOf: each) equals: (result occurrencesOf: each) ].
 	^ result
 ]
@@ -89,7 +89,7 @@ AssociationListTest >> associationWithKeyAlreadyInToAdd [
 { #category : #requirements }
 AssociationListTest >> associationWithKeyNotInToAdd [
 	" return an association that will be used to add to nonEmptyDict (the key of this association is not included in nonEmptyDict)"
-	^ associationNotIn 
+	^ associationNotIn
 ]
 
 { #category : #coverage }
@@ -146,7 +146,7 @@ AssociationListTest >> collectionWithoutNilElements [
 
 { #category : #'tests - set arithmetic' }
 AssociationListTest >> containsAll: union of: one andOf: another [
-			
+
 	self assert: (one allSatisfy: [:each | union includes: each]).
 	self assert: (another allSatisfy: [:each | union includes: each])
 ]
@@ -422,7 +422,7 @@ AssociationListTest >> test0FixtureDictionaryIncludesIdentity [
 
 	self nonEmptyWithCopyNonIdentical.
 	self denyEmpty: self nonEmptyWithCopyNonIdentical.
-	self nonEmptyWithCopyNonIdentical do: [ :each | 
+	self nonEmptyWithCopyNonIdentical do: [ :each |
 		self deny: each identicalTo: each copy ]
 ]
 
@@ -488,7 +488,7 @@ AssociationListTest >> test0FixtureIterateTest [
 		equals: 0.
 	res := true.
 	self collectionWithoutNilElements
-		detect: [ :each | 
+		detect: [ :each |
 		(self collectionWithoutNilElements occurrencesOf: each) > 1 ]
 		ifNone: [ res := false ].
 	self deny: res
@@ -503,7 +503,7 @@ AssociationListTest >> test0FixtureOccurrencesTest [
 	self denyEmpty: self collectionWithoutEqualElements.
 	tmp := OrderedCollection new.
 	self collectionWithoutEqualElements
-		do: [ :each | 
+		do: [ :each |
 			self deny: (tmp includes: each).
 			tmp add: each ].
 	self elementNotInForOccurrences.
@@ -553,7 +553,7 @@ AssociationListTest >> test0FixtureTConvertTest [
 	self collectionWithoutEqualElements.
 	res := true.
 	self collectionWithoutEqualElements
-		detect: [ :each | 
+		detect: [ :each |
 			(self collectionWithoutEqualElements occurrencesOf: each) > 1 ]
 		ifNone: [ res := false ].
 	self assert: res equals: false
@@ -582,7 +582,7 @@ AssociationListTest >> testAddAll [
 	self assert: result equals: collectionToAdd.
 	self assert: collection size equals: oldSize + 1.
 
-	result associationsDo: [ :assoc | 
+	result associationsDo: [ :assoc |
 		self assert: (collection at: assoc key) equals: assoc value ]
 ]
 
@@ -620,19 +620,19 @@ AssociationListTest >> testAllSatisfy [
 	| element |
 	" when all element  satisfy the condition, should return true : "
 	self assert: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) ] ).
-	
+
 	" when all element don't satisfy the condition, should return false : "
 	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) not ] ).
-	
+
 	" when only one element doesn't satisfy the condition' should return false'"
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] ).
+	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] )
 ]
 
 { #category : #'tests - iterating' }
 AssociationListTest >> testAllSatisfyEmpty [
 
-	self assert: ( self empty allSatisfy: [:each | false]).
+	self assert: ( self empty allSatisfy: [:each | false])
 ]
 
 { #category : #'tests - iterating' }
@@ -641,19 +641,19 @@ AssociationListTest >> testAnySastify [
 	| element |
 	" when all elements satisty the condition, should return true :"
 	self assert: ( self collectionWithoutNilElements anySatisfy: [:each | each notNil ]).
-	
+
 	" when only one element satisfy the condition, should return true :"
 	element := self collectionWithoutNilElements anyOne.
 	self assert: ( self collectionWithoutNilElements  anySatisfy: [:each | (each = element)  ]   ).
-	
+
 	" when all elements don't satisty the condition, should return false :"
-	self deny: ( self collectionWithoutNilElements anySatisfy: [:each | (each notNil) not ]).
+	self deny: ( self collectionWithoutNilElements anySatisfy: [:each | (each notNil) not ])
 ]
 
 { #category : #'tests - converting' }
 AssociationListTest >> testAsArray [
 
-	self 
+	self
 		assertSameContents: self collectionWithoutEqualElements
 		whenConvertedTo: Array
 ]
@@ -669,11 +669,11 @@ AssociationListTest >> testAsByteArray [
 
 	| res |
 	self integerCollectionWithoutEqualElements.
-	self integerCollectionWithoutEqualElements do: [ :each | 
+	self integerCollectionWithoutEqualElements do: [ :each |
 		self assert: each class equals: SmallInteger ].
 	res := true.
 	self integerCollectionWithoutEqualElements
-		detect: [ :each | 
+		detect: [ :each |
 			(self integerCollectionWithoutEqualElements occurrencesOf: each)
 			> 1 ]
 		ifNone: [ res := false ].
@@ -701,17 +701,17 @@ AssociationListTest >> testAsCommaStringMore [
 
 	"verifying result  :"
 	allElementsAsString := result findBetweenSubstrings: ', '.
-	allElementsAsString do: [ :each | 
+	allElementsAsString do: [ :each |
 		self
 			assert: (tmp occurrencesOf: each)
 			equals: (allElementsAsString occurrencesOf: each) ].
 
 	"verifying esultAnd :"
 	allElementsAsString := resultAnd findBetweenSubstrings: ', '.
-	allElementsAsString withIndexDo: [ :each :i | 
+	allElementsAsString withIndexDo: [ :each :i |
 		i = (allElementsAsString size - 1)
 			ifTrue: [ self assert: each equals: 'and' ]
-			ifFalse: [ 
+			ifFalse: [
 				self
 					assert: (tmp occurrencesOf: each)
 					equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -720,7 +720,7 @@ AssociationListTest >> testAsCommaStringMore [
 { #category : #'tests - as string comma delimiter sequenceable' }
 AssociationListTest >> testAsCommaStringOne [
 
-	self nonEmpty1Element do: [ :each | 
+	self nonEmpty1Element do: [ :each |
 		self
 			assert: each asString
 			equals: self nonEmpty1Element asCommaString.
@@ -733,21 +733,21 @@ AssociationListTest >> testAsCommaStringOne [
 AssociationListTest >> testAsIdentitySet [
 	"Test with a collection without equal elements :"
 
-	self 
+	self
 		assertSameContents: self collectionWithoutEqualElements
 		whenConvertedTo: IdentitySet
 ]
 
 { #category : #'tests - converting' }
 AssociationListTest >> testAsOrderedCollection [
-	
+
 	self assertSameContents: self collectionWithoutEqualElements whenConvertedTo: OrderedCollection
 ]
 
 { #category : #'tests - converting' }
 AssociationListTest >> testAsSet [
  	"Test with a collection without equal elements"
-	
+
 	self assertSameContents: self collectionWithoutEqualElements whenConvertedTo: Set
 ]
 
@@ -770,7 +770,7 @@ AssociationListTest >> testAsSortedCollection [
 	result := aCollection asSortedCollection.
 
 	self assert: (result class includesBehavior: SortedCollection).
-	result do: [ :each | 
+	result do: [ :each |
 		self
 			assert: (aCollection occurrencesOf: each)
 			equals: (result occurrencesOf: each) ].
@@ -783,8 +783,8 @@ AssociationListTest >> testAsSortedCollectionWithSortBlock [
 	| result tmp |
 	result := self collectionWithSortableElements  asSortedCollection: [:a :b | a > b ].
 	self assert: (result class includesBehavior: SortedCollection).
-	result do: 
-		[ :each | 
+	result do:
+		[ :each |
 		self assert: (self collectionWithSortableElements occurrencesOf: each) equals: (result occurrencesOf: each) ].
 	self assert: result size equals: self collectionWithSortableElements  size.
 	tmp:=result at: 1.
@@ -812,7 +812,7 @@ AssociationListTest >> testAsStringOnDelimiterLastMore [
 	self nonEmpty asStringOn: multiItemStream delimiter: delim last: last.
 	result := multiItemStream contents.
 	allElementsAsString := result findBetweenSubstrings: delim.
-	self nonEmpty do: [ :each | 
+	self nonEmpty do: [ :each |
 		self
 			assert: (self nonEmpty occurrencesOf: each)
 			equals: (allElementsAsString occurrencesOf: each asString) ].
@@ -832,8 +832,8 @@ AssociationListTest >> testAsStringOnDelimiterLastOne [
 		asStringOn: oneItemStream
 		delimiter: delim
 		last: 'and'.
-	oneItemStream do: [ :each1 | 
-		self nonEmpty1Element do: [ :each2 | 
+	oneItemStream do: [ :each1 |
+		self nonEmpty1Element do: [ :each2 |
 			self assert: each1 equals: each2 asString ] ]
 ]
 
@@ -847,7 +847,7 @@ AssociationListTest >> testAsStringOnDelimiterMore [
 	self nonEmpty asStringOn: multiItemStream delimiter: delim.
 	result := multiItemStream contents.
 	allElementsAsString := result findBetweenSubstrings: delim.
-	self nonEmpty do: [ :each | 
+	self nonEmpty do: [ :each |
 		self
 			assert: (self nonEmpty occurrencesOf: each)
 			equals: (allElementsAsString occurrencesOf: each asString) ]
@@ -861,8 +861,8 @@ AssociationListTest >> testAsStringOnDelimiterOne [
 	result := ''.
 	oneItemStream := ReadWriteStream on: result.
 	self nonEmpty1Element asStringOn: oneItemStream delimiter: delim.
-	oneItemStream do: [ :each1 | 
-		self nonEmpty1Element do: [ :each2 | 
+	oneItemStream do: [ :each1 |
+		self nonEmpty1Element do: [ :each2 |
 			self assert: each1 equals: each2 asString ] ]
 ]
 
@@ -885,7 +885,7 @@ AssociationListTest >> testAssociationAtError [
 	collection := self nonEmpty.
 	nonExistantKey := self keyNotIn .
 
-	self should: [collection associationAt: nonExistantKey] raise: Error.
+	self should: [collection associationAt: nonExistantKey] raise: Error
 ]
 
 { #category : #'tests - dictionary assocition access' }
@@ -910,8 +910,8 @@ AssociationListTest >> testAssociationAtIfPresent [
 	collection := self nonEmpty.
 	keyIn := collection keys anyOne.
 
-	result := collection associationAt: keyIn ifPresent: [ :assoc | 
-		          { 
+	result := collection associationAt: keyIn ifPresent: [ :assoc |
+		          {
 			          #present.
 			          assoc } ].
 	self
@@ -927,8 +927,8 @@ AssociationListTest >> testAssociationAtIfPresent [
 
 	result := collection
 		          associationAt: self keyNotIn
-		          ifPresent: [ :assoc | 
-			          { 
+		          ifPresent: [ :assoc |
+			          {
 				          #present.
 				          assoc } ].
 	self assert: result isNil
@@ -964,7 +964,7 @@ AssociationListTest >> testAssociations [
 	collection := self nonEmpty.
 	result := collection associations.
 	self assert: result size equals: collection size.
-	result do: [ :assoc | "keys do: [ :key | self assert: ( result at: key ) = ( collection at: key )] ." 
+	result do: [ :assoc | "keys do: [ :key | self assert: ( result at: key ) = ( collection at: key )] ."
 		self assert: assoc value equals: (collection at: assoc key) ]
 ]
 
@@ -976,11 +976,11 @@ AssociationListTest >> testAssociationsDo [
 
 	keys := OrderedCollection new.
 
-	collection associationsDo: [ :assoc | 
+	collection associationsDo: [ :assoc |
 		keys add: assoc key.
 		self assert: (collection at: assoc key) equals: assoc value ].
 
-	collection keys do: [ :key | 
+	collection keys do: [ :key |
 		self
 			assert: (keys occurrencesOf: key)
 			equals: (collection keys occurrencesOf: key) ]
@@ -992,11 +992,11 @@ AssociationListTest >> testAssociationsSelect [
 	| collection keys result |
 	collection := self nonEmptyDict.
 	keys := OrderedCollection new.
-	result := collection associationsSelect: [ :assoc | 
+	result := collection associationsSelect: [ :assoc |
 		          keys add: assoc key.
 		          true ].
 
-	collection keys do: [ :key | 
+	collection keys do: [ :key |
 		self
 			assert: (collection keys occurrencesOf: key)
 			equals: (keys occurrencesOf: key) ].
@@ -1065,7 +1065,7 @@ AssociationListTest >> testAtIfPresent [
 	association := collection associations anyOne.
 	arg := nil.
 	self
-		assert: (collection at: association key ifPresent: [ :value | 
+		assert: (collection at: association key ifPresent: [ :value |
 				 arg := value.
 				 #present ])
 		equals: #present.
@@ -1090,7 +1090,7 @@ AssociationListTest >> testAtIfPresentIfAbsent [
 	self
 		assert: (collection
 				 at: association key
-				 ifPresent: [ :value | 
+				 ifPresent: [ :value |
 					 arg := value.
 					 #present ]
 				 ifAbsent: [ Error signal ])
@@ -1122,7 +1122,7 @@ AssociationListTest >> testAtIfPresentIfAbsentPut [
 	self
 		assert: (collection
 				 at: association key
-				 ifPresent: [ :value | 
+				 ifPresent: [ :value |
 					 arg := value.
 					 #present ]
 				 ifAbsentPut: [ Error signal ])
@@ -1174,7 +1174,7 @@ AssociationListTest >> testAtPutDict [
 		identicalTo: newValue.
 	self assert: (collection at: keyIn) identicalTo: newValue.
 
-	newValue := { 
+	newValue := {
 		            self valueNotIn.
 		            self valueNotIn.
 		            self valueNotIn }.
@@ -1222,11 +1222,11 @@ AssociationListTest >> testBasicCollect [
 
 	| res index |
 	index := 0.
-	res := self collectionWithoutNilElements collect: [ :each | 
+	res := self collectionWithoutNilElements collect: [ :each |
 		       index := index + 1.
 		       each ].
 
-	res do: [ :each | 
+	res do: [ :each |
 		self
 			assert: (self collectionWithoutNilElements occurrencesOf: each)
 			equals: (res occurrencesOf: each) ].
@@ -1245,14 +1245,14 @@ AssociationListTest >> testBasicCollectThenDo [
 
 	| result index |
 	index := 0.
-	result := self collectionWithoutNilElements 
+	result := self collectionWithoutNilElements
 		collect: [ :each | nil ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each isNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
-	self assert: index equals: self collectionWithoutNilElements size.
+	self assert: index equals: self collectionWithoutNilElements size
 ]
 
 { #category : #'tests - dictionnary enumerating' }
@@ -1263,7 +1263,7 @@ AssociationListTest >> testCollect [
 	values := OrderedCollection new.
 	result := collection collect: [ :value | values add: value ].
 
-	collection values do: [ :value | 
+	collection values do: [ :value |
 		self
 			assert: (collection values occurrencesOf: value)
 			equals: (values occurrencesOf: value) ].
@@ -1320,8 +1320,8 @@ AssociationListTest >> testCopyEmptyWithoutAll [
 { #category : #'tests - copy' }
 AssociationListTest >> testCopyEquals [
 	"A copy should be equivalent to the things it's a copy of."
-	
-	| copy | 
+
+	| copy |
 	copy := self nonEmpty copy.
 	self assert: copy equals: self nonEmpty
 ]
@@ -1343,7 +1343,7 @@ AssociationListTest >> testCopyNonEmptyWith [
 	anElement := self elementToAdd .
 	res := self nonEmpty copyWith: anElement.
 	"Here we do not test the size since for a non empty set we would get a problem.
-	Then in addition copy is not about duplicate management. The element should 
+	Then in addition copy is not about duplicate management. The element should
 	be in at the end."
 	self assert: (res includes: (anElement value)).
 	self nonEmpty do: [ :each | res includes: each ]
@@ -1355,11 +1355,11 @@ AssociationListTest >> testCopyNonEmptyWithoutAll [
 	| res |
 	res := self nonEmpty copyWithoutAll: self collectionWithElementsToRemove.
 	"here we do not test the size since for a non empty set we would get a problem.
-	Then in addition copy is not about duplicate management. The element should 
+	Then in addition copy is not about duplicate management. The element should
 	be in at the end."
 	self collectionWithElementsToRemove do: [ :each | self deny: (res includes: (each)) ].
-	self nonEmpty do: 
-		[ :each | 
+	self nonEmpty do:
+		[ :each |
 		(self collectionWithElementsToRemove includes: each) ifFalse: [ self assert: (res includes: each) ] ]
 ]
 
@@ -1369,7 +1369,7 @@ AssociationListTest >> testCopyNonEmptyWithoutAllNotIncluded [
 	| res |
 	res := self nonEmpty copyWithoutAll: self collectionNotIncluded.
 	"here we do not test the size since for a non empty set we would get a problem.
-	Then in addition copy is not about duplicate management. The element should 
+	Then in addition copy is not about duplicate management. The element should
 	be in at the end."
 	self nonEmpty do: [ :each | self assert: (res includes: each) ]
 ]
@@ -1421,7 +1421,7 @@ AssociationListTest >> testDetect [
 	| res element |
 	element := self collectionWithoutNilElements anyOne.
 
-	res := self collectionWithoutNilElements detect: [ :each | 
+	res := self collectionWithoutNilElements detect: [ :each |
 		       each = element ].
 	self assert: res equals: element
 ]
@@ -1439,7 +1439,7 @@ AssociationListTest >> testDetectIfFoundIfNoneWhenSomethingIsFound [
 	foundObject := nil.
 	wasFound := self collectionWithoutNilElements
 		detect: [ :each | each notNil ]
-		ifFound: [ :element | 
+		ifFound: [ :element |
 			foundObject := element.
 			true ]
 		ifNone: [ false ].
@@ -1472,7 +1472,7 @@ AssociationListTest >> testDetectIfFoundWhenSomethingIsFound [
 	foundObject := nil.
 	self collectionWithoutNilElements
 		detect: [ :each | each notNil ]
-		ifFound: [ :element | 
+		ifFound: [ :element |
 			foundObject := element.
 			wasFound := true ].
 	self
@@ -1515,7 +1515,7 @@ AssociationListTest >> testDictionaryConcatenationWithCommonKeys [
 	result := dictionary1 , dictionary2.
 	self assert: result size equals: dictionary2 size.
 
-	dictionary2 associationsDo: [ :assoc | 
+	dictionary2 associationsDo: [ :assoc |
 		self assert: (result at: assoc key) equals: assoc value ]
 ]
 
@@ -1532,7 +1532,7 @@ AssociationListTest >> testDictionaryConcatenationWithCommonKeysDifferentValues 
 	result := dictionary1 , dictionary2.
 	self assert: result size equals: dictionary2 size.
 
-	dictionary2 associationsDo: [ :assoc | 
+	dictionary2 associationsDo: [ :assoc |
 		self assert: (result at: assoc key) equals: assoc value ]
 ]
 
@@ -1544,9 +1544,9 @@ AssociationListTest >> testDictionaryConcatenationWithoutCommonKeys [
 	dictionary2 := self nonEmptyDifferentFromNonEmptyDict.
 	result := dictionary1 , dictionary2.
 	self assert: result size equals: dictionary1 size + dictionary2 size.
-	dictionary1 associationsDo: [ :assoc | 
+	dictionary1 associationsDo: [ :assoc |
 		self assert: (result at: assoc key) equals: assoc value ].
-	dictionary2 associationsDo: [ :assoc | 
+	dictionary2 associationsDo: [ :assoc |
 		self assert: (result at: assoc key) equals: assoc value ]
 ]
 
@@ -1565,17 +1565,17 @@ AssociationListTest >> testDifference [
 	self
 		assert: difference size
 		equals: self collectionWithoutEqualElements size.
-	self collectionWithoutEqualElements do: [ :each | 
+	self collectionWithoutEqualElements do: [ :each |
 		self assert: (difference includes: each) ]
 ]
 
 { #category : #'tests - set arithmetic' }
 AssociationListTest >> testDifferenceWithNonNullIntersection [
-	"Answer the set theoretic difference of two collections. 
+	"Answer the set theoretic difference of two collections.
 	 	#(1 2 3) difference: #(2 4) ->  #(1 3)"
-	
+
 	| res overlapping |
-	overlapping := self collectionClass 
+	overlapping := self collectionClass
 		with: self anotherElementOrAssociationNotIn
 		with: self anotherElementOrAssociationIn.
 	res := self collection difference: overlapping.
@@ -1587,16 +1587,16 @@ AssociationListTest >> testDifferenceWithNonNullIntersection [
 AssociationListTest >> testDifferenceWithSeparateCollection [
 	"Answer the set theoretic difference of two collections."
 
-	| res separateCol |	
+	| res separateCol |
 	separateCol := self collectionClass with: self anotherElementOrAssociationNotIn.
 	res := self collectionWithoutEqualElements difference: separateCol.
-	
+
 	self deny: (res includes: self anotherElementOrAssociationNotIn).
 	self assert: res size equals: self collectionWithoutEqualElements size.
-	
+
 	self collectionWithoutEqualElements do: [ :each|
 		self assert: (res includes: each)].
-	
+
 	res := separateCol difference: self collection.
 	self deny: (res includes: self collection anyOne).
 	self assert: res equals: separateCol
@@ -1610,7 +1610,7 @@ AssociationListTest >> testDo [
 	t := OrderedCollection new.
 	collection do: [ :value | t add: value ].
 
-	t do: [ :each | 
+	t do: [ :each |
 		self
 			assert: (t occurrencesOf: each)
 			equals: (collection values occurrencesOf: each) ]
@@ -1621,7 +1621,7 @@ AssociationListTest >> testDo2 [
 
 	"dc: Bad test, it assumes that a new instance of #speciesClass allows addition with #add:. This is not the case of Interval for which species is Array."
 
-	"res := self speciesClass new.  
+	"res := self speciesClass new.
 	self collection do: [:each | res add: each class].
 	self assert: res = self result. "
 
@@ -1629,10 +1629,10 @@ AssociationListTest >> testDo2 [
 	collection := self collectionWithoutNilElements.
 	cptElementsViewed := 0.
 	cptElementsIn := OrderedCollection new.
-	collection do: [ :each | 
+	collection do: [ :each |
 		cptElementsViewed := cptElementsViewed + 1.
 		" #do doesn't iterate with the same objects than those in the collection for FloatArray( I don' t know why ) . That's why I use #includes: and not #identityIncludes:  '"
-		(collection includes: each) ifTrue: [ " the collection used doesn't include equal elements. Therefore each element viewed should not have been viewed before " 
+		(collection includes: each) ifTrue: [ " the collection used doesn't include equal elements. Therefore each element viewed should not have been viewed before "
 			(cptElementsIn includes: each) ifFalse: [ cptElementsIn add: each ] ] ].
 	self assert: cptElementsViewed equals: collection size.
 	self assert: cptElementsIn size equals: collection size
@@ -1649,7 +1649,7 @@ AssociationListTest >> testDoSeparatedBy [
 
 	expectedString := ''.
 	beforeFirst := true.
-	self collectionWithoutNilElements do: [ :each | 
+	self collectionWithoutNilElements do: [ :each |
 		beforeFirst
 			ifTrue: [ beforeFirst := false ]
 			ifFalse: [ expectedString := expectedString , '|' ].
@@ -1669,7 +1669,7 @@ AssociationListTest >> testDoWithout [
 	self
 		assert: res size
 		equals: collection size - (collection occurrencesOf: element).
-	res do: [ :each | 
+	res do: [ :each |
 		self
 			assert: (collection occurrencesOf: each)
 			equals: (res occurrencesOf: each) ]
@@ -1680,7 +1680,7 @@ AssociationListTest >> testEquality [
 
 	| nonEmptyDict2 |
 	nonEmptyDict2 := self nonEmpty class new.
-	self nonEmpty keysAndValuesDo: [ :key :value | 
+	self nonEmpty keysAndValuesDo: [ :key :value |
 		nonEmptyDict2 at: key put: value ].
 	self assert: self nonEmptyDict equals: nonEmptyDict2
 ]
@@ -1688,10 +1688,10 @@ AssociationListTest >> testEquality [
 { #category : #'tests - includes' }
 AssociationListTest >> testIdentityIncludesNonSpecificComportement [
 	"Test the same comportement than #includes:"
-	
-	| collection |	
+
+	| collection |
 	collection := self nonEmpty.
-	
+
 	self deny: (collection identityIncludes: self elementNotIn).
 	self assert: (collection identityIncludes: collection anyOne)
 ]
@@ -1736,12 +1736,12 @@ AssociationListTest >> testIncludesAnyAllThere [
 
 	self deny: (self nonEmpty includesAny: self empty).
 	self assert: (self nonEmpty includesAny: { self nonEmpty anyOne }).
-	self assert: (self nonEmpty includesAny: self nonEmpty).
+	self assert: (self nonEmpty includesAny: self nonEmpty)
 ]
 
 { #category : #'tests - includes' }
 AssociationListTest >> testIncludesAnyNoneThere [
-	
+
 	self deny: (self nonEmpty includesAny: self empty).
 	self deny: (self nonEmpty includesAny: { self elementNotIn. self anotherElementNotIn })
 ]
@@ -1752,16 +1752,16 @@ AssociationListTest >> testIncludesAssociation [
 	|  nonExistantAssociation associationIn keyIn valueIn |
 
 	keyIn := self nonEmpty keys anyOne.
-	valueIn := self nonEmpty values anyOne. 
+	valueIn := self nonEmpty values anyOne.
 	nonExistantAssociation := self keyNotInNonEmpty -> self valueNotInNonEmpty .
-	associationIn := self nonEmpty associations anyOne.	
+	associationIn := self nonEmpty associations anyOne.
 
 	self assert:  (self nonEmpty includesAssociation: associationIn ).
 	self deny:  (self nonEmpty includesAssociation: nonExistantAssociation ).
 	" testing the case where key is included but not with the same value :"
 	self deny: (self nonEmpty includesAssociation: (keyIn-> self valueNotInNonEmpty )).
 	" testing the case where value is included but not corresponding key :"
-	self deny: (self nonEmpty includesAssociation: (self keyNotInNonEmpty -> valueIn  )).
+	self deny: (self nonEmpty includesAssociation: (self keyNotInNonEmpty -> valueIn  ))
 ]
 
 { #category : #'tests - dictionary including' }
@@ -1778,7 +1778,7 @@ AssociationListTest >> testIncludesComportementForDictionnary [
 
 { #category : #'tests - includes' }
 AssociationListTest >> testIncludesElementIsNotThere [
-	
+
 	self deny: (self nonEmpty includes: self elementNotIn).
 	self assert: (self nonEmpty includes: self nonEmpty anyOne).
 	self deny: (self empty includes: self elementNotIn)
@@ -1786,8 +1786,8 @@ AssociationListTest >> testIncludesElementIsNotThere [
 
 { #category : #'tests - includes' }
 AssociationListTest >> testIncludesElementIsThere [
-	
-	self assert: (self nonEmpty includes: self nonEmpty anyOne).
+
+	self assert: (self nonEmpty includes: self nonEmpty anyOne)
 ]
 
 { #category : #'tests - dictionary including' }
@@ -1798,7 +1798,7 @@ collection := self nonEmpty .
 valueIn := collection  values anyOne.
 
 self assert: (collection includesIdentity: valueIn ) .
-self deny: (collection includesIdentity: self valueNotInNonEmpty ).
+self deny: (collection includesIdentity: self valueNotInNonEmpty )
 ]
 
 { #category : #'tests - dictionary including' }
@@ -1809,7 +1809,7 @@ collection := self nonEmptyWithCopyNonIdentical  .
 valueIn := collection  values anyOne.
 
 self assert: (collection includesIdentity: valueIn ) .
-self deny: (collection includesIdentity: valueIn copy ) .
+self deny: (collection includesIdentity: valueIn copy )
 ]
 
 { #category : #'tests - dictionary including' }
@@ -1819,10 +1819,10 @@ AssociationListTest >> testIncludesKey [
 
 	collection := self nonEmpty .
 	keyIn := collection keys anyOne.
-	nonExistantKey := self keyNotInNonEmpty. 
+	nonExistantKey := self keyNotInNonEmpty.
 
 	self assert: ( collection includesKey: keyIn ).
-	self deny: ( collection includesKey: nonExistantKey ).
+	self deny: ( collection includesKey: nonExistantKey )
 ]
 
 { #category : #'tests - iterating' }
@@ -1854,12 +1854,12 @@ AssociationListTest >> testIntersectionEmpty [
 
 { #category : #'tests - set arithmetic' }
 AssociationListTest >> testIntersectionItself [
-	
+
 	| result |
 	result := self collectionWithoutEqualElements intersection: self collectionWithoutEqualElements.
 	self assert: result size equals: self collectionWithoutEqualElements size.
 	self collectionWithoutEqualElements do: [ :each|
-		self assert: (result includes: each) ].
+		self assert: (result includes: each) ]
 ]
 
 { #category : #'tests - set arithmetic' }
@@ -1954,7 +1954,7 @@ AssociationListTest >> testKeys [
 	result do: [ :key | collection at: key ].
 	self assert: result size equals: collection size.
 	self
-		should: [ 
+		should: [
 		result detect: [ :each | (result occurrencesOf: each) > 1 ] ]
 		raise: Error
 ]
@@ -1965,11 +1965,11 @@ AssociationListTest >> testKeysAndValuesDo [
 	| collection keys |
 	collection := self nonEmptyDict.
 	keys := OrderedCollection new.
-	collection keysAndValuesDo: [ :key :value | 
+	collection keysAndValuesDo: [ :key :value |
 		keys add: key.
 		self assert: (collection at: key) equals: value ].
 
-	collection keys do: [ :key | 
+	collection keys do: [ :key |
 		self
 			assert: (collection keys occurrencesOf: key)
 			equals: (keys occurrencesOf: key) ]
@@ -1983,7 +1983,7 @@ AssociationListTest >> testKeysAndValuesRemove [
 	oldSize := collection size.
 	keyIn := collection keys anyOne.
 
-	collection keysAndValuesRemove: [ :key :value | 
+	collection keysAndValuesRemove: [ :key :value |
 		key == self keyNotInNonEmptyDict ].
 	self assert: collection size equals: oldSize.
 
@@ -2000,7 +2000,7 @@ AssociationListTest >> testKeysDo [
 	keys := OrderedCollection new.
 	collection keysDo: [ :key | keys add: key ].
 
-	collection keys do: [ :key | 
+	collection keys do: [ :key |
 		self
 			assert: (collection keys occurrencesOf: key)
 			equals: (keys occurrencesOf: key) ]
@@ -2015,7 +2015,7 @@ AssociationListTest >> testKeysSortedSafely [
 	result do: [ :key | collection at: key ].
 	self assert: result size equals: collection size.
 	self
-		should: [ 
+		should: [
 		result detect: [ :each | (result occurrencesOf: each) > 1 ] ]
 		raise: Error.
 	self assert: result asArray isSorted
@@ -2027,13 +2027,13 @@ AssociationListTest >> testNoneSatisfy [
 	| element |
 	self assert: ( self collectionWithoutNilElements  noneSatisfy: [:each | each notNil not ] ).
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] ).
+	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] )
 ]
 
 { #category : #'tests - iterating' }
 AssociationListTest >> testNoneSatisfyEmpty [
 
-	self assert: ( self empty noneSatisfy: [:each | false]).
+	self assert: ( self empty noneSatisfy: [:each | false])
 ]
 
 { #category : #'tests - empty' }
@@ -2046,7 +2046,7 @@ AssociationListTest >> testNotEmpty [
 AssociationListTest >> testOccurrencesOf [
 	| collection |
 	collection := self collectionWithoutEqualElements .
-	
+
 	collection do: [ :each | self assert: (collection occurrencesOf: each) equals: 1 ]
 ]
 
@@ -2072,10 +2072,10 @@ AssociationListTest >> testPrintElementsOn [
 	tmp := OrderedCollection new.
 	self nonEmpty associationsDo: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		           self nonEmpty printElementsOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: '( )'.
-	allElementsAsString do: [ :each | 
+	allElementsAsString do: [ :each |
 		self
 			assert: (tmp occurrencesOf: each)
 			equals: (allElementsAsString occurrencesOf: each) ]
@@ -2086,9 +2086,9 @@ AssociationListTest >> testPrintNameOn [
 
 	| printed |
 	printed := String streamContents: [ :s | self nonEmpty printNameOn: s ].
-	
-	self 
-		assert: printed 
+
+	self
+		assert: printed
 		equals: (self nonEmpty class name first isVowel ifTrue: [ 'an ' ] ifFalse: [ 'a ' ]) , self nonEmpty class name
 ]
 
@@ -2101,13 +2101,13 @@ AssociationListTest >> testPrintOn [
 
 	printed := String streamContents: [ :s | self nonEmpty printOn: s ].
 	allElementsAsString := printed findBetweenSubstrings: ' ()'.
-	allElementsAsString withIndexDo: [ :each :i | 
-		i = 1 ifTrue: [ 
+	allElementsAsString withIndexDo: [ :each :i |
+		i = 1 ifTrue: [
 			self
 				assert: each
 				equals: (self classToBeTested class name first isVowel ifTrue: [ 'an' ] ifFalse: [ 'a' ]) ].
 		i = 2 ifTrue: [ self assert: each equals: self classToBeTested name ].
-		i > 2 ifTrue: [ 
+		i > 2 ifTrue: [
 			self
 				assert: (tmp occurrencesOf: each)
 				equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -2120,7 +2120,7 @@ AssociationListTest >> testPrintOnDelimiter [
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
 
-	printed := String streamContents: [ :aStream | 
+	printed := String streamContents: [ :aStream |
 		           self nonEmpty printOn: aStream delimiter: ', ' ].
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
@@ -2136,15 +2136,15 @@ AssociationListTest >> testPrintOnDelimiterLast [
 	| printed allElementsAsString tmp |
 	tmp := OrderedCollection new.
 	self nonEmpty do: [ :each | tmp add: each asString ].
-	printed := String streamContents: [ :s | 
+	printed := String streamContents: [ :s |
 		           self nonEmpty printOn: s delimiter: ', ' last: ' and ' ].
 
 
 	allElementsAsString := printed findBetweenSubstrings: ', '.
-	allElementsAsString withIndexDo: [ :each :i | 
+	allElementsAsString withIndexDo: [ :each :i |
 		i = (allElementsAsString size - 1)
 			ifTrue: [ self assert: each equals: 'and' ]
-			ifFalse: [ 
+			ifFalse: [
 				self
 					assert: (tmp occurrencesOf: each)
 					equals: (allElementsAsString occurrencesOf: each) ] ]
@@ -2172,11 +2172,11 @@ AssociationListTest >> testRejectAllThenCollect [
 { #category : #'tests - iterating' }
 AssociationListTest >> testRejectAllThenDo [
 	| result |
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | each notNil ] 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each | each notNil ]
 		thenDo: [ :each | self fail ].
-	
+
 	self assert: result equals: self collectionWithoutNilElements
 ]
 
@@ -2200,28 +2200,28 @@ AssociationListTest >> testRejectNoReject [
 AssociationListTest >> testRejectThenCollect [
 
 	| result index selectIndex pivot |
-	
+
 	index := 0.
 	selectIndex := 0.
 	pivot := self collectionWithoutNilElements anyOne.
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex = 1 ]
-		thenCollect: [ :each | 
+		thenCollect: [ :each |
 			self assert: each notNil.
 			index := index + 1.
 			pivot ].
-			
+
 	self assert: result ~= self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
 	self assert: index equals: self collectionWithoutNilElements size - 1.
-	
+
 	self assert: (self collectionWithoutNilElements occurrencesOf: pivot) equals: 1.
 	"should be > 1 for standard collection and = 1 for those that do not allow exact duplicates"
-	self assert: (result occurrencesOf: pivot) >= 1.
+	self assert: (result occurrencesOf: pivot) >= 1
 ]
 
 { #category : #'tests - iterating' }
@@ -2233,22 +2233,22 @@ AssociationListTest >> testRejectThenCollectEmpty [
 AssociationListTest >> testRejectThenDo [
 
 	| result index rejectIndex |
-	
+
 	index := 0.
 	rejectIndex := 0.
-	
-	result := self collectionWithoutNilElements 
-		reject: [ :each | 
+
+	result := self collectionWithoutNilElements
+		reject: [ :each |
 			rejectIndex := rejectIndex + 1.
 			"reject the first element"
 			rejectIndex = 1 ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each notNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
 	self assert: rejectIndex equals: self collectionWithoutNilElements size.
-	self assert: index equals: self collectionWithoutNilElements size - 1.
+	self assert: index equals: self collectionWithoutNilElements size - 1
 ]
 
 { #category : #'tests - iterating' }
@@ -2260,7 +2260,7 @@ AssociationListTest >> testRejectThenDoOnEmpty [
 AssociationListTest >> testRemove [
 
 	self should: [self nonEmptyDict remove: nil] raise: Error.
-	self should: [self nonEmptyDict remove: nil ifAbsent: ['What ever here']] raise: Error.
+	self should: [self nonEmptyDict remove: nil ifAbsent: ['What ever here']] raise: Error
 ]
 
 { #category : #'tests - removing' }
@@ -2305,11 +2305,11 @@ AssociationListTest >> testSelect [
 	| collection values result |
 	collection := self nonEmptyDict.
 	values := OrderedCollection new.
-	result := collection select: [ :value | 
+	result := collection select: [ :value |
 		          values add: value.
 		          true ].
 
-	collection values do: [ :value | 
+	collection values do: [ :value |
 		self
 			assert: (collection values occurrencesOf: value)
 			equals: (values occurrencesOf: value) ].
@@ -2327,11 +2327,11 @@ AssociationListTest >> testSelectNoneThenCollect [
 { #category : #'tests - iterating' }
 AssociationListTest >> testSelectNoneThenDo [
 	| result |
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | each isNil ] 
+
+	result := self collectionWithoutNilElements
+		select: [ :each | each isNil ]
 		thenDo: [ self fail ].
-	
+
 	self assert: result equals: self collectionWithoutNilElements
 ]
 
@@ -2344,28 +2344,28 @@ AssociationListTest >> testSelectOnEmpty [
 AssociationListTest >> testSelectThenCollect [
 
 	| result index selectIndex pivot |
-	
+
 	index := 0.
 	selectIndex := 0.
 	pivot := self collectionWithoutNilElements anyOne.
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | 
+
+	result := self collectionWithoutNilElements
+		select: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex > 1 ]
-		thenCollect: [ :each | 
+		thenCollect: [ :each |
 			self assert: each notNil.
 			index := index + 1.
 			pivot ].
-			
+
 	self assert: result ~= self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
 	self assert: index equals: self collectionWithoutNilElements size - 1.
-	
+
 	self assert: (self collectionWithoutNilElements occurrencesOf: pivot) equals: 1.
 	"should be > 1 for standard collection and = 1 for those that do not allow exact duplicates"
-	self assert: (result occurrencesOf: pivot) >= 1.
+	self assert: (result occurrencesOf: pivot) >= 1
 ]
 
 { #category : #'tests - iterating' }
@@ -2377,22 +2377,22 @@ AssociationListTest >> testSelectThenCollectOnEmpty [
 AssociationListTest >> testSelectThenDo [
 
 	| result index selectIndex |
-	
+
 	index := 0.
 	selectIndex := 0.
-	
-	result := self collectionWithoutNilElements 
-		select: [ :each | 
+
+	result := self collectionWithoutNilElements
+		select: [ :each |
 			selectIndex := selectIndex + 1.
 			"reject the first element"
 			selectIndex > 1 ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			self assert: each notNil.
 			index := index + 1]	.
-			
+
 	self assert: result equals: self collectionWithoutNilElements.
 	self assert: selectIndex equals: self collectionWithoutNilElements size.
-	self assert: index equals: self collectionWithoutNilElements size - 1.
+	self assert: index equals: self collectionWithoutNilElements size - 1
 ]
 
 { #category : #'tests - iterating' }
@@ -2414,7 +2414,7 @@ AssociationListTest >> testSize [
 AssociationListTest >> testSumNumbers [
 
 	| result |
-	result := self collectionWithoutNilElements sumNumbers: [ :ele | 
+	result := self collectionWithoutNilElements sumNumbers: [ :ele |
 		          ele notNil
 			          ifTrue: [ 1 ]
 			          ifFalse: [ 0 ] ].
@@ -2423,14 +2423,14 @@ AssociationListTest >> testSumNumbers [
 
 { #category : #'tests - set arithmetic' }
 AssociationListTest >> testUnion [
-	
+
 	| union |
 	union := self empty union: self nonEmpty.
 	self containsAll: union of: self empty andOf: self nonEmpty.
 	union := self nonEmpty union: self empty.
 	self containsAll: union of: self empty andOf: self nonEmpty.
 	union := self collection union: self nonEmpty.
-	self containsAll: union of: self collection andOf: self nonEmpty.
+	self containsAll: union of: self collection andOf: self nonEmpty
 ]
 
 { #category : #'tests - set arithmetic' }
@@ -2445,7 +2445,7 @@ AssociationListTest >> testValues [
 	collection := self nonEmpty.
 	result := collection values.
 	self assert: result size equals: collection size.
-	result do: [ :each | 
+	result do: [ :each |
 		self
 			assert: (collection occurrencesOf: each)
 			equals: (result occurrencesOf: each) ]
@@ -2459,7 +2459,7 @@ AssociationListTest >> testValuesDo [
 	values := OrderedCollection new.
 	collection valuesDo: [ :value | values add: value ].
 
-	collection values do: [ :value | 
+	collection values do: [ :value |
 		self
 			assert: (collection values occurrencesOf: value)
 			equals: (values occurrencesOf: value) ]

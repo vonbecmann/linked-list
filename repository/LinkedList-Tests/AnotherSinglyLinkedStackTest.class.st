@@ -35,7 +35,7 @@ AnotherSinglyLinkedStackTest >> test03PopRemovesElementsFromTheStack [
 
 	stack push: 'Something'.
 	stack pop.
-	
+
 	self assert: stack isEmpty
 ]
 
@@ -52,13 +52,13 @@ AnotherSinglyLinkedStackTest >> test04PopReturnsLastPushedObject [
 { #category : #tests }
 AnotherSinglyLinkedStackTest >> test05StackBehavesLIFO [
 	| firstPushedObject secondPushedObject |
-	
+
 	firstPushedObject := 'First'.
 	secondPushedObject := 'Second'.
-	
+
 	stack push: firstPushedObject.
 	stack push: secondPushedObject.
-	
+
 	self assert: stack pop equals: secondPushedObject.
 	self assert: stack pop equals: firstPushedObject.
 	self assert: stack isEmpty
@@ -68,9 +68,9 @@ AnotherSinglyLinkedStackTest >> test05StackBehavesLIFO [
 AnotherSinglyLinkedStackTest >> test06TopReturnsLastPushedObject [
 	| pushedObject |
 	pushedObject := 'Something'.
-	
+
 	stack push: pushedObject.
-	
+
 	self assert: stack top equals: pushedObject
 ]
 
