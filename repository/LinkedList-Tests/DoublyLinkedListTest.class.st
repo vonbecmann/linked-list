@@ -157,14 +157,18 @@ DoublyLinkedListTest >> testAllSatisfy [
 
 	| element |
 	" when all element  satisfy the condition, should return true : "
-	self assert: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) ] ).
+	self assert:
+		(self collectionWithoutNilElements allSatisfy: [ :each |
+			 each notNil ]).
 
 	" when all element don't satisfy the condition, should return false : "
-	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) not ] ).
+	self deny: (self collectionWithoutNilElements allSatisfy: [ :each |
+			 each notNil not ]).
 
 	" when only one element doesn't satisfy the condition' should return false'"
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] )
+	self deny: (self collectionWithoutNilElements allSatisfy: [ :each |
+			 each ~= element ])
 ]
 
 { #category : #'tests - iterating' }
@@ -506,9 +510,12 @@ DoublyLinkedListTest >> testLast03 [
 DoublyLinkedListTest >> testNoneSatisfy [
 
 	| element |
-	self assert: ( self collectionWithoutNilElements  noneSatisfy: [:each | each notNil not ] ).
+	self assert:
+		(self collectionWithoutNilElements noneSatisfy: [ :each |
+			 each notNil not ]).
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] )
+	self deny: (self collectionWithoutNilElements noneSatisfy: [ :each |
+			 each ~= element ])
 ]
 
 { #category : #'tests - iterating' }

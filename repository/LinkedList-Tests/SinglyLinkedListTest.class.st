@@ -163,14 +163,18 @@ SinglyLinkedListTest >> testAllSatisfy [
 
 	| element |
 	" when all element  satisfy the condition, should return true : "
-	self assert: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) ] ).
+	self assert:
+		(self collectionWithoutNilElements allSatisfy: [ :each |
+			 each notNil ]).
 
 	" when all element don't satisfy the condition, should return false : "
-	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each notNil) not ] ).
+	self deny: (self collectionWithoutNilElements allSatisfy: [ :each |
+			 each notNil not ]).
 
 	" when only one element doesn't satisfy the condition' should return false'"
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  allSatisfy: [:each | (each = element) not] )
+	self deny: (self collectionWithoutNilElements allSatisfy: [ :each |
+			 each ~= element ])
 ]
 
 { #category : #'tests - iterating' }
@@ -607,9 +611,12 @@ SinglyLinkedListTest >> testLast03 [
 SinglyLinkedListTest >> testNoneSatisfy [
 
 	| element |
-	self assert: ( self collectionWithoutNilElements  noneSatisfy: [:each | each notNil not ] ).
+	self assert:
+		(self collectionWithoutNilElements noneSatisfy: [ :each |
+			 each notNil not ]).
 	element := self collectionWithoutNilElements anyOne.
-	self deny: ( self collectionWithoutNilElements  noneSatisfy: [:each | (each = element)not ] )
+	self deny: (self collectionWithoutNilElements noneSatisfy: [ :each |
+			 each ~= element ])
 ]
 
 { #category : #'tests - iterating' }
@@ -851,12 +858,18 @@ SinglyLinkedListTest >> testSecond03 [
 SinglyLinkedListTest >> testSelect [
 
 	| result element |
-	result := self collectionWithoutNilElements select: [ :each | each notNil].
-	self assert: result size equals: self collectionWithoutNilElements size.
+	result := self collectionWithoutNilElements select: [ :each |
+		          each notNil ].
+	self
+		assert: result size
+		equals: self collectionWithoutNilElements size.
 
 	element := self collectionWithoutNilElements anyOne.
-	result := self collectionWithoutNilElements select: [ :each | (each = element) not].
-	self assert: result size equals: (self collectionWithoutNilElements size - 1)
+	result := self collectionWithoutNilElements select: [ :each |
+		          each ~= element ].
+	self
+		assert: result size
+		equals: self collectionWithoutNilElements size - 1
 ]
 
 { #category : #'tests - iterating' }
