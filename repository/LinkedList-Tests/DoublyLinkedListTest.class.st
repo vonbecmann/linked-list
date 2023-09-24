@@ -388,20 +388,20 @@ DoublyLinkedListTest >> testDo2 [
 { #category : #'tests - iterating' }
 DoublyLinkedListTest >> testDoSeparatedBy [
 
-	| string expectedString beforeFirst |
-	string := ''.
-	self collectionWithoutNilElements
-		do: [ :each | string := string , each asString ]
-		separatedBy: [ string := string , '|' ].
+	| actualString beforeFirst expectedString |
+	actualString := String streamContents: [ :stream |
+		                self collectionWithoutNilElements
+			                do: [ :each | stream nextPutAll: each asString ]
+			                separatedBy: [ stream nextPutAll: '|' ] ].
 
-	expectedString := ''.
 	beforeFirst := true.
-	self collectionWithoutNilElements do: [ :each |
-		beforeFirst
-			ifTrue: [ beforeFirst := false ]
-			ifFalse: [ expectedString := expectedString , '|' ].
-		expectedString := expectedString , each asString ].
-	self assert: expectedString equals: string
+	expectedString := String streamContents: [ :stream |
+		                  self collectionWithoutNilElements do: [ :each |
+			                  beforeFirst
+				                  ifTrue: [ beforeFirst := false ]
+				                  ifFalse: [ stream nextPutAll: '|' ].
+			                  stream nextPutAll: each asString ] ].
+	self assert: expectedString equals: actualString
 ]
 
 { #category : #'tests - iterating' }
