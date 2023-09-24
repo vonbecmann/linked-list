@@ -1835,7 +1835,7 @@ AssociationListTest >> testInjectInto [
 	| result |
 	result := self collectionWithoutNilElements
 		          inject: 0
-		          into: [ :inj :ele | ele notNil ifTrue: [ inj + 1 ] ].
+		          into: [ :inj :ele | ele ifNotNil: [ inj + 1 ] ].
 	self assert: self collectionWithoutNilElements size equals: result
 ]
 
@@ -2422,9 +2422,7 @@ AssociationListTest >> testSumNumbers [
 
 	| result |
 	result := self collectionWithoutNilElements sumNumbers: [ :ele |
-		          ele notNil
-			          ifTrue: [ 1 ]
-			          ifFalse: [ 0 ] ].
+		          ele ifNotNil: [ 1 ] ifNil: [ 0 ] ].
 	self assert: self collectionWithoutNilElements size equals: result
 ]
 
