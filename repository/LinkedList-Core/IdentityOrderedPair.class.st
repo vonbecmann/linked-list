@@ -21,12 +21,11 @@ IdentityOrderedPair >> = aPair [
 { #category : #displaying }
 IdentityOrderedPair >> displayStringOn: aStream [
 
-	aStream
-		nextPut: $<;
-		print: first;
-		nextPutAll: ', ';
-		print: second;
-		nextPut: $>
+	aStream nextPut: $<.
+	first displayStringOn: aStream.
+	aStream nextPutAll: ', '.
+	second displayStringOn: aStream.
+	aStream nextPut: $>
 ]
 
 { #category : #comparing }

@@ -21,7 +21,7 @@ OrderedPairTest >> testDisplayString [
 	| one |
 	one := OrderedPair first: 'A' second: 1.
 
-	self assert: one displayString equals: '(''A'', 1)'
+	self assert: one displayString equals: '(A, 1)'
 ]
 
 { #category : #tests }
