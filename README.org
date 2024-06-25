@@ -4,7 +4,7 @@
 #+BEGIN_SRC
 Metacello new
    baseline: 'LinkedList';
-   repository: 'github://vonbecmann/linked-list/repository';
+   repository: 'github://vonbecmann/linked-list:pharo11/repository';
    load.
 #+END_SRC
 
