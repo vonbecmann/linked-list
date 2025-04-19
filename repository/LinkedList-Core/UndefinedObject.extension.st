@@ -1,6 +1,6 @@
-Extension { #name : #UndefinedObject }
+Extension { #name : 'UndefinedObject' }
 
-{ #category : #'*LinkedList-Core' }
+{ #category : '*LinkedList-Core' }
 UndefinedObject >> removeNodeFrom: associationList [
 	^ associationList removeFirstNode
 ]

@@ -5,16 +5,18 @@ I implement a singly linked Stack.
 #top answer the first element of the stack without removing it.
 "
 Class {
-	#name : #SinglyLinkedStack,
-	#superclass : #Object,
+	#name : 'SinglyLinkedStack',
+	#superclass : 'Object',
 	#instVars : [
 		'tally',
 		'firstNode'
 	],
-	#category : #'LinkedList-Core-Sequenceable'
+	#category : 'LinkedList-Core-Sequenceable',
+	#package : 'LinkedList-Core',
+	#tag : 'Sequenceable'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedStack class >> with: anObject [
 	"Answer an instance of me containing anObject."
 
@@ -23,7 +25,7 @@ SinglyLinkedStack class >> with: anObject [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedStack class >> withAll: aCollection [
 	"Create a new stack containing all the elements from aCollection."
 
@@ -32,7 +34,7 @@ SinglyLinkedStack class >> withAll: aCollection [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 SinglyLinkedStack >> asArray [
 	"Optimized for efficiency"
 
@@ -43,7 +45,7 @@ SinglyLinkedStack >> asArray [
 	^ newArray
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedStack >> do: aBlock [
 	| current |
 	current := firstNode.
@@ -53,7 +55,7 @@ SinglyLinkedStack >> do: aBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedStack >> do: elementBlock separatedBy: separatorBlock [
 	"Evaluate the elementBlock for all elements in the receiver,
 	and evaluate the separatorBlock between."
@@ -68,7 +70,7 @@ SinglyLinkedStack >> do: elementBlock separatedBy: separatorBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> ifEmpty: aBlock [
 	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
 
@@ -77,7 +79,7 @@ SinglyLinkedStack >> ifEmpty: aBlock [
 		ifFalse: [ self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise"
 
@@ -88,7 +90,7 @@ SinglyLinkedStack >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> ifNotEmpty: aBlock [
 	"Evaluate the given block with the receiver as argument, answering its value
     unless the receiver is empty, in which case answer the receiver."
@@ -98,7 +100,7 @@ SinglyLinkedStack >> ifNotEmpty: aBlock [
 		ifFalse: [ aBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise
 	 If the notEmptyBlock has an argument, eval with the receiver as its argument"
@@ -108,30 +110,30 @@ SinglyLinkedStack >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SinglyLinkedStack >> initialize [
 	super initialize.
 	tally := 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> isEmpty [
 	^ firstNode isNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> isEmptyOrNil [
 	"Answer whether the receiver contains any elements, or is nil.  Useful in numerous situations where one wishes the same reaction to an empty collection or to nil"
 
 	^ self isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> isNotEmpty [
 	^ firstNode isNotNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedStack >> notEmpty [
 	"Answer whether the receiver contains any elements."
 	"use isNotEmpty for consistency with isEmpty"
@@ -139,7 +141,7 @@ SinglyLinkedStack >> notEmpty [
 	^ self isNotEmpty
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedStack >> pop [
 	"Returns the first element and remove it from the stack."
 
@@ -150,7 +152,7 @@ SinglyLinkedStack >> pop [
 	^ firstElement
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 SinglyLinkedStack >> postCopy [
 	| node |
 	super postCopy.
@@ -160,21 +162,21 @@ SinglyLinkedStack >> postCopy [
 			[ node nextNode isNil ] whileFalse: [ node nextNode: (node := node nextNode copy) ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedStack >> printElementsOn: aStream [
 	aStream nextPut: $(.
 	self do: [ :element | aStream print: element ] separatedBy: [ aStream space ].
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedStack >> printNameOn: aStream [
 	aStream
 		nextPutAll: 'a ';
 		nextPutAll: self class name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedStack >> printOn: aStream [
 	"Append a sequence of characters that identify the receiver to aStream."
 
@@ -182,7 +184,7 @@ SinglyLinkedStack >> printOn: aStream [
 	self printElementsOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedStack >> printOn: aStream delimiter: delimString [
 	"Print elements on a stream separated
 	with a delimiter String like: 'a, b, c' "
@@ -190,7 +192,7 @@ SinglyLinkedStack >> printOn: aStream delimiter: delimString [
 	self do: [ :elem | aStream print: elem ] separatedBy: [ aStream nextPutAll: delimString ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedStack >> printOn: aStream delimiter: delimString last: lastDelimString [
 	"Print elements on a stream separated
 	with a delimiter between all the elements and with
@@ -211,7 +213,7 @@ SinglyLinkedStack >> printOn: aStream delimiter: delimString last: lastDelimStri
 				ifFalse: [ aStream nextPutAll: delimString ] ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 SinglyLinkedStack >> push: anObject [
 	"Adds a new object of any kind on top of the stack."
 
@@ -220,7 +222,7 @@ SinglyLinkedStack >> push: anObject [
 	^ anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 SinglyLinkedStack >> pushAll: aCollection [
 	"Include all the elements of aCollection as the receiver's elements. Answer
 	aCollection. Actually, any object responding to #do: can be used as argument."
@@ -229,7 +231,7 @@ SinglyLinkedStack >> pushAll: aCollection [
 	^ aCollection
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedStack >> removeAll [
 	"Implementation note: this has to be fast"
 
@@ -237,14 +239,14 @@ SinglyLinkedStack >> removeAll [
 	tally := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedStack >> size [
 	"Answer how many elements the receiver contains."
 
 	^ tally
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedStack >> top [
 	"Answer the first element of the stack without removing it."
 

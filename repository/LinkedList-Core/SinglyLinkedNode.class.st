@@ -5,23 +5,25 @@ I hold an object, as well as a reference to my successor (nextNode:)  - can be n
 
 "
 Class {
-	#name : #SinglyLinkedNode,
-	#superclass : #Object,
+	#name : 'SinglyLinkedNode',
+	#superclass : 'Object',
 	#instVars : [
 		'value',
 		'nextNode'
 	],
-	#category : #'LinkedList-Core-Base'
+	#category : 'LinkedList-Core-Base',
+	#package : 'LinkedList-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedNode class >> with: anObject [
 	"a singly linked node with an object as its value."
 
 	^ self basicNew initializeValue: anObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedNode class >> with: anObject next: aNode [
 	"a singly linked node with an object as its value and a node as its successor"
 
@@ -30,33 +32,33 @@ SinglyLinkedNode class >> with: anObject next: aNode [
 			yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 SinglyLinkedNode >> = anObject [
 	^ self class == anObject class
 		and: [ value = anObject value and: [ nextNode == anObject nextNode ] ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 SinglyLinkedNode >> hash [
 	^ (self class hash + (value hash + nextNode identityHash) hashMultiply) hashMultiply
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SinglyLinkedNode >> initializeValue: anObject [
 	value := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedNode >> nextNode [
 	^ nextNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedNode >> nextNode: aNode [
 	nextNode := aNode
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedNode >> printOn: aStream [
 	aStream
 		nextPutAll: self class name;
@@ -65,18 +67,18 @@ SinglyLinkedNode >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 SinglyLinkedNode >> release [
 	value := nextNode := nil.
 	super release
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedNode >> removeNodeFrom: anAssociationList [
 	^ anAssociationList removeNextNodeTo: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedNode >> value [
 	^ value
 ]

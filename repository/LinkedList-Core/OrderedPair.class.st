@@ -13,28 +13,30 @@ Let ( a1 , b1 )  and ( a2 , b2 )  be ordered pairs. Then the characteristic (or 
 
 "
 Class {
-	#name : #OrderedPair,
-	#superclass : #Object,
+	#name : 'OrderedPair',
+	#superclass : 'Object',
 	#instVars : [
 		'first',
 		'second'
 	],
-	#category : #'LinkedList-Core-Pair'
+	#category : 'LinkedList-Core-Pair',
+	#package : 'LinkedList-Core',
+	#tag : 'Pair'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OrderedPair class >> empty [
 	^ self basicNew
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OrderedPair class >> first: firstObject [
 	^ self basicNew
 		first: firstObject;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OrderedPair class >> first: firstObject second: secondObject [
 	^ self basicNew
 		first: firstObject;
@@ -42,14 +44,14 @@ OrderedPair class >> first: firstObject second: secondObject [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OrderedPair class >> second: secondObject [
 	^ self basicNew
 		second: secondObject;
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OrderedPair >> = aPair [
 	self == aPair
 		ifTrue: [ ^ true ].
@@ -58,7 +60,7 @@ OrderedPair >> = aPair [
 	^ first = aPair first and: [ second = aPair second ]
 ]
 
-{ #category : #displaying }
+{ #category : 'displaying' }
 OrderedPair >> displayStringOn: aStream [
 
 	aStream nextPut: $(.
@@ -68,22 +70,22 @@ OrderedPair >> displayStringOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OrderedPair >> first [
 	^ first
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OrderedPair >> first: anObject [
 	first := anObject
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OrderedPair >> hash [
 	^ (first hash + second hash) hashMultiply
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 OrderedPair >> printOn: aStream [
 
 	aStream
@@ -95,12 +97,12 @@ OrderedPair >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OrderedPair >> second [
 	^ second
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OrderedPair >> second: anObject [
 	second := anObject
 ]

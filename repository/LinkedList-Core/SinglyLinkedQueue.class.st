@@ -5,17 +5,19 @@ I implement a singly linked queue.
 #peek answer the first element of the queue without removing it.
 "
 Class {
-	#name : #SinglyLinkedQueue,
-	#superclass : #Object,
+	#name : 'SinglyLinkedQueue',
+	#superclass : 'Object',
 	#instVars : [
 		'firstNode',
 		'lastNode',
 		'tally'
 	],
-	#category : #'LinkedList-Core-Sequenceable'
+	#category : 'LinkedList-Core-Sequenceable',
+	#package : 'LinkedList-Core',
+	#tag : 'Sequenceable'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedQueue class >> with: anObject [
 	"Answer an instance of me containing anObject."
 
@@ -24,7 +26,7 @@ SinglyLinkedQueue class >> with: anObject [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedQueue class >> withAll: aCollection [
 	"Create a new queue containing all the elements from aCollection."
 
@@ -33,7 +35,7 @@ SinglyLinkedQueue class >> withAll: aCollection [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 SinglyLinkedQueue >> asArray [
 	"Optimized for efficiency"
 
@@ -44,7 +46,7 @@ SinglyLinkedQueue >> asArray [
 	^ newArray
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedQueue >> do: aBlock [
 	| current |
 	current := firstNode.
@@ -54,7 +56,7 @@ SinglyLinkedQueue >> do: aBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedQueue >> do: elementBlock separatedBy: separatorBlock [
 	"Evaluate the elementBlock for all elements in the receiver,
 	and evaluate the separatorBlock between."
@@ -69,12 +71,12 @@ SinglyLinkedQueue >> do: elementBlock separatedBy: separatorBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SinglyLinkedQueue >> emptyError [
 	^ Error signal: 'collection is empty!'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedQueue >> head [
 	"Answer the head of the receiver"
 
@@ -83,7 +85,7 @@ SinglyLinkedQueue >> head [
 	^ firstNode ifNil: [ self emptyError ] ifNotNil: [ firstNode value ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> ifEmpty: aBlock [
 	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
 
@@ -92,7 +94,7 @@ SinglyLinkedQueue >> ifEmpty: aBlock [
 		ifFalse: [ self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise"
 
@@ -103,7 +105,7 @@ SinglyLinkedQueue >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> ifNotEmpty: aBlock [
 	"Evaluate the given block with the receiver as argument, answering its value
     unless the receiver is empty, in which case answer the receiver."
@@ -113,7 +115,7 @@ SinglyLinkedQueue >> ifNotEmpty: aBlock [
 		ifFalse: [ aBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise
 	 If the notEmptyBlock has an argument, eval with the receiver as its argument"
@@ -123,30 +125,30 @@ SinglyLinkedQueue >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SinglyLinkedQueue >> initialize [
 	super initialize.
 	tally := 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> isEmpty [
 	^ firstNode isNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> isEmptyOrNil [
 	"Answer whether the receiver contains any elements, or is nil.  Useful in numerous situations where one wishes the same reaction to an empty collection or to nil"
 
 	^ self isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> isNotEmpty [
 	^ firstNode isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedQueue >> next [
 	"Answer the next object accessible by the receiver."
 
@@ -163,7 +165,7 @@ SinglyLinkedQueue >> next [
 			head ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedQueue >> nextPut: anObject [
 	"Insert the argument, anObject, as the next object accessible by the
 	receiver. Answer anObject."
@@ -176,7 +178,7 @@ SinglyLinkedQueue >> nextPut: anObject [
 	^ anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedQueue >> nextPutAll: aCollection [
 	"Append the elements of aCollection to the sequence of objects accessible
 	by the receiver. Answer aCollection."
@@ -185,7 +187,7 @@ SinglyLinkedQueue >> nextPutAll: aCollection [
 	^ aCollection
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedQueue >> notEmpty [
 	"Answer whether the receiver contains any elements."
 	"use isNotEmpty for consistency with isEmpty"
@@ -193,12 +195,12 @@ SinglyLinkedQueue >> notEmpty [
 	^ self isNotEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedQueue >> peek [
 	^ firstNode ifNil: [ nil ] ifNotNil: [ firstNode value ]
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 SinglyLinkedQueue >> postCopy [
 	| node |
 	super postCopy.
@@ -209,7 +211,7 @@ SinglyLinkedQueue >> postCopy [
 			lastNode := node ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedQueue >> printElementsOn: aStream [
 	aStream nextPut: $(.
 	self
@@ -218,14 +220,14 @@ SinglyLinkedQueue >> printElementsOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedQueue >> printNameOn: aStream [
 	aStream
 		nextPutAll: 'a ';
 		nextPutAll: self class name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedQueue >> printOn: aStream [
 	"Append a sequence of characters that identify the receiver to aStream."
 
@@ -233,7 +235,7 @@ SinglyLinkedQueue >> printOn: aStream [
 	self printElementsOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedQueue >> printOn: aStream delimiter: delimString [
 	"Print elements on a stream separated
 	with a delimiter String like: 'a, b, c' "
@@ -241,7 +243,7 @@ SinglyLinkedQueue >> printOn: aStream delimiter: delimString [
 	self do: [ :elem | aStream print: elem ] separatedBy: [ aStream nextPutAll: delimString ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedQueue >> printOn: aStream delimiter: delimString last: lastDelimString [
 	"Print elements on a stream separated
 	with a delimiter between all the elements and with
@@ -260,13 +262,13 @@ SinglyLinkedQueue >> printOn: aStream delimiter: delimString last: lastDelimStri
 			current := current nextNode ]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedQueue >> removeAll [
 	firstNode := lastNode := nil.
 	tally := 0
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedQueue >> removeHead [
 	"Remove the head and answer it. If the receiver is empty, create
 	an error notification."
@@ -284,7 +286,7 @@ SinglyLinkedQueue >> removeHead [
 			head ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedQueue >> size [
 	"Answer how many elements the receiver contains."
 

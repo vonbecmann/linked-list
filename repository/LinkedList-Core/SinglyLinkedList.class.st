@@ -4,17 +4,19 @@ a really simple implementation.
 
 "
 Class {
-	#name : #SinglyLinkedList,
-	#superclass : #Object,
+	#name : 'SinglyLinkedList',
+	#superclass : 'Object',
 	#instVars : [
 		'tally',
 		'firstNode',
 		'lastNode'
 	],
-	#category : #'LinkedList-Core-Sequenceable'
+	#category : 'LinkedList-Core-Sequenceable',
+	#package : 'LinkedList-Core',
+	#tag : 'Sequenceable'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedList class >> with: anObject [
 	"Answer an instance of me containing anObject."
 
@@ -23,7 +25,7 @@ SinglyLinkedList class >> with: anObject [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedList class >> with: firstObject with: secondObject [
 	"Answer an instance of me containing firstObject and secondObject."
 
@@ -33,7 +35,7 @@ SinglyLinkedList class >> with: firstObject with: secondObject [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedList class >> with: firstObject with: secondObject with: thirdObject [
 	"Answer an instance of me containing the three arguments as elements."
 
@@ -44,7 +46,7 @@ SinglyLinkedList class >> with: firstObject with: secondObject with: thirdObject
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject [
 	"Answer an instance of me, containing the four arguments as the elements."
 
@@ -56,7 +58,7 @@ SinglyLinkedList class >> with: firstObject with: secondObject with: thirdObject
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject with: fifthObject [
 	"Answer an instance of me, containing the five arguments as the elements."
 
@@ -69,7 +71,7 @@ SinglyLinkedList class >> with: firstObject with: secondObject with: thirdObject
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SinglyLinkedList class >> withAll: aCollection [
 	"Create a new collection containing all the elements from aCollection."
 
@@ -78,7 +80,7 @@ SinglyLinkedList class >> withAll: aCollection [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 SinglyLinkedList >> = anObject [
 	| list1 list2 |
 	self == anObject
@@ -98,12 +100,12 @@ SinglyLinkedList >> = anObject [
 	^ true
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 SinglyLinkedList >> add: anObject [
 	^ self addLast: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 SinglyLinkedList >> addAll: aCollection [
 	"Include all the elements of aCollection as the receiver's elements. Answer
 	aCollection. Actually, any object responding to #do: can be used as argument."
@@ -112,7 +114,7 @@ SinglyLinkedList >> addAll: aCollection [
 	^ aCollection
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 SinglyLinkedList >> addFirst: anObject [
 	"Add a node to the beginning of the receiver's list."
 
@@ -124,7 +126,7 @@ SinglyLinkedList >> addFirst: anObject [
 	^ anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 SinglyLinkedList >> addLast: anObject [
 	"Add a node to the end of the receiver's list."
 
@@ -136,7 +138,7 @@ SinglyLinkedList >> addLast: anObject [
 	^ anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> allSatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns false for any element return false.
@@ -148,12 +150,12 @@ SinglyLinkedList >> allSatisfy: aBlock [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedList >> anyOne [
 	^ self first
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> anySatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns true for any element return true.
@@ -166,7 +168,7 @@ SinglyLinkedList >> anySatisfy: aBlock [
 	^ false
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 SinglyLinkedList >> asArray [
 	"Optimized for efficiency"
 
@@ -177,7 +179,7 @@ SinglyLinkedList >> asArray [
 	^ newArray
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> collect: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Collect the resulting values into a collection like the receiver. Answer
@@ -194,14 +196,14 @@ SinglyLinkedList >> collect: aBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> collect: collectBlock thenDo: doBlock [
 	"Utility method to improve readability."
 
 	self do: [ :each | doBlock value: (collectBlock value: each) ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> collect: collectBlock thenSelect: selectBlock [
 	"Utility method to improve readability."
 	"Optimized version."
@@ -216,7 +218,7 @@ SinglyLinkedList >> collect: collectBlock thenSelect: selectBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> detect: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Answer the first element for which aBlock evaluates to true."
@@ -224,7 +226,7 @@ SinglyLinkedList >> detect: aBlock [
 	^ self detect: aBlock ifNone: [ self errorNotFound: aBlock ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> detect: aBlock ifFound: foundBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	If some element evaluates aBlock to true, then cull this element into
@@ -240,7 +242,7 @@ SinglyLinkedList >> detect: aBlock ifFound: foundBlock [
 			 ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	If some element evaluates aBlock to true, then cull this element into
@@ -254,7 +256,7 @@ SinglyLinkedList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	^ exceptionBlock value
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> detect: aBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Answer the first element for which aBlock evaluates to true. If none
@@ -263,7 +265,7 @@ SinglyLinkedList >> detect: aBlock ifNone: exceptionBlock [
 	^ self detect: aBlock ifFound: [ :element | element ] ifNone: exceptionBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> do: aBlock [
 	| current |
 	current := firstNode.
@@ -273,7 +275,7 @@ SinglyLinkedList >> do: aBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> do: elementBlock separatedBy: separatorBlock [
 	"Evaluate the elementBlock for all elements in the receiver,
 	and evaluate the separatorBlock between."
@@ -288,7 +290,7 @@ SinglyLinkedList >> do: elementBlock separatedBy: separatorBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> do: aBlock without: anItem [
 	"Enumerate all elements in the receiver.
 	Execute aBlock for those elements that are not equal to the given item"
@@ -296,18 +298,18 @@ SinglyLinkedList >> do: aBlock without: anItem [
 	^ self do: [ :each | anItem = each ifFalse: [ aBlock value: each ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SinglyLinkedList >> emptyCheck [
 
 	self ifEmpty: [ self emptyError ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SinglyLinkedList >> emptyError [
 	^ Error signal: 'collection is empty!'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SinglyLinkedList >> errorNotFound: anObject [
 	Error
 		signal:
@@ -318,7 +320,7 @@ SinglyLinkedList >> errorNotFound: anObject [
 					stream print: self class ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedList >> first [
 	"Answer the first element of the receiver"
 
@@ -327,12 +329,12 @@ SinglyLinkedList >> first [
 	^ firstNode ifNil: [ self emptyError ] ifNotNil: [ firstNode value ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SinglyLinkedList >> firstNode [
 	^ firstNode
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 SinglyLinkedList >> hash [
 	| hash |
 	hash := self class hash.
@@ -340,7 +342,7 @@ SinglyLinkedList >> hash [
 	^ hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> ifEmpty: aBlock [
 	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
 
@@ -349,7 +351,7 @@ SinglyLinkedList >> ifEmpty: aBlock [
 		ifFalse: [ self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise"
 
@@ -360,7 +362,7 @@ SinglyLinkedList >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> ifNotEmpty: aBlock [
 	"Evaluate the given block with the receiver as argument, answering its value
     unless the receiver is empty, in which case answer the receiver."
@@ -370,7 +372,7 @@ SinglyLinkedList >> ifNotEmpty: aBlock [
 		ifFalse: [ aBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise
 	 If the notEmptyBlock has an argument, eval with the receiver as its argument"
@@ -380,27 +382,27 @@ SinglyLinkedList >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> includes: anObject [
 	"Answer whether anObject is one of the receiver's elements."
 
 	^ self anySatisfy: [ :each | each = anObject ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> includesAll: aCollection [
 	"Answer whether all the elements of aCollection are in the receiver."
 
 	^ aCollection allSatisfy: [ :each | self includes: each ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SinglyLinkedList >> initialize [
 	super initialize.
 	tally := 0
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> inject: thisValue into: binaryBlock [
 	"Accumulate a running value associated with evaluating the argument,
 	binaryBlock, with the current value of the argument, thisValue, and the
@@ -414,24 +416,24 @@ SinglyLinkedList >> inject: thisValue into: binaryBlock [
 	^ nextValue
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> isEmpty [
 	^ firstNode isNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> isEmptyOrNil [
 	"Answer whether the receiver contains any elements, or is nil.  Useful in numerous situations where one wishes the same reaction to an empty collection or to nil"
 
 	^ self isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> isNotEmpty [
 	^ firstNode isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedList >> last [
 	"Answer the last element of the receiver"
 
@@ -440,7 +442,7 @@ SinglyLinkedList >> last [
 	^ lastNode ifNil: [ self emptyError ] ifNotNil: [ lastNode value ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> noneSatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns false for all elements return true.
@@ -450,7 +452,7 @@ SinglyLinkedList >> noneSatisfy: aBlock [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> notEmpty [
 	"Answer whether the receiver contains any elements."
 	"use isNotEmpty for consistency with isEmpty"
@@ -458,7 +460,7 @@ SinglyLinkedList >> notEmpty [
 	^ self isNotEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SinglyLinkedList >> occurrencesOf: anObject [
 	"Answer how many of the receiver's elements are equal to anObject."
 
@@ -470,7 +472,7 @@ SinglyLinkedList >> occurrencesOf: anObject [
 	^ count
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 SinglyLinkedList >> postCopy [
 	| node |
 	super postCopy.
@@ -481,7 +483,7 @@ SinglyLinkedList >> postCopy [
 			lastNode := node ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedList >> printElementsOn: aStream [
 	aStream nextPut: $(.
 	self
@@ -490,14 +492,14 @@ SinglyLinkedList >> printElementsOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedList >> printNameOn: aStream [
 	aStream
 		nextPutAll: 'a ';
 		nextPutAll: self class name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedList >> printOn: aStream [
 	"Append a sequence of characters that identify the receiver to aStream."
 
@@ -505,7 +507,7 @@ SinglyLinkedList >> printOn: aStream [
 	self printElementsOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedList >> printOn: aStream delimiter: delimString [
 	"Print elements on a stream separated
 	with a delimiter String like: 'a, b, c' "
@@ -513,7 +515,7 @@ SinglyLinkedList >> printOn: aStream delimiter: delimString [
 	self do: [ :elem | aStream print: elem ] separatedBy: [ aStream nextPutAll: delimString ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SinglyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimString [
 
 	"Print elements on a stream separated
@@ -531,7 +533,7 @@ SinglyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimStrin
 		current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> reject: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Collect into a new collection like the receiver only those elements for
@@ -549,7 +551,7 @@ SinglyLinkedList >> reject: aBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> reject: rejectBlock thenCollect: collectBlock [
 	"Utility method to improve readability."
 	"Optimized."
@@ -565,7 +567,7 @@ SinglyLinkedList >> reject: rejectBlock thenCollect: collectBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> reject: rejectBlock thenDo: aBlock [
 	"Utility method to improve readability."
 
@@ -575,7 +577,7 @@ SinglyLinkedList >> reject: rejectBlock thenDo: aBlock [
 				ifFalse: [ aBlock value: each ] ]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedList >> removeAll [
 	"Implementation note: this has to be fast"
 
@@ -583,7 +585,7 @@ SinglyLinkedList >> removeAll [
 	tally := 0
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedList >> removeFirst [
 	"Remove the first element and answer it. If the receiver is empty, create
 	an error notification."
@@ -599,7 +601,7 @@ SinglyLinkedList >> removeFirst [
 	^ firstElement
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 SinglyLinkedList >> removeLast [
 	"Remove the receiver's last element and answer it. If the receiver is
 	empty, create an error notification."
@@ -619,7 +621,7 @@ SinglyLinkedList >> removeLast [
 	^ lastElement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 SinglyLinkedList >> reversed [
 	^ self
 		inject: self class new
@@ -629,7 +631,7 @@ SinglyLinkedList >> reversed [
 				yourself ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedList >> second [
 	"Answer the second element of the receiver"
 
@@ -640,7 +642,7 @@ SinglyLinkedList >> second [
 		ifNotNil: [ firstNode nextNode ifNil: [ self emptyError ] ifNotNil: [ firstNode nextNode value ] ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> select: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Collect into a new collection like the receiver, only those elements for
@@ -658,7 +660,7 @@ SinglyLinkedList >> select: aBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> select: selectBlock thenCollect: collectBlock [
 	"Utility method to improve readability."
 	"Optimized."
@@ -674,7 +676,7 @@ SinglyLinkedList >> select: selectBlock thenCollect: collectBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SinglyLinkedList >> select: selectBlock thenDo: doBlock [
 	"Utility method to improve readability.
 	Do not create the intermediate collection."
@@ -685,14 +687,14 @@ SinglyLinkedList >> select: selectBlock thenDo: doBlock [
 				ifTrue: [ doBlock value: each ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SinglyLinkedList >> size [
 	"Answer how many elements the receiver contains."
 
 	^ tally
 ]
 
-{ #category : #'math functions' }
+{ #category : 'math functions' }
 SinglyLinkedList >> sum [
 	"This is implemented using a variant of the normal inject:into: pattern.
 	The reason for this is that it is not known whether we're in the normal
@@ -707,7 +709,7 @@ SinglyLinkedList >> sum [
 	^ sum - sample
 ]
 
-{ #category : #'math functions' }
+{ #category : 'math functions' }
 SinglyLinkedList >> sumNumbers: aBlock [
 	"This is implemented using a variant of the normal inject:into: pattern
 	that is specific to handling numbers. aBlock is expected to return a number

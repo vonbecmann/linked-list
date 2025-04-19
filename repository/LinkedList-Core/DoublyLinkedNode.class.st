@@ -2,24 +2,26 @@
 I am doubly linked node, the elementary part of a doubly linked list.
 "
 Class {
-	#name : #DoublyLinkedNode,
-	#superclass : #Object,
+	#name : 'DoublyLinkedNode',
+	#superclass : 'Object',
 	#instVars : [
 		'value',
 		'previousNode',
 		'nextNode'
 	],
-	#category : #'LinkedList-Core-Base'
+	#category : 'LinkedList-Core-Base',
+	#package : 'LinkedList-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedNode class >> with: anObject [
 	"a singly linked node with an object as its value."
 
 	^ self basicNew initializeValue: anObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedNode class >> with: anObject next: aNode [
 	"a doubly linked node with an object as its value and a node as its successor"
 
@@ -28,7 +30,7 @@ DoublyLinkedNode class >> with: anObject next: aNode [
 			yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedNode class >> with: anObject previous: aNode [
 	"a doubly linked node with an object as its value and a node as its predecessor"
 
@@ -37,7 +39,7 @@ DoublyLinkedNode class >> with: anObject previous: aNode [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 DoublyLinkedNode >> = anObject [
 	^ self class == anObject class
 		and: [ value = anObject value
@@ -45,39 +47,39 @@ DoublyLinkedNode >> = anObject [
 						and: [ nextNode == anObject nextNode ] ] ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 DoublyLinkedNode >> hash [
 	^ (self class hash +
 			(value hash	+ (previousNode identityHash + nextNode identityHash) hashMultiply)	hashMultiply)
 					hashMultiply
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DoublyLinkedNode >> initializeValue: anObject [
 	value := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedNode >> nextNode [
 	^ nextNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedNode >> nextNode: aNode [
 	nextNode := aNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedNode >> previousNode [
 	^ previousNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedNode >> previousNode: aNode [
 	previousNode := aNode
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 DoublyLinkedNode >> printOn: aStream [
 	aStream
 		nextPutAll: self class name;
@@ -86,13 +88,13 @@ DoublyLinkedNode >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 DoublyLinkedNode >> release [
 	value := previousNode := nextNode := nil.
 	super release
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedNode >> value [
 	^ value
 ]

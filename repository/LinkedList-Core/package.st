@@ -1,1 +1,1 @@
-Package { #name : #'LinkedList-Core' }
+Package { #name : 'LinkedList-Core' }

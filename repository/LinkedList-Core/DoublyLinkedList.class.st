@@ -4,17 +4,19 @@ a really simple implementation.
 
 "
 Class {
-	#name : #DoublyLinkedList,
-	#superclass : #Object,
+	#name : 'DoublyLinkedList',
+	#superclass : 'Object',
 	#instVars : [
 		'firstNode',
 		'lastNode',
 		'tally'
 	],
-	#category : #'LinkedList-Core-Sequenceable'
+	#category : 'LinkedList-Core-Sequenceable',
+	#package : 'LinkedList-Core',
+	#tag : 'Sequenceable'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedList class >> with: anObject [
 	"Answer an instance of me containing anObject."
 
@@ -23,7 +25,7 @@ DoublyLinkedList class >> with: anObject [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedList class >> with: firstObject with: secondObject [
 	"Answer an instance of me containing firstObject and secondObject."
 
@@ -33,7 +35,7 @@ DoublyLinkedList class >> with: firstObject with: secondObject [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject [
 	"Answer an instance of me containing the three arguments as elements."
 
@@ -44,7 +46,7 @@ DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject [
 	"Answer an instance of me, containing the four arguments as the elements."
 
@@ -56,7 +58,7 @@ DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject with: fourthObject with: fifthObject [
 	"Answer an instance of me, containing the five arguments as the elements."
 
@@ -69,7 +71,7 @@ DoublyLinkedList class >> with: firstObject with: secondObject with: thirdObject
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DoublyLinkedList class >> withAll: aCollection [
 	"Create a new collection containing all the elements from aCollection."
 
@@ -78,7 +80,7 @@ DoublyLinkedList class >> withAll: aCollection [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 DoublyLinkedList >> = anObject [
 	| list1 list2 |
 	self == anObject
@@ -98,12 +100,12 @@ DoublyLinkedList >> = anObject [
 	^ true
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 DoublyLinkedList >> add: anObject [
 	^ self addLast: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 DoublyLinkedList >> addAll: aCollection [
 	"Include all the elements of aCollection as the receiver's elements. Answer
 	aCollection. Actually, any object responding to #do: can be used as argument."
@@ -112,7 +114,7 @@ DoublyLinkedList >> addAll: aCollection [
 	^ aCollection
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 DoublyLinkedList >> addFirst: anObject [
 	"Add a node to the beginning of the receiver's list."
 
@@ -124,7 +126,7 @@ DoublyLinkedList >> addFirst: anObject [
 	^ anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 DoublyLinkedList >> addLast: anObject [
 	"Add a node to the end of the receiver's list."
 
@@ -136,7 +138,7 @@ DoublyLinkedList >> addLast: anObject [
 	^ anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> allSatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns false for any element return false.
@@ -146,12 +148,12 @@ DoublyLinkedList >> allSatisfy: aBlock [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedList >> anyOne [
 	^ self first
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> anySatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns true for any element return true.
@@ -164,7 +166,7 @@ DoublyLinkedList >> anySatisfy: aBlock [
 	^ false
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 DoublyLinkedList >> asArray [
 	"Optimized for efficiency"
 
@@ -175,7 +177,7 @@ DoublyLinkedList >> asArray [
 	^ newArray
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> collect: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Collect the resulting values into a collection like the receiver. Answer
@@ -192,14 +194,14 @@ DoublyLinkedList >> collect: aBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> collect: collectBlock thenDo: doBlock [
 	"Utility method to improve readability."
 
 	self do: [ :each | doBlock value: (collectBlock value: each) ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> collect: collectBlock thenSelect: selectBlock [
 	"Utility method to improve readability."
 	"Optimized version."
@@ -214,7 +216,7 @@ DoublyLinkedList >> collect: collectBlock thenSelect: selectBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> detect: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Answer the first element for which aBlock evaluates to true."
@@ -222,7 +224,7 @@ DoublyLinkedList >> detect: aBlock [
 	^ self detect: aBlock ifNone: [ self errorNotFound: aBlock ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> detect: aBlock ifFound: foundBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	If some element evaluates aBlock to true, then cull this element into
@@ -238,7 +240,7 @@ DoublyLinkedList >> detect: aBlock ifFound: foundBlock [
 			 ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	If some element evaluates aBlock to true, then cull this element into
@@ -252,7 +254,7 @@ DoublyLinkedList >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	^ exceptionBlock value
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> detect: aBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Answer the first element for which aBlock evaluates to true. If none
@@ -261,7 +263,7 @@ DoublyLinkedList >> detect: aBlock ifNone: exceptionBlock [
 	^ self detect: aBlock ifFound: [ :element | element ] ifNone: exceptionBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> do: aBlock [
 	| current |
 	current := firstNode.
@@ -271,7 +273,7 @@ DoublyLinkedList >> do: aBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> do: elementBlock separatedBy: separatorBlock [
 	"Evaluate the elementBlock for all elements in the receiver,
 	and evaluate the separatorBlock between."
@@ -286,7 +288,7 @@ DoublyLinkedList >> do: elementBlock separatedBy: separatorBlock [
 			current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> do: aBlock without: anItem [
 	"Enumerate all elements in the receiver.
 	Execute aBlock for those elements that are not equal to the given item"
@@ -294,18 +296,18 @@ DoublyLinkedList >> do: aBlock without: anItem [
 	^ self do: [ :each | anItem = each ifFalse: [ aBlock value: each ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 DoublyLinkedList >> emptyCheck [
 
 	self ifEmpty: [ self emptyError ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 DoublyLinkedList >> emptyError [
 	^ Error signal: 'collection is empty!'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 DoublyLinkedList >> errorNotFound: anObject [
 	Error
 		signal:
@@ -316,7 +318,7 @@ DoublyLinkedList >> errorNotFound: anObject [
 					stream print: self class ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedList >> first [
 	"Answer the first element of the receiver"
 
@@ -325,12 +327,12 @@ DoublyLinkedList >> first [
 	^ firstNode ifNil: [ self emptyError ] ifNotNil: [ firstNode value ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 DoublyLinkedList >> firstNode [
 	^ firstNode
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 DoublyLinkedList >> hash [
 	| hash |
 	hash := self class hash.
@@ -338,7 +340,7 @@ DoublyLinkedList >> hash [
 	^ hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> ifEmpty: aBlock [
 	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
 
@@ -347,7 +349,7 @@ DoublyLinkedList >> ifEmpty: aBlock [
 		ifFalse: [ self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise"
 
@@ -358,7 +360,7 @@ DoublyLinkedList >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> ifNotEmpty: aBlock [
 	"Evaluate the given block with the receiver as argument, answering its value
     unless the receiver is empty, in which case answer the receiver."
@@ -368,7 +370,7 @@ DoublyLinkedList >> ifNotEmpty: aBlock [
 		ifFalse: [ aBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise
 	 If the notEmptyBlock has an argument, eval with the receiver as its argument"
@@ -378,27 +380,27 @@ DoublyLinkedList >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
 		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> includes: anObject [
 	"Answer whether anObject is one of the receiver's elements."
 
 	^ self anySatisfy: [ :each | each = anObject ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> includesAll: aCollection [
 	"Answer whether all the elements of aCollection are in the receiver."
 
 	^ aCollection allSatisfy: [ :each | self includes: each ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DoublyLinkedList >> initialize [
 	super initialize.
 	tally := 0
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> inject: thisValue into: binaryBlock [
 	"Accumulate a running value associated with evaluating the argument,
 	binaryBlock, with the current value of the argument, thisValue, and the
@@ -412,24 +414,24 @@ DoublyLinkedList >> inject: thisValue into: binaryBlock [
 	^ nextValue
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> isEmpty [
 	^ firstNode isNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> isEmptyOrNil [
 	"Answer whether the receiver contains any elements, or is nil.  Useful in numerous situations where one wishes the same reaction to an empty collection or to nil"
 
 	^ self isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> isNotEmpty [
 	^ firstNode isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedList >> last [
 	"Answer the last element of the receiver"
 
@@ -438,7 +440,7 @@ DoublyLinkedList >> last [
 	^ lastNode ifNil: [ self emptyError ] ifNotNil: [ lastNode value ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> noneSatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns false for all elements return true.
@@ -448,7 +450,7 @@ DoublyLinkedList >> noneSatisfy: aBlock [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> notEmpty [
 	"Answer whether the receiver contains any elements."
 	"use isNotEmpty for consistency with isEmpty"
@@ -456,7 +458,7 @@ DoublyLinkedList >> notEmpty [
 	^ self isNotEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 DoublyLinkedList >> occurrencesOf: anObject [
 	"Answer how many of the receiver's elements are equal to anObject."
 
@@ -466,7 +468,7 @@ DoublyLinkedList >> occurrencesOf: anObject [
 	^ count
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 DoublyLinkedList >> postCopy [
 	| node |
 	super postCopy.
@@ -477,7 +479,7 @@ DoublyLinkedList >> postCopy [
 			lastNode := node ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 DoublyLinkedList >> printElementsOn: aStream [
 	aStream nextPut: $(.
 	self
@@ -486,14 +488,14 @@ DoublyLinkedList >> printElementsOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 DoublyLinkedList >> printNameOn: aStream [
 	aStream
 		nextPutAll: 'a ';
 		nextPutAll: self class name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 DoublyLinkedList >> printOn: aStream [
 	"Append a sequence of characters that identify the receiver to aStream."
 
@@ -501,7 +503,7 @@ DoublyLinkedList >> printOn: aStream [
 	self printElementsOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 DoublyLinkedList >> printOn: aStream delimiter: delimString [
 	"Print elements on a stream separated
 	with a delimiter String like: 'a, b, c' "
@@ -509,7 +511,7 @@ DoublyLinkedList >> printOn: aStream delimiter: delimString [
 	self do: [ :elem | aStream print: elem ] separatedBy: [ aStream nextPutAll: delimString ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 DoublyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimString [
 	"Print elements on a stream separated
 	with a delimiter between all the elements and with
@@ -528,7 +530,7 @@ DoublyLinkedList >> printOn: aStream delimiter: delimString last: lastDelimStrin
 			current := current nextNode ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> reject: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Collect into a new collection like the receiver only those elements for
@@ -546,7 +548,7 @@ DoublyLinkedList >> reject: aBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> reject: rejectBlock thenCollect: collectBlock [
 	"Utility method to improve readability."
 	"Optimized."
@@ -562,7 +564,7 @@ DoublyLinkedList >> reject: rejectBlock thenCollect: collectBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> reject: rejectBlock thenDo: aBlock [
 	"Utility method to improve readability."
 
@@ -572,7 +574,7 @@ DoublyLinkedList >> reject: rejectBlock thenDo: aBlock [
 				ifFalse: [ aBlock value: each ] ]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 DoublyLinkedList >> removeAll [
 	"Implementation note: this has to be fast"
 
@@ -580,7 +582,7 @@ DoublyLinkedList >> removeAll [
 	tally := 0
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 DoublyLinkedList >> removeFirst [
 	"Remove the first element and answer it. If the receiver is empty, create
 	an error notification."
@@ -595,7 +597,7 @@ DoublyLinkedList >> removeFirst [
 	^ firstElement
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 DoublyLinkedList >> removeLast [
 	"Remove the last element and answer it. If the receiver is empty, create
 	an error notification."
@@ -612,7 +614,7 @@ DoublyLinkedList >> removeLast [
 	^ lastElement
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> reverseDo: aBlock [
 	"Execute block for each of my elements, in reverse order."
 
@@ -624,7 +626,7 @@ DoublyLinkedList >> reverseDo: aBlock [
 			current := current previousNode ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 DoublyLinkedList >> reversed [
 	| newList |
 	newList := self class new.
@@ -632,7 +634,7 @@ DoublyLinkedList >> reversed [
 	^ newList
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedList >> second [
 	"Answer the second element of the receiver"
 
@@ -643,7 +645,7 @@ DoublyLinkedList >> second [
 		ifNotNil: [ firstNode nextNode ifNil: [ self emptyError ] ifNotNil: [ firstNode nextNode value ] ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> select: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.
 	Collect into a new collection like the receiver, only those elements for
@@ -661,7 +663,7 @@ DoublyLinkedList >> select: aBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> select: selectBlock thenCollect: collectBlock [
 	"Utility method to improve readability."
 	"Optimized."
@@ -677,7 +679,7 @@ DoublyLinkedList >> select: selectBlock thenCollect: collectBlock [
 	^ newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 DoublyLinkedList >> select: selectBlock thenDo: doBlock [
 	"Utility method to improve readability.
 	Do not create the intermediate collection."
@@ -688,14 +690,14 @@ DoublyLinkedList >> select: selectBlock thenDo: doBlock [
 				ifTrue: [ doBlock value: each ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DoublyLinkedList >> size [
 	"Answer how many elements the receiver contains."
 
 	^ tally
 ]
 
-{ #category : #'math functions' }
+{ #category : 'math functions' }
 DoublyLinkedList >> sum [
 	"This is implemented using a variant of the normal inject:into: pattern.
 	The reason for this is that it is not known whether we're in the normal
@@ -710,7 +712,7 @@ DoublyLinkedList >> sum [
 	^ sum - sample
 ]
 
-{ #category : #'math functions' }
+{ #category : 'math functions' }
 DoublyLinkedList >> sumNumbers: aBlock [
 	"This is implemented using a variant of the normal inject:into: pattern
 	that is specific to handling numbers. aBlock is expected to return a number
