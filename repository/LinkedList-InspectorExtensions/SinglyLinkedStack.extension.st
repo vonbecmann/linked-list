@@ -1,12 +1,17 @@
-Extension { #name : #SinglyLinkedStack }
+Extension { #name : 'SinglyLinkedStack' }
 
-{ #category : #'*LinkedList-InspectorExtensions' }
+{ #category : '*LinkedList-InspectorExtensions' }
 SinglyLinkedStack >> inspectionItems: aBuilder [
 
 	<inspectorPresentationOrder: 0 title: 'Items'>
 	^ aBuilder newTable
-		  addColumn: (SpIndexTableColumn title: 'Index');
-		  addColumn: (SpStringTableColumn title: 'Value' evaluated: [ :each | StObjectPrinter asTruncatedTextFrom: each ]);
+		  alternateRowsColor;
+		  addColumn: ((SpIndexTableColumn title: '#')
+				   beNotExpandable;
+				   yourself);
+		  addColumn: (SpStringTableColumn
+				   title: 'Value'
+				   evaluated: [ :each | StObjectPrinter asTruncatedTextFrom: each ]);
 		  items: self asArray;
 		  yourself
 ]

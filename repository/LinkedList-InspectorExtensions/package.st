@@ -1,1 +1,1 @@
-Package { #name : #'LinkedList-InspectorExtensions' }
+Package { #name : 'LinkedList-InspectorExtensions' }
