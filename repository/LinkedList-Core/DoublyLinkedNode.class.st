@@ -94,7 +94,7 @@ DoublyLinkedNode >> release [
 	super release
 ]
 
-{ #category : 'accessing' }
+{ #category : 'evaluating' }
 DoublyLinkedNode >> value [
 	^ value
 ]

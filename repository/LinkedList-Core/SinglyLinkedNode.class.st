@@ -78,7 +78,7 @@ SinglyLinkedNode >> removeNodeFrom: anAssociationList [
 	^ anAssociationList removeNextNodeTo: self
 ]
 
-{ #category : 'accessing' }
+{ #category : 'evaluating' }
 SinglyLinkedNode >> value [
 	^ value
 ]
